@@ -1,10 +1,11 @@
 {
-    "title": "Stackbit Exto Theme",
+    "title": "aono's web tech",
     "path_prefix": "/",
     "color_scheme": "dark",
     "accent_color": "blue",
     "header": {
         "title": "Exto",
+        "logo_img": "/images/aonos-web-tech.png",
         "has_nav": true,
         "nav_links": [
             {

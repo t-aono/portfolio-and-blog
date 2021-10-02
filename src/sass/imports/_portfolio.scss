@@ -103,15 +103,15 @@
 
     &.layout-mosaic {
       .project {
-        -ms-flex-preferred-size: 60%;
-        flex-basis: 60%;
-        max-width: 60%;
+        -ms-flex-preferred-size: 50%;
+        flex-basis: 50%;
+        max-width: 50%;
 
         &:nth-child(4n+2),
         &:nth-child(4n+3) {
           -ms-flex-preferred-size: 40%;
-          flex-basis: 40%;
-          max-width: 40%;
+          flex-basis: 50%;
+          max-width: 50%;
 
           .project-thumbnail {
             &:before {
@@ -137,13 +137,14 @@
     }
 
     .project-title {
-      opacity: 0;
+      opacity: 0.7;
       -webkit-transition: opacity .3s;
       transition: opacity .3s;
     }
 
     .project-link {
       color: #fff;
+      height: 120px;
 
       &:hover,
       &:focus {
