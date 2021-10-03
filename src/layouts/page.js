@@ -21,7 +21,7 @@ export default class Page extends React.Component {
             <header className="post-header inner-sm">
               <h1 className="post-title line-top">{project.title}</h1>
               <div className="post-subtitle">
-                {project.skill && project.skill.map(skill => <span key={skill}>{htmlToReact(skill)}</span>)}
+                <span>{project.skill}</span>
                 <span className="post-date">{project.date}</span>
               </div>
             </header>
@@ -42,7 +42,7 @@ export default class Page extends React.Component {
                       item.block.paragraph.text.map(text => (text.href) ? (
                         <Link href={text.href} target="_blank" key={text.href}>{text.plain_text}</Link>
                       ) : <span key={text.href}>{text.plain_text}</span>)
-                    ) : "　" }
+                    ) : "　"}
                   </div>
                 ) : ''}
                 {(item.type === 'bulleted_list_item') ? <li>{item.block.bulleted_list_item.text[0].plain_text}</li> : ''}

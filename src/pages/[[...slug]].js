@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import { sourcebitDataClient } from 'sourcebit-target-next';
 import { withRemoteDataUpdates } from 'sourcebit-target-next/with-remote-data-updates';
-import { getProjects, getProjectPaths, getProjectPage } from '../utils';
+import { getProjects, getProjectPaths, getProjectPage, getPosts } from '../utils';
 
 import pageLayouts from '../layouts';
 
@@ -29,23 +29,31 @@ export async function getStaticProps({ params }) {
   console.log('Page [...slug].js getStaticProps, params: ', params);
   const pagePath = '/' + (params.slug ? params.slug.join('/') : '');
   const props = await sourcebitDataClient.getStaticPropsForPageAtPath(pagePath);
+  
+  if (params.slug[0] === 'portfolio') {  // 制作物の一覧
   const projects = await getProjects();
 
-  if (pagePath.match(/\/portfolio\/.+/)) {  // 制作物の詳細
-    const project = projects.find(pj => pj.pageId === params.slug[1])
-    const pageContent = await getProjectPage(params.slug[1]);
-    props.page = {
-      __metadata: {
-        modelName: 'page'
+    if (pagePath.match(/\/portfolio\/.+/)) {  // 制作物の詳細
+      const project = projects.find(pj => pj.pageId === params.slug[1])
+      const pageContent = await getProjectPage(params.slug[1]);
+      props.page = {
+        __metadata: {
+          modelName: 'page'
+        }
       }
+      props.project = project;
+      props.content = pageContent.content;
+      return { props };
     }
-    props.project = project;
-    props.content = pageContent.content;
-    return { props };
+
+    props.projects = projects;
+    return { props }
   }
 
-  if (params.slug[0] === 'portfolio') {  // 制作物の一覧
-    props.projects = projects;
+  if (params.slug[0] === 'blog') {  // ブログの一覧
+    const posts = await getPosts();
+
+    props.posts = posts;
     return { props }
   }
 

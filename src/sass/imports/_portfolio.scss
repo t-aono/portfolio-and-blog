@@ -11,7 +11,7 @@
     color: _palette(charcoal);
 
     .palette-dark & {
-      color: #fff;
+      color: _palette(charcoal-light-40);
     }
   }
 }
@@ -25,12 +25,14 @@
   margin: 0.5em 0;
 }
 
-p.project-skill, p.project-summary {
+.project-skill > p, .project-summary > p {
+  color: #fff;
   margin-bottom: 0.3em;
+  text-transform: none;
 }
 
-.skill {
-    text-transform: none;
+.project-summary {
+    min-height: 8.5em;
 }
 
 .project-thumbnail {
@@ -139,7 +141,7 @@ p.project-skill, p.project-summary {
       padding: 1.33333em;
       position: absolute;
       text-align: center;
-      top: 50%;
+      top: 90%;
       -webkit-transform: translateY(-50%);
       transform: translateY(-50%);
       width: 100%;

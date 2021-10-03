@@ -11,3 +11,4 @@ export { default as Link } from './link';
 export { default as getProjects } from './getProjects';
 export { default as getProjectPaths } from './getProjectPaths';
 export { default as getProjectPage } from './getProjectPage';
+export { default as getPosts } from './getPosts';
