@@ -21,16 +21,16 @@
   margin-top: 0.5em;
 
   .palette-dark & {
-    color: _palette(charcoal-light-25);
+    color: _palette(charcoal-light-75);
   }
 
   span {
       padding: 0 15px;
   }
+}
 
-  &.date {
-    text-align: right;
-  }
+.post-date {
+    float: right;
 }
 
 .post-subtitle {
@@ -45,7 +45,7 @@
   text-transform: uppercase;
 
   .palette-dark & {
-    color: _palette(charcoal-light-25);
+    color: _palette(charcoal-light-75);
   }
 }
 
@@ -64,6 +64,14 @@
   img {
     width: 100%;
   }
+}
+
+.capture-wrap {
+    text-align: center;
+}
+
+.capture-image {
+  margin: 0.5em;
 }
 
 /* Post feed */
@@ -108,6 +116,18 @@
   .post-meta {
     margin-top: 0.5em;
   }
+}
+
+.heading-2 {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin: 7px 0;
+}
+
+.heading-3 {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: 5px 0;
 }
 
 @media only screen and (min-width: 541px) {
