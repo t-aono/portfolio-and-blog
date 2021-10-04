@@ -22,7 +22,7 @@ export default class Portfolio extends React.Component {
         <Link href={projectUrl} className="project-link">
           {thumbnail && (
             <div className="project-thumbnail">
-              <img src={withPrefix(thumbnail)} als={thumbnail.replace(/images\//g, '')} />
+              <img src={withPrefix(thumbnail)} alt={thumbnail.replace(/images\//g, '')} />
             </div>
           )}
           <header className="project-header">

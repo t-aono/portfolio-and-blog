@@ -73,7 +73,9 @@ export async function getStaticProps({ params }) {
   }
 
   // トップページ
-
+  const projects = await getProjects();
+  props.projects = projects;
+  
   return { props };
 }
 
