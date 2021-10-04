@@ -22,7 +22,7 @@ body {
 
   &.palette-dark {
     background: _palette(charcoal);
-    color: _palette(charcoal-light-60);
+    color: _palette(charcoal-light-75);
   }
 }
 
@@ -242,6 +242,7 @@ ol {
 li > ul,
 li > ol {
   margin-bottom: 0;
+  color: _palette(charcoal-light-75);
 }
 
 hr {

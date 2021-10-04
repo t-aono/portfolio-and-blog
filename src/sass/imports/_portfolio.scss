@@ -2,16 +2,15 @@
  * Projects
  */
 .project {
-  margin-bottom: 4em;
-  margin-top: 4em;
-  height: 10em;
+  margin-bottom: 3em;
+  height: 15em;
 
   .project-link {
     border: 0;
     color: _palette(charcoal);
 
     .palette-dark & {
-      color: #fff;
+      color: _palette(charcoal-light-40);
     }
   }
 }
@@ -25,12 +24,14 @@
   margin: 0.5em 0;
 }
 
-p.project-skill, p.project-summary {
+.project-skill > p, .project-summary > p {
+  color: #fff;
   margin-bottom: 0.3em;
+  text-transform: none;
 }
 
-.skill {
-    text-transform: none;
+.project-summary {
+    min-height: 8.5em;
 }
 
 .project-thumbnail {
@@ -39,6 +40,7 @@ p.project-skill, p.project-summary {
   overflow: hidden;
   position: relative;
   width: 100%;
+  height: 15em;
 
   &:before {
     content: "";
@@ -86,6 +88,18 @@ p.project-skill, p.project-summary {
       -webkit-transform: scale(1.05,1.05);
       transform: scale(1.05,1.05);
     }
+  }
+}
+
+@media only screen and (max-width: 760px) {
+  .project-header {
+    position: relative;
+    bottom: 15em;
+    padding: 0.5em
+  }
+
+  .project-thumbnail {
+    opacity: 0.3;
   }
 }
 
@@ -139,7 +153,7 @@ p.project-skill, p.project-summary {
       padding: 1.33333em;
       position: absolute;
       text-align: center;
-      top: 50%;
+      top: 125%;
       -webkit-transform: translateY(-50%);
       transform: translateY(-50%);
       width: 100%;
@@ -147,7 +161,7 @@ p.project-skill, p.project-summary {
     }
 
     .project-title, .project-skill, .project-summary {
-      opacity: 0.7;
+      opacity: 0.3;
       -webkit-transition: opacity .3s;
       transition: opacity .3s;
     }

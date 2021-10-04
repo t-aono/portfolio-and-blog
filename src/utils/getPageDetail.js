@@ -1,7 +1,7 @@
 const { Client } = require("@notionhq/client")
 
-export default async function getProjectPage(pageId) {
-  const notion = new Client({ auth: process.env.NEXT_PUBLIC_NOTION_TOKEN });
+export default async function getPageDetail(pageId) {
+  const notion = new Client({ auth: process.env.NOTION_TOKEN });
 
   // const pageObject = await notion.pages.retrieve({ page_id: pageId });
   // const title = pageObject.properties.title.title[0].plain_text;

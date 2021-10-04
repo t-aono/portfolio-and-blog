@@ -17,7 +17,7 @@
 
 .page-subtitle,
 .post-subtitle {
-  color: _palette(charcoal-light-40);
+  color: _palette(charcoal-light-75);
   margin-top: 0.5em;
 
   .palette-dark & {
@@ -25,7 +25,13 @@
   }
 
   span {
-      padding: 0 15px;
+      padding-right: 0.5em;
+
+      label {
+          color: _palette(charcoal-light-75);
+          font-weight: normal;
+          margin-right: 0.8em;
+      }
   }
 }
 
@@ -38,8 +44,16 @@
   line-height: 1.4;
 }
 
+.post-category {
+  margin-bottom: 0;
+}
+
+.post-category > span {
+  margin-right: 0.7em;
+}
+
 .post-meta {
-  color: _palette(charcoal-light-40);
+  color: _palette(charcoal-light-75);
   font-size: 0.88889em;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -72,6 +86,23 @@
 
 .capture-image {
   margin: 0.5em;
+}
+
+.pagenate-btn {
+  text-align: center;
+  margin-top: 3em;
+}
+
+.pagenate-btn > a {
+  margin: 0 1em;
+  cursor: pointer;
+}
+
+.back-btn {
+    margin-top: 5em;
+    a {
+      cursor: pointer;
+    }
 }
 
 /* Post feed */

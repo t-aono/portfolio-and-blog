@@ -1,6 +1,5 @@
 import React from 'react';
 import _ from 'lodash';
-import moment from 'moment-strftime';
 
 import { Layout } from '../components/index';
 import { getPageUrl, Link, withPrefix } from '../utils';
@@ -13,6 +12,7 @@ export default class Portfolio extends React.Component {
     const title = _.get(project, 'title');
     const skill = _.get(project, 'skill');
     const summary = _.get(project, 'summary');
+    const thumbnail = _.get(project, 'thumbnail');
     // const date = _.get(project, 'date');
     // const dateTimeAttr = moment(date).strftime('%Y-%m-%d %H:%M');
     // const formattedDate = moment(date).strftime('%Y/%m/%d');
@@ -20,15 +20,20 @@ export default class Portfolio extends React.Component {
     return (
       <article key={pageId} className="project">
         <Link href={projectUrl} className="project-link">
+          {thumbnail && (
+            <div className="project-thumbnail">
+              <img src={withPrefix(thumbnail)} als={thumbnail.replace(/images\//g, '')} />
+            </div>
+          )}
           <header className="project-header">
             <h2 className="project-title">{title}</h2>
             <div className="project-skill">
               <label>使用技術</label>
-              <p className="project-skill skill">{skill}</p>
+              <p>{skill}</p>
             </div>
             <div className="project-summary">
               <label>概要</label>
-              <p className="project-summary">{summary}</p>
+              <p>{summary}</p>
             </div>
           </header>
         </Link>
@@ -48,7 +53,7 @@ export default class Portfolio extends React.Component {
         <div className="inner outer">
           <header className="page-header inner-sm">
             <h1 className="page-title line-top">{title}</h1>
-            <div className="page-subtitle">個人で制作したWebアプリなどの制作物を一覧表示しています。</div>
+            <div className="page-subtitle">個人で制作したWebアプリなどの制作物です。</div>
           </header>
           <div className={`portfolio-feed layout-${layoutStyle}`}>
             {this.props.projects.map(project => this.renderProject(project))}
