@@ -25,7 +25,13 @@
   }
 
   span {
-      padding: 0 15px;
+      padding-right: 0.5em;
+
+      label {
+          color: _palette(charcoal-light-75);
+          font-weight: normal;
+          margin-right: 0.8em;
+      }
   }
 }
 
@@ -83,12 +89,20 @@
 }
 
 .pagenate-btn {
-  margin-left: 1em;
+  text-align: center;
+  margin-top: 3em;
 }
 
 .pagenate-btn > a {
   margin: 0 1em;
   cursor: pointer;
+}
+
+.back-btn {
+    margin-top: 5em;
+    a {
+      cursor: pointer;
+    }
 }
 
 /* Post feed */
