@@ -12,6 +12,7 @@ export default class Portfolio extends React.Component {
     const title = _.get(project, 'title');
     const skill = _.get(project, 'skill');
     const summary = _.get(project, 'summary');
+    const thumbnail = _.get(project, 'thumbnail');
     // const date = _.get(project, 'date');
     // const dateTimeAttr = moment(date).strftime('%Y-%m-%d %H:%M');
     // const formattedDate = moment(date).strftime('%Y/%m/%d');
@@ -19,6 +20,11 @@ export default class Portfolio extends React.Component {
     return (
       <article key={pageId} className="project">
         <Link href={projectUrl} className="project-link">
+          {thumbnail && (
+            <div className="project-thumbnail">
+              <img src={withPrefix(thumbnail)} als={thumbnail.replace(/images\//g, '')} />
+            </div>
+          )}
           <header className="project-header">
             <h2 className="project-title">{title}</h2>
             <div className="project-skill">

@@ -1,10 +1,10 @@
 const { Client } = require("@notionhq/client")
 
-export default async function getProjectPaths() {
+export default async function getPostPaths() {
   const notion = new Client({ auth: process.env.NOTION_TOKEN });
-  const databaseId = 'a4928a93d9c0447fa889c7d60c5124a7';
+  const databaseId = '75d817d15e21455f8df10c68aa28f7de';
   const response = await notion.databases.query({ database_id: databaseId });
   return response.results.map(row => {
-    return `/portfolio/${row.id}`
+    return `/blog/${row.id}`
   });
 }

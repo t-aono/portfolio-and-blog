@@ -38,6 +38,14 @@
   line-height: 1.4;
 }
 
+.post-category {
+  margin-bottom: 0;
+}
+
+.post-category > span {
+  margin-right: 0.7em;
+}
+
 .post-meta {
   color: _palette(charcoal-light-75);
   font-size: 0.88889em;
@@ -72,6 +80,15 @@
 
 .capture-image {
   margin: 0.5em;
+}
+
+.pagenate-btn {
+  margin-left: 1em;
+}
+
+.pagenate-btn > a {
+  margin: 0 1em;
+  cursor: pointer;
 }
 
 /* Post feed */

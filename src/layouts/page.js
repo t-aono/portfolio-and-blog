@@ -11,8 +11,8 @@ export default class Page extends React.Component {
     const data = _.get(this.props, 'data');
     const config = _.get(data, 'config');
     const page = _.get(this.props, 'page');
-    const image = _.get(page, 'image');
-    const imageAlt = _.get(page, 'image_alt', '');
+    // const image = _.get(page, 'image');
+    // const imageAlt = _.get(page, 'image_alt', '');
 
     return (
       <Layout page={page} config={config}>
@@ -25,11 +25,11 @@ export default class Page extends React.Component {
                 <span className="post-date">{project.date}</span>
               </div>
             </header>
-            {image && (
+            {/* {image && (
               <div className="post-image">
                 <img src={withPrefix(image)} alt={imageAlt} />
               </div>
-            )}
+            )} */}
             {content.map(item => (
               <div className="post-content inner-sm" key={item.block.id}>
                 {/* {console.log(item.type)} */}

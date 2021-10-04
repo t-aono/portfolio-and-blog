@@ -8,8 +8,8 @@ import { classNames, getPageUrl, Link, withPrefix } from '../utils';
 export default class Blog extends React.Component {
   renderPost(post, index) {
     const title = _.get(post, 'title');
-    // const thumbImage = _.get(post, 'thumb_image');
-    // const thumbImageAlt = _.get(post, 'thumb_image_alt', '');
+    const category = _.get(post, 'category');
+    const thumbnail = _.get(post, 'thumbnail');
     const excerpt = _.get(post, 'excerpt');
     const date = _.get(post, 'date');
     const dateTimeAttr = moment(date).strftime('%Y-%m-%d %H:%M');
@@ -19,14 +19,15 @@ export default class Blog extends React.Component {
     return (
       <article key={index} className="post grid-item">
         <div className="post-inside">
-          {/* {thumbImage && <Link className="post-thumbnail" href={postUrl}><img src={withPrefix(thumbImage)} alt={thumbImageAlt} /></Link>} */}
+          {thumbnail && <Link className="post-thumbnail" href={postUrl}><img src={withPrefix(thumbnail)} alt={thumbnail.replace(/images\//g, '')} /></Link>}
           <header className="post-header">
             <h2 className="post-title"><Link href={postUrl}>{title}</Link></h2>
+            {category && <p className="post-category">{category.map(cat => <span>{cat}</span>)}</p>}
             <div className="post-meta">
               <time className="published" dateTime={dateTimeAttr}>{formattedDate}</time>
             </div>
           </header>
-          {excerpt && <p className="post-content">{excerpt}</p>}
+          {/* {excerpt && <p className="post-content">{excerpt}</p>} */}
         </div>
       </article>
     );
@@ -38,9 +39,7 @@ export default class Blog extends React.Component {
     const page = _.get(this.props, 'page');
     const title = _.get(page, 'title');
     const hideTitle = _.get(page, 'hide_title');
-    const subtitle = _.get(page, 'subtitle');
     const colNumber = _.get(page, 'col_number', 'three');
-    const posts = _.orderBy(_.get(this.props, 'posts', []), 'date', 'desc');
 
     return (
       <Layout page={page} config={config}>
@@ -51,7 +50,7 @@ export default class Blog extends React.Component {
             })}
           >
             <h1 className="page-title line-top">{title}</h1>
-            <div className="page-subtitle">プログラミングの Tips を公開しています。</div>
+            <div className="page-subtitle">初級者、中級者向けのプログラミング Tips です。</div>
           </header>
           <div
             className={classNames('post-feed', 'grid', {
@@ -59,9 +58,12 @@ export default class Blog extends React.Component {
               'grid-col-3': colNumber === 'three'
             })}
           >
-            {/* {_.map(posts, (post, index) => this.renderPost(post, index))} */}
             {this.props.posts.map((post, index) => this.renderPost(post, index))}
           </div>
+        </div>
+        <div className="pagenate-btn">
+            <Link to="/" className="button">前へ</Link>
+            <Link to="/" className="button">次へ</Link>
         </div>
       </Layout>
     );
