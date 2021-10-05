@@ -74,7 +74,8 @@ export async function getStaticProps({ params }) {
 
   // トップページ
   props.projects = await getProjects(6);
-  props.posts = await getPosts(3);  
+  props.posts = await getPosts(3);
+  props.about = await getPageDetail('cc9fe3c1f4774928ad90e364892f0c2b');
   return { props };
 }
 
