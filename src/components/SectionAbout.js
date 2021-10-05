@@ -11,7 +11,9 @@ export default class SectionAbount extends React.Component {
         const subtitle = _.get(section, 'subtitle');
         const image = _.get(section, 'image');
         const imageAlt = _.get(section, 'image_alt', '');
-        const content = _.get(section, 'content');
+        const content1 = _.get(section, 'content1');
+        const content2 = _.get(section, 'content2');
+        const content3 = _.get(section, 'content3');
 
         return (
             <section id={sectionId} className="block block-text outer">
@@ -27,7 +29,9 @@ export default class SectionAbount extends React.Component {
                             <img src={withPrefix(image)} alt={imageAlt} />
                         </div>
                     )}
-                    {content && <div className="block-content inner-sm">{markdownify(content)}</div>}
+                    {content1 && <div className="block-content inner-sm">{markdownify(content1)}</div>}
+                    {content2 && <div className="block-content inner-sm">{markdownify(content2)}</div>}
+                    {content3 && <div className="block-content inner-sm">{markdownify(content3)}</div>}
                 </div>
             </section>
         );

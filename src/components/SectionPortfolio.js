@@ -6,6 +6,8 @@ import { getPageUrl, htmlToReact, Link, withPrefix } from '../utils';
 export default class SectionPortfolio extends React.Component {
   renderProject(project, index, projectCount, viewAllLabel, viewAllUrl) {
     const title = _.get(project, 'title');
+    const skill = _.get(project, 'skill');
+    const summary = _.get(project, 'summary');
     const thumbnail = _.get(project, 'thumbnail');
     const projectUrl = getPageUrl(project, { withPrefix: true });
 
@@ -21,10 +23,8 @@ export default class SectionPortfolio extends React.Component {
                   </div>
                 )}
             </Link>
+            <span className="view-all-button button">{viewAllLabel}</span>
           </article>
-          <div className="block-buttons inner-sm">
-            <span className="button">{viewAllLabel}</span>
-          </div>
         </>
       );
     } else {
@@ -37,7 +37,15 @@ export default class SectionPortfolio extends React.Component {
               </div>
             )}
             <header className="project-header">
-              <h3 className="project-title">{title}</h3>
+              <h2 className="project-title">{title}</h2>
+              <div className="project-skill">
+                <label>使用技術</label>
+                <p>{skill}</p>
+              </div>
+              <div className="project-summary">
+                <label>概要</label>
+                <p>{summary}</p>
+              </div>
             </header>
           </Link>
         </article>
@@ -53,9 +61,7 @@ export default class SectionPortfolio extends React.Component {
     const layoutStyle = _.get(section, 'layout_style', 'mosaic');
     const viewAllLabel = _.get(section, 'view_all_label');
     const viewAllUrl = _.get(section, 'view_all_url');
-    const projects = _.orderBy(_.get(this.props, 'projects', []), 'date', 'desc');
-    const projectsNumber = _.get(section, 'projects_number', 6);
-    const recentProjects = projects.slice(0, projectsNumber);
+    const recentProjects = _.get(this.props, 'projects');
     const projectCount = _.size(recentProjects);
 
     return (

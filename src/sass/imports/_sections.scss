@@ -30,7 +30,7 @@
   margin: 0.5em 0 0;
 
   .palette-dark & {
-    color: _palette(charcoal-light-25);
+    color: _palette(charcoal-light-60);
   }
 }
 
@@ -126,12 +126,14 @@
   font-weight: bold;
   line-height: 1.2;
   padding: 0.9em 1em;
-//   left: 20%;
+  // right: 20%;
+  left: 45%;
   position: relative;
-  top: 4em;
+  top: 10%;
   -webkit-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
   z-index: 2;
+  cursor: pointer;
 
   .accent-green & {
     color: _palette(accent-green);
@@ -247,6 +249,12 @@
   margin: 0;
 }
 
+@media screen and (max-width: 760px) {
+  .view-all-button {
+    top: -50%;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .block {
     padding-top: 3.33333em;
@@ -261,4 +269,5 @@
       font-size: 2.22222em;
     }
   }
+
 }

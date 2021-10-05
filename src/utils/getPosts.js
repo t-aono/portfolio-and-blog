@@ -1,6 +1,6 @@
 const { Client } = require("@notionhq/client")
 
-export default async function getPosts() {
+export default async function getPosts(pageSize = 9) {
   const notion = new Client({ auth: process.env.NOTION_TOKEN });
   const databaseId = '75d817d15e21455f8df10c68aa28f7de';
   const response = await notion.databases.query({
@@ -17,7 +17,7 @@ export default async function getPosts() {
         equals: true
       }
     },
-    page_size: 9
+    page_size: pageSize
   });
   return response.results.map(row => {
 // console.log(row.properties.title.title[0].plain_text)

@@ -8,20 +8,21 @@ import CtaButtons from './CtaButtons';
 export default class SectionPosts extends React.Component {
     renderPost(post, index) {
         const title = _.get(post, 'title');
-        const thumbImage = _.get(post, 'thumb_image');
-        const thumbImageAlt = _.get(post, 'thumb_image_alt', '');
+        const thumbnail = _.get(post, 'thumbnail');
+        const category = _.get(post, 'category');
         const excerpt = _.get(post, 'excerpt');
         const date = _.get(post, 'date');
         const dateTimeAttr = moment(date).strftime('%Y-%m-%d %H:%M');
-        const formattedDate = moment(date).strftime('%B %d, %Y');
+        const formattedDate = moment(date).strftime('%Y/%m/%d');
         const postUrl = getPageUrl(post, { withPrefix: true });
 
         return (
             <article key={index} className="post grid-item">
                 <div className="post-inside">
-                    {thumbImage && <Link className="post-thumbnail" href={postUrl}><img src={withPrefix(thumbImage)} alt={thumbImageAlt} /></Link>}
+                    {thumbnail && <Link className="post-thumbnail" href={postUrl}><img src={withPrefix(thumbnail)} alt={thumbnail.replace(/images\//g, '')} /></Link>}
                     <header className="post-header">
                         <h3 className="post-title"><Link href={postUrl}>{title}</Link></h3>
+                        {category && <p className="post-category">{category.map(cat => <span>{cat}</span>)}</p>}
                         <div className="post-meta">
                             <time className="published" dateTime={dateTimeAttr}>{formattedDate}</time>
                         </div>
