@@ -1,7 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 
-import { htmlToReact, withPrefix, markdownify } from '../utils';
+import { htmlToReact, withPrefix, markdownify, Link } from '../utils';
+import { CtaButtons, Icon } from '.';
 
 export default class SectionAbount extends React.Component {
   render() {
@@ -11,6 +12,7 @@ export default class SectionAbount extends React.Component {
     const subtitle = _.get(section, 'subtitle');
     const image = _.get(section, 'image');
     const imageAlt = _.get(section, 'image_alt', '');
+    const actions = _.get(section, 'actions');
     const about = _.get(this.props, 'about');
 
     return (
@@ -32,14 +34,21 @@ export default class SectionAbount extends React.Component {
               {(item.type === 'paragraph') ? (
                 <div>
                   {(item.block.paragraph.text.length > 0) ? (
-                    item.block.paragraph.text.map(text => (text.href) ? (
-                      <Link href={text.href} target="_blank" key={text.plain_text}>{text.plain_text}</Link>
-                    ) : <span key={text.plain_text}>{text.plain_text}</span>)
+                    item.block.paragraph.text.map((text, index) => (text.href) ? (
+                      <Link href={text.href} target="_blank" key={index} style={{ borderBottom: 0 }}>
+                        <div style={{ display: 'flex' }}><Icon icon="github" />&ensp;{text.plain_text}</div>
+                      </Link>
+                    ) : <span key={index}>{text.plain_text}</span>)
                   ) : "　"}
                 </div>
               ) : ''}
             </div>
           ))}
+          {!_.isEmpty(actions) && (
+            <div className="block-buttons inner-sm" style={{marginTop: '3em'}}>
+              <CtaButtons actions={actions} />
+            </div>
+          )}
         </div>
       </section>
     );

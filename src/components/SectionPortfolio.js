@@ -13,19 +13,17 @@ export default class SectionPortfolio extends React.Component {
 
     if (index === projectCount - 1 && viewAllLabel && viewAllUrl) {
       return (
-        <>
-          <article key={index} className="project">
-            <Link href={withPrefix(viewAllUrl)} className="project-link view-all-link">
-              {<img src={withPrefix(thumbnail)} alt={thumbnail.replace(/images\//g, '')} />
-                && (
-                  <div className="project-thumbnail">
-                    <img src={withPrefix(thumbnail)} alt={thumbnail.replace(/images\//g, '')} />
-                  </div>
-                )}
-            </Link>
-            <span className="view-all-button button">{viewAllLabel}</span>
-          </article>
-        </>
+        <article key={index} className="project">
+          <Link href={withPrefix(viewAllUrl)} className="project-link view-all-link">
+            {<img src={withPrefix(thumbnail)} alt={thumbnail.replace(/images\//g, '')} />
+              && (
+                <div className="project-thumbnail">
+                  <img src={withPrefix(thumbnail)} alt={thumbnail.replace(/images\//g, '')} />
+                </div>
+              )}
+          </Link>
+          <span className="view-all-button button">{viewAllLabel}</span>
+        </article>
       );
     } else {
       return (

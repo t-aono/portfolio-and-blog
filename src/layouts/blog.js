@@ -22,7 +22,7 @@ export default class Blog extends React.Component {
           {thumbnail && <Link className="post-thumbnail" href={postUrl}><img src={withPrefix(thumbnail)} alt={thumbnail.replace(/images\//g, '')} /></Link>}
           <header className="post-header">
             <h2 className="post-title"><Link href={postUrl}>{title}</Link></h2>
-            {category && <p className="post-category">{category.map(cat => <span>{cat}</span>)}</p>}
+            {category && <p className="post-category">{category.map((cat, index) => <span key={index}>{cat}</span>)}</p>}
             <div className="post-meta">
               <time className="published" dateTime={dateTimeAttr}>{formattedDate}</time>
             </div>

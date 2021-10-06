@@ -72,6 +72,18 @@ export async function getStaticProps({ params }) {
     return { props }
   }
 
+  if (params.slug && params.slug[0] === 'skillsheet') {  // スキルシート
+    props.project = {title: 'スキルシート'}
+    const page = await getPageDetail('2d211d238ccc4a8d9c278d16be4231ad');
+    props.content = page.content;
+    props.page = {
+      __metadata: {
+        modelName: 'page'
+      }
+    }
+    return { props }
+  }
+
   // トップページ
   props.projects = await getProjects(6);
   props.posts = await getPosts(3);

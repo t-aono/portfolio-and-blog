@@ -14,13 +14,17 @@ sections:
   - section_id: abount
     type: section_about
     title: 自己紹介
+    actions:
+      - label: スキルシートを見る
+        url: skillsheet
+        style: button
   - section_id: latest-posts
     type: section_posts
     title: 最近書いたブログ記事
     posts_number: 3
     col_number: three
     actions:
-      - label: View Blog
+      - label: ブログを見る
         url: blog
         style: button
 seo:
