@@ -4,7 +4,7 @@ hide_title: true
 sections:
   - section_id: hero
     type: section_hero
-    title: 'Thank you for browsing!!'
+    title: 'はじめまして aono です。ご覧いただき、ありがとうございます。'
   - section_id: latest-projects
     type: section_portfolio
     layout_style: mosaic
@@ -29,7 +29,7 @@ sections:
         style: button
 seo:
   title: aono web tech
-  description: The preview of the Exto theme
+  description: aonoによるWeb技術を公開
   extra:
     - name: 'og:type'
       value: website
@@ -38,7 +38,7 @@ seo:
       value: aono web tech
       keyName: property
     - name: 'og:description'
-      value: The preview of the Exto theme
+      value: aonoによるWeb技術を公開
       keyName: property
     - name: 'og:image'
       value: images/exto_preview.png
@@ -49,7 +49,7 @@ seo:
     - name: 'twitter:title'
       value: aono web tech
     - name: 'twitter:description'
-      value: The preview of the Exto theme
+      value: aonoによるWeb技術を公開
     - name: 'twitter:image'
       value: images/exto_preview.png
       relativeUrl: true

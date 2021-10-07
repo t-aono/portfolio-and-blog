@@ -42,7 +42,6 @@ export default class Header extends React.Component {
     renderNavLinks(navLinks, pageUrl) {
         return (
           <React.Fragment>
-{/* {console.log(navLinks, pageUrl)} */}
                 <button id="menu-open" className="menu-toggle" ref={this.menuOpenRef} onClick={this.handleMenuToggle.bind(this)}><span className="screen-reader-text">Open Menu</span><span className="icon-menu" aria-hidden="true" /></button>
                 <nav id="main-navigation" className="site-navigation" aria-label="Main Navigation">
                     <div className="site-nav-inside">

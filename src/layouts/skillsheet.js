@@ -8,22 +8,18 @@ import { htmlToReact, withPrefix, Link } from '../utils';
 
 export default class SkillSheet extends React.Component {
   render() {
-    const project = _.get(this.props, 'project');
     const content = _.get(this.props, 'content');
+    const page = this.props.page;
     const data = _.get(this.props, 'data');
     const config = _.get(data, 'config');
-    const page = _.get(this.props, 'page');
-    const date = project.date ? project.date.replace(/\-/g, '/') : '';
 
     return (
       <Layout page={page} config={config}>
         <div className="inner outer">
           <article className="post post-full">
             <header className="post-header inner-sm">
-              <h1 className="post-title line-top">{project.title}</h1>
+              <h1 className="post-title line-top">スキルシート</h1>
               <div className="post-subtitle">
-                <span>{project.skill}</span>
-                <span className="post-date">{date}</span>
               </div>
             </header>
             {content.map(item => (
