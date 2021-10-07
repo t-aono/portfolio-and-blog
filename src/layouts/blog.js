@@ -10,7 +10,7 @@ export default class Blog extends React.Component {
     const title = _.get(post, 'title');
     const category = _.get(post, 'category');
     const thumbnail = _.get(post, 'thumbnail');
-    const excerpt = _.get(post, 'excerpt');
+    // const excerpt = _.get(post, 'excerpt');
     const date = _.get(post, 'date');
     const dateTimeAttr = moment(date).strftime('%Y-%m-%d %H:%M');
     const formattedDate = moment(date).strftime('%Y/%m/%d');
@@ -38,6 +38,7 @@ export default class Blog extends React.Component {
     const config = _.get(data, 'config');
     const page = _.get(this.props, 'page');
     const title = _.get(page, 'title');
+    const subtitle = _.get(page, 'subtitle');
     const hideTitle = _.get(page, 'hide_title');
     const colNumber = _.get(page, 'col_number', 'three');
 
@@ -50,7 +51,7 @@ export default class Blog extends React.Component {
             })}
           >
             <h1 className="page-title line-top">{title}</h1>
-            <div className="page-subtitle">初級者、中級者向けのプログラミング Tips です。</div>
+            <div className="page-subtitle">{subtitle}</div>
           </header>
           <div
             className={classNames('post-feed', 'grid', {
@@ -62,8 +63,8 @@ export default class Blog extends React.Component {
           </div>
         </div>
         <div className="pagenate-btn">
-            <Link to="/" className="button">前へ</Link>
-            <Link to="/" className="button">次へ</Link>
+          <Link to="/" className="button">前へ</Link>
+          <Link to="/" className="button">次へ</Link>
         </div>
       </Layout>
     );

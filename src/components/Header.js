@@ -79,7 +79,7 @@ export default class Header extends React.Component {
         const title = _.get(header, 'title');
         const hasNav = _.get(header, 'has_nav');
         const navLinks = _.get(header, 'nav_links');
-console.log(page, pageUrl)
+// console.log(page, pageUrl)
         return (
             <header id="masthead" className="site-header outer">
                 <div className="inner">

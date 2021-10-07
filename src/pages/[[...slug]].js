@@ -61,7 +61,8 @@ export async function getStaticProps({ params }) {
       const post = posts.find(po => po.pageId === params.slug[1])
       const pageContent = await getPageContent(params.slug[1]);
       props.page = {
-        __metadata: { modelName: 'post', urlPath: '/blog' }
+        __metadata: { modelName: 'post', urlPath: '/blog' },
+        seo: { title: post.title, description: `${post.category.map(cat => cat + ',')} ${post.title}` }
       }
       props.post = post;
       props.content = pageContent.content;
@@ -74,7 +75,7 @@ export async function getStaticProps({ params }) {
 
   if (params.slug && params.slug[0] === 'skillsheet') {
     // スキルシート
-    const pageContent = await getPageContent('2d211d238ccc4a8d9c278d16be4231ad');
+    const pageContent = await getPageContent('7a6de0538ee94b709afaa72fe4069725');
     props.content = pageContent.content;
     props.page.__metadata.modelName = 'skillsheet';
     return { props }
