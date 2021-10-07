@@ -20,7 +20,7 @@ export default class Footer extends React.Component {
                     <div className="site-footer-inside">
                         <div className="site-info">
                             {copyright && <span className="copyright">{htmlToReact(copyright)}</span>}
-                            {_.map(links, (action, index) => <ActionLink key={index} action={action} />)}
+                            {_.map(links, (action, index) => <ActionLink key={index} action={action} target="_blank" />)}
                         </div>
                         {hasSocial && !_.isEmpty(socialLinks) && (
                             <div className="social-links">

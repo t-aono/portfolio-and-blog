@@ -4,39 +4,34 @@ import Prism from 'prismjs';
 import Router from 'next/router';
 
 import { Layout } from '../components/index';
-import { htmlToReact, withPrefix, markdownify, Link } from '../utils';
+import { htmlToReact, withPrefix, Link } from '../utils';
 
-export default class Post extends React.Component {
-  componentDidMount() {
-    Prism.highlightAll();
-  }
-
+export default class SkillSheet extends React.Component {
   render() {
-    const post = _.get(this.props, 'post');
+    const project = _.get(this.props, 'project');
     const content = _.get(this.props, 'content');
     const data = _.get(this.props, 'data');
     const config = _.get(data, 'config');
     const page = _.get(this.props, 'page');
-    const date = post ? post.date.replace(/\-/g, '/') : '';
+    const date = project.date ? project.date.replace(/\-/g, '/') : '';
 
     return (
       <Layout page={page} config={config}>
         <div className="inner outer">
           <article className="post post-full">
             <header className="post-header inner-sm">
-              <h1 className="post-title line-top">{post.title}</h1>
+              <h1 className="post-title line-top">{project.title}</h1>
               <div className="post-subtitle">
-                <span>{post.category.map((cat, index) => <label key={index}>{cat}</label>)}</span>
+                <span>{project.skill}</span>
                 <span className="post-date">{date}</span>
               </div>
             </header>
             {content.map(item => (
               <div className="post-content inner-sm" key={item.block.id}>
-  {/* {item.type === 'code' && console.log(item.block.code.language)} */}
+                {/* {console.log(item.type)} */}
                 {(item.type === 'heading_2') ? <p className="heading-2">{item.block.heading_2.text[0].text.content}</p> : ''}
                 {(item.type === 'heading_3') ? <p className="heading-3">{item.block.heading_3.text[0].text.content}</p> : ''}
                 {(item.type === 'image') ? <div className="capture-wrap"><img src={item.block.image.file.url} className="capture-image" /></div> : ''}
-                {(item.type === 'bulleted_list_item') ? <li>{item.block.bulleted_list_item.text[0].plain_text}</li> : ''}
                 {(item.type === 'paragraph') ? (
                   <div>
                     {(item.block.paragraph.text.length > 0) ? (
@@ -46,11 +41,7 @@ export default class Post extends React.Component {
                     ) : "　"}
                   </div>
                 ) : ''}
-                {(item.type === 'code') ? (
-                  <pre className="line-numbers">
-                    <code className={`language-${item.block.code.language}`}>{item.block.code.text[0].text.content}</code>
-                  </pre>
-                ) : ''}
+                {(item.type === 'bulleted_list_item') ? <li>{item.block.bulleted_list_item.text[0].plain_text}</li> : ''}
               </div>
             ))}
             <footer className="post-meta inner-sm back-btn">

@@ -37,7 +37,8 @@ export async function getStaticProps({ params }) {
       const pageContent = await getPageDetail(params.slug[1]);
       props.page = {
         __metadata: {
-          modelName: 'page'
+          modelName: 'page',
+          urlPath: '/portfolio'
         }
       }
       props.project = project;
@@ -78,8 +79,9 @@ export async function getStaticProps({ params }) {
     props.content = page.content;
     props.page = {
       __metadata: {
-        modelName: 'page'
-      }
+        modelName: 'skillsheet',
+        urlPath: '/skillsheet'
+      },
     }
     return { props }
   }

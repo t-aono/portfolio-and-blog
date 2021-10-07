@@ -21,7 +21,7 @@ export default async function getProjects(pageSize = null) {
       title: row.properties.title.title[0].plain_text,
       skill: row.properties.skill.rich_text[0].plain_text,
       summary: row.properties.summary.rich_text[0].plain_text,
-      date: row.properties.date.date.start.replace(/\-/g, '/'),
+      date: row.properties.date.date.start,
       thumbnail: row.properties.thumbnail.rich_text[0].plain_text,
       __metadata: {
         urlPath: `/portfolio/${row.id}`
