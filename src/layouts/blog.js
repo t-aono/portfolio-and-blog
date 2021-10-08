@@ -37,10 +37,13 @@ export default class Blog extends React.Component {
     const data = _.get(this.props, 'data');
     const config = _.get(data, 'config');
     const page = _.get(this.props, 'page');
+    const pageNo = _.get(this.props, 'pageNo');
     const title = _.get(page, 'title');
     const subtitle = _.get(page, 'subtitle');
     const hideTitle = _.get(page, 'hide_title');
     const colNumber = _.get(page, 'col_number', 'three');
+    const prev = (pageNo) ? parseInt(pageNo) - 1 : null;
+    const next = (pageNo) ? parseInt(pageNo) + 1 : 2;
 
     return (
       <Layout page={page} config={config}>
@@ -63,8 +66,13 @@ export default class Blog extends React.Component {
           </div>
         </div>
         <div className="pagenate-btn">
-          <Link to="/" className="button">前へ</Link>
-          <Link to="/" className="button">次へ</Link>
+          {prev >= 1 && (
+            <Link
+              href={(prev === 1) ? '/blog' : `/blog/page-no/${prev}`}
+              className="button"
+            >前へ</Link>
+          )}
+          {next && <Link href={`/blog/page-no/${next}`} className="button">次へ</Link>}
         </div>
       </Layout>
     );

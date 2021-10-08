@@ -1,9 +1,9 @@
 const { Client } = require("@notionhq/client")
 
-export default async function getPosts(pageSize = 9) {
+export default async function getPosts(startCursor = null) {
   const notion = new Client({ auth: process.env.NOTION_TOKEN });
   const databaseId = '75d817d15e21455f8df10c68aa28f7de';
-  const response = await notion.databases.query({
+  const queryParam = {
     database_id: databaseId,
     sorts: [
       {
@@ -17,8 +17,10 @@ export default async function getPosts(pageSize = 9) {
         equals: true
       }
     },
-    page_size: pageSize
-  });
+    page_size: 12,
+  };
+  if (startCursor) queryParam.start_cursor = startCursor;
+  const response = await notion.databases.query(queryParam);
   return response.results.map(row => {
 // console.log(row.properties.title.title[0].plain_text)
     return {
