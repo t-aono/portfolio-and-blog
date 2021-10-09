@@ -53,13 +53,10 @@ export async function getStaticProps({ params }) {
   }
 
   if (params.slug && params.slug[0] === 'blog') {
-// console.log(props.pages.find(p => p.title === 'Blog'))
-// console.log(props.pages)
     let posts = [];
     if (params.slug[1] && params.slug[1] === 'page-no') {
       props.pageNo = params.slug[2];
       const postIds = await getPostIds('id');
-console.log(params.slug[2]);
       posts = await getPosts(postIds[(params.slug[2] - 1) * 12 + 1].replace('/blog/', ''));
       props.page = props.pages.find(p => p.title === 'Blog');
     } else {
@@ -93,8 +90,8 @@ console.log(params.slug[2]);
   }
 
   // トップページ
-  props.projects = await getProjects(6);
-  props.posts = await getPosts(3);
+  props.projects = await getProjects();
+  props.posts = await getPosts();
   props.about = await getPageContent('cc9fe3c1f4774928ad90e364892f0c2b');
   return { props };
 }

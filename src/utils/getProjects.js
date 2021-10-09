@@ -1,6 +1,6 @@
 const { Client } = require("@notionhq/client")
 
-export default async function getProjects(pageSize = null) {
+export default async function getProjects() {
   const notion = new Client({ auth: process.env.NOTION_TOKEN });
   const databaseId = 'a4928a93d9c0447fa889c7d60c5124a7';
   const queryParam = {
@@ -12,7 +12,6 @@ export default async function getProjects(pageSize = null) {
       }
     ]
   };
-  if (pageSize) queryParam.page_size = pageSize;
   const response = await notion.databases.query(queryParam);
   return response.results.map(row => {
 // console.log(row.properties.title)

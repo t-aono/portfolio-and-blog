@@ -37,7 +37,7 @@
         ]
     },
     "footer": {
-        "content": "当サイトのデザインは <a href=\"https:\/\/jamstackthemes.dev\/#ssg=next\">Jamstack Themes</a> を利用しています。",
+        "content": "当サイトのデザインは <a href=\"https:\/\/jamstackthemes.dev\/#ssg=next\" target=\"_blank\">Jamstack Themes</a> を利用しています。",
         "has_social": false,
         "social_links": [
             {

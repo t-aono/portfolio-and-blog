@@ -59,7 +59,8 @@ export default class SectionPortfolio extends React.Component {
     const layoutStyle = _.get(section, 'layout_style', 'mosaic');
     const viewAllLabel = _.get(section, 'view_all_label');
     const viewAllUrl = _.get(section, 'view_all_url');
-    const recentProjects = _.get(this.props, 'projects');
+    const projects = _.get(this.props, 'projects');
+    const recentProjects = projects.slice(0, 4);
     const projectCount = _.size(recentProjects);
 
     return (

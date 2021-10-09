@@ -40,9 +40,6 @@ export default class SkillSheet extends React.Component {
                 {(item.type === 'bulleted_list_item') ? <li>{item.block.bulleted_list_item.text[0].plain_text}</li> : ''}
               </div>
             ))}
-            <footer className="post-meta inner-sm back-btn">
-              <span className="button" onClick={() => Router.back()}>戻る</span>
-            </footer>
           </article>
         </div>
       </Layout>

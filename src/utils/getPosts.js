@@ -19,6 +19,7 @@ export default async function getPosts(startCursor = null) {
     },
     page_size: 12,
   };
+// console.log(startCursor); return;
   if (startCursor) queryParam.start_cursor = startCursor;
   const response = await notion.databases.query(queryParam);
   return response.results.map(row => {
