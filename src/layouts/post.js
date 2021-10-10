@@ -4,7 +4,7 @@ import Prism from 'prismjs';
 import Router from 'next/router';
 
 import { Layout } from '../components/index';
-import { htmlToReact, withPrefix, markdownify, Link } from '../utils';
+import { Link } from '../utils';
 
 export default class Post extends React.Component {
   componentDidMount() {
@@ -32,12 +32,12 @@ export default class Post extends React.Component {
             </header>
             {content.map(item => (
               <div className="post-content inner-sm" key={item.block.id}>
-  {item.type === 'video' && console.log(item.block.video)}
                 {(item.type === 'heading_2') ? <p className="heading-2">{item.block.heading_2.text[0].text.content}</p> : ''}
                 {(item.type === 'heading_3') ? <p className="heading-3">{item.block.heading_3.text[0].text.content}</p> : ''}
                 {(item.type === 'image') ? <div className="capture-wrap"><img src={item.block.image.file.url} className="capture-image" /></div> : ''}
-                {(item.type === 'bulleted_list_item') ? <li>{item.block.bulleted_list_item.text[0].plain_text}</li> : ''}
                 {(item.type === 'video') ? <div className="video-wrap"><video src={item.block.video.file.url} controls></video></div> : ''}
+                {(item.type === 'bulleted_list_item') ? <li>{item.block.bulleted_list_item.text[0].plain_text}</li> : ''}
+                {(item.type === 'numbered_list_item') ? <li>{item.block.numbered_list_item.text[0].plain_text}</li> : ''}
                 {(item.type === 'paragraph') ? (
                   <div>
                     {(item.block.paragraph.text.length > 0) ? (

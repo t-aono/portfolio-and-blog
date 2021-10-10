@@ -52,27 +52,29 @@ export async function getStaticProps({ params }) {
 
   if (params.slug && params.slug[0] === 'blog') {
     let posts = [];
+    
     if (params.slug[1] && params.slug[1] === 'page-no') {
+      // ページネーション
       props.page_no = params.slug[2];
       const postIds = await getPosts('id');
       props.post_count = postIds.length;
       posts = await getPosts('post', postIds[(params.slug[2] - 1) * 12]);
       props.page = props.pages.find(p => p.title === 'Blog');
-    } else {
-      posts = await getPosts('post');
-      props.page_no = 1;
-    }
-
-    if (params.slug[1] && params.slug[1] !== 'page-no') {
-      const post = posts.find(po => po.pageId === params.slug[1])
+    } else if (params.slug[1] && params.slug[1] !== 'page-no') {
+      // 個別ページ
+      posts = await getPosts('post', params.slug[1]);
       const pageContent = await getPageContent(params.slug[1]);
       props.page = {
         __metadata: { modelName: 'post', urlPath: '/blog' },
-        seo: { title: post.title, description: `${post.category.map(cat => cat + ',')} ${post.title}` }
+        seo: { title: posts[0].title, description: `${posts[0].category.map(cat => cat + ',')} ${posts[0].title}` }
       }
-      props.post = post;
+      props.post = posts[0];
       props.content = pageContent.content;
       return { props };
+    } else {
+      // 初期の一覧ページ
+      props.page_no = 1;
+      posts = await getPosts('post');
     }
 
     props.posts = posts;
