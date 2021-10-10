@@ -1,11 +1,17 @@
 import React from 'react';
 import _ from 'lodash';
 import Router from 'next/router';
+import Loader from "react-loader-spinner";
 
 import { htmlToReact, markdownify } from '../utils';
 import FormField from './FormField';
 
 export default class SectionForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { sending: false };
+  }
+
   render() {
     const section = _.get(this.props, 'section');
     const sectionId = _.get(section, 'section_id');
@@ -18,9 +24,11 @@ export default class SectionForm extends React.Component {
     const formHoneypotInputId = formId + '-honeypot';
     const formHoneypotLabelId = formId + '-honeypot-label';
     const formHoneypotName = formId + '-bot-field';
+    const sending = this.state.sending;
 
     const sendForm = async event => {
       event.preventDefault();
+      this.setState({ sending: true });
 
       const res = await fetch('/api/send', {
         body: JSON.stringify({
@@ -64,9 +72,10 @@ export default class SectionForm extends React.Component {
               </div>
               <input type="hidden" name="form-name" value={formId} />
               {_.map(formFields, (field, index) => <FormField key={index} {...this.props} field={field} />)}
-              <div className="form-submit">
+              <div className="form-submit" style={{ display: (sending) ? 'none' : 'block' }}>
                 <button type="submit" className="button">{submitLabel}</button>
               </div>
+              <Loader style={{ display: (sending) ? 'block' : 'none' }} type="ThreeDots" color="#23d3ff" height={80} width={80}/>
             </form>
           </div>
         </div>

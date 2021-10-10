@@ -9,7 +9,6 @@ sections:
       以下のお問い合わせフォームに記入して頂くか、  
       こちらのメールアドレスにメールを送信してください。[aonoweb@aol.com](mailto:aonoweb@aol.com)
     form_id: contactForm
-    # form_action: /thank-you
     form_fields:
       - input_type: text
         name: name
@@ -33,10 +32,10 @@ sections:
         name: message
         label: メッセージ
         default_value: 入力してください
-      - input_type: checkbox
-        name: consent
-        label: >-
-          フォームへの入力内容は保存され、連絡のために利用される事に同意します。
+    #   - input_type: checkbox
+    #     name: consent
+    #     label: >-
+    #       フォームへの入力内容は保存され、連絡のために利用される事に同意します。
     submit_label: 送信
 seo:
   title: Contact

@@ -6,11 +6,10 @@ export default function handler(req, res) {
     sgMail.setApiKey(process.env.SENDGRID_APIKEY);
     const msg = {
       to: req.body.email,
-      // bcc: 'aonoweb@aol.com',
+      bcc: 'aonoweb@aol.com',
       from: 'info@aonoweb.com',
       subject: 'お問合せありがとうございました。',
-      text: `${req.body.name} 様\nお問合せを受け付けました。回答をお待ちください。\n\n【件名】${req.body.subject}\n${req.body.message}`,
-      html: `${req.body.name} 様<br>お問合せを受け付けました。回答をお待ちください。<br><br>【件名】${req.body.subject}<br><br>${req.body.message}`
+      text: `${req.body.name} 様\nお問合せを受け付けました。回答をお待ちください。\n\n【件名】${req.body.subject}\n${req.body.message}`
     };
 
     (async () => {
