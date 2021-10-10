@@ -4,7 +4,8 @@ hide_title: true
 sections:
   - section_id: hero
     type: section_hero
-    title: 'はじめまして aono です。ご覧いただき、ありがとうございます。'
+    title: Welcome to aono's web tech !!
+    content: サイトをご覧いただきありがとうございます。制作物などを公開しています。
   - section_id: latest-projects
     type: section_portfolio
     layout_style: mosaic

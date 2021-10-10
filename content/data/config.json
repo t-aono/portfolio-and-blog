@@ -5,7 +5,7 @@
     "accent_color": "blue",
     "favicon": "/images/favicon.ico",
     "header": {
-        "title": "Exto",
+        "title": "aono's web tech",
         "logo_img": "/images/site-logo-blippo.png",
         "has_nav": true,
         "nav_links": [
@@ -37,7 +37,7 @@
         ]
     },
     "footer": {
-        "content": "当サイトのデザインは <a href=\"https:\/\/jamstackthemes.dev\/#ssg=next\" target=\"_blank\">Jamstack Themes</a> を利用しています。",
+        "content": "当サイトは Next.js (SSG) と Notion API を使って制作しています。デザインは <a href=\"https:\/\/jamstackthemes.dev\/#ssg=next\" target=\"_blank\">Jamstack Themes</a> を利用しています。",
         "has_social": false,
         "social_links": [
             {

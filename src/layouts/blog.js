@@ -37,13 +37,14 @@ export default class Blog extends React.Component {
     const data = _.get(this.props, 'data');
     const config = _.get(data, 'config');
     const page = _.get(this.props, 'page');
-    const pageNo = _.get(this.props, 'pageNo');
+    const pageNo = _.get(this.props, 'page_no');
     const title = _.get(page, 'title');
     const subtitle = _.get(page, 'subtitle');
     const hideTitle = _.get(page, 'hide_title');
     const colNumber = _.get(page, 'col_number', 'three');
+    const postCount = _.get(this.props, 'post_count');
     const prev = (pageNo) ? parseInt(pageNo) - 1 : null;
-    const next = (pageNo) ? parseInt(pageNo) + 1 : 2;
+    const next = (pageNo > 1) ? (pageNo * 12 < postCount) ? parseInt(pageNo) + 1 : null : 2;
 
     return (
       <Layout page={page} config={config}>

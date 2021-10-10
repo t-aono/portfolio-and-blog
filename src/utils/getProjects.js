@@ -14,7 +14,6 @@ export default async function getProjects() {
   };
   const response = await notion.databases.query(queryParam);
   return response.results.map(row => {
-// console.log(row.properties.title)
     return {
       pageId: row.id,
       title: row.properties.title.title[0].plain_text,

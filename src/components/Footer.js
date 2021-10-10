@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import { htmlToReact } from '../utils';
 import ActionLink from './ActionLink';
-import Action from './Action';
+// import Action from './Action';
 
 export default class Footer extends React.Component {
   render() {
@@ -23,10 +23,10 @@ export default class Footer extends React.Component {
               {_.map(links, (action, index) => <ActionLink key={index} action={action} />)}
             </div>
             {/* {hasSocial && !_.isEmpty(socialLinks) && (
-                            <div className="social-links">
-                                {_.map(socialLinks, (action, index) => <Action key={index} action={action} />)}
-                            </div>
-                        )} */}
+              <div className="social-links">
+                {_.map(socialLinks, (action, index) => <Action key={index} action={action} />)}
+              </div>
+            )} */}
           </div>
         </div>
       </footer>

@@ -106,6 +106,14 @@
     }
 }
 
+.video-wrap {
+    margin: 1em 0;
+}
+
+.video-wrap > video {
+    width: 100%;
+}
+
 /* Post feed */
 .post-thumbnail {
   border: 0;
