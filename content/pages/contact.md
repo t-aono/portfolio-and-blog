@@ -1,44 +1,42 @@
 ---
-title: Contact
+title: お問い合わせ
 hide_title: false
 sections:
   - section_id: contact-form
     type: section_form
     content: >-
-      Hi there! Thank you so much for your interest in working together. Please
-      fill the contact form below or send us an email at
-      [example@example.com](mailto:example@example.com).
+      興味を持って頂き、ありがとうございます。<br/>
+      以下のお問い合わせフォームに記入して頂くか、  
+      こちらのメールアドレスにメールを送信してください。[aonoweb@aol.com](mailto:aonoweb@aol.com)
     form_id: contactForm
-    form_action: /thank-you
     form_fields:
       - input_type: text
         name: name
-        label: Name
-        default_value: Your name
+        label: お名前
+        default_value: 入力してください
         is_required: true
       - input_type: email
         name: email
-        label: Email
-        default_value: Your email address
+        label: メールアドレス
+        default_value: 入力してください
         is_required: true
       - input_type: select
         name: subject
-        label: Subject
-        default_value: Please select
+        label: 件名
+        default_value: 選択してください
         options:
-          - Error on the site
-          - Sponsorship
-          - Other
+          - お仕事のご相談やご紹介
+          - 当サイトの内容に関して
+          - その他
       - input_type: textarea
         name: message
-        label: Message
-        default_value: Your message
-      - input_type: checkbox
-        name: consent
-        label: >-
-          I understand that this form is storing my submitted information so I
-          can be contacted.
-    submit_label: Send Message
+        label: メッセージ
+        default_value: 入力してください
+    #   - input_type: checkbox
+    #     name: consent
+    #     label: >-
+    #       フォームへの入力内容は保存され、連絡のために利用される事に同意します。
+    submit_label: 送信
 seo:
   title: Contact
   description: This is the contact page

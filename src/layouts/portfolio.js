@@ -22,7 +22,7 @@ export default class Portfolio extends React.Component {
         <Link href={projectUrl} className="project-link">
           {thumbnail && (
             <div className="project-thumbnail">
-              <img src={withPrefix(thumbnail)} als={thumbnail.replace(/images\//g, '')} />
+              <img src={withPrefix(thumbnail)} alt={thumbnail.replace(/images\//g, '')} />
             </div>
           )}
           <header className="project-header">
@@ -46,6 +46,7 @@ export default class Portfolio extends React.Component {
     const config = _.get(data, 'config');
     const page = _.get(this.props, 'page');
     const title = _.get(page, 'title');
+    const subtitle = _.get(page, 'subtitle');
     const layoutStyle = _.get(page, 'layout_style', 'mosaic');
 
     return (
@@ -53,7 +54,7 @@ export default class Portfolio extends React.Component {
         <div className="inner outer">
           <header className="page-header inner-sm">
             <h1 className="page-title line-top">{title}</h1>
-            <div className="page-subtitle">個人で制作したWebアプリなどの制作物です。</div>
+            <div className="page-subtitle">{subtitle}</div>
           </header>
           <div className={`portfolio-feed layout-${layoutStyle}`}>
             {this.props.projects.map(project => this.renderProject(project))}

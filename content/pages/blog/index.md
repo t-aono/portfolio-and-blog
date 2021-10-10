@@ -1,11 +1,11 @@
 ---
 title: Blog
-subtitle: 'News, tips and highlights'
+subtitle: '初級者、中級者向けのプログラミング Tips です。'
 hide_title: false
 col_number: three
 seo:
   title: Blog
-  description: This is the blog page
+  description: 初級者、中級者向けのプログラミング Tips
   extra:
     - name: 'og:type'
       value: website
@@ -14,7 +14,7 @@ seo:
       value: Blog
       keyName: property
     - name: 'og:description'
-      value: This is the blog page
+      value: 初級者、中級者向けのプログラミング Tips
       keyName: property
     - name: 'og:image'
       value: images/12.jpg
@@ -25,7 +25,7 @@ seo:
     - name: 'twitter:title'
       value: Blog
     - name: 'twitter:description'
-      value: This is the blog page
+      value: 初級者、中級者向けのプログラミング Tips
     - name: 'twitter:image'
       value: images/12.jpg
       relativeUrl: true

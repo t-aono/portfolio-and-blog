@@ -10,7 +10,7 @@ export default class Blog extends React.Component {
     const title = _.get(post, 'title');
     const category = _.get(post, 'category');
     const thumbnail = _.get(post, 'thumbnail');
-    const excerpt = _.get(post, 'excerpt');
+    // const excerpt = _.get(post, 'excerpt');
     const date = _.get(post, 'date');
     const dateTimeAttr = moment(date).strftime('%Y-%m-%d %H:%M');
     const formattedDate = moment(date).strftime('%Y/%m/%d');
@@ -22,7 +22,7 @@ export default class Blog extends React.Component {
           {thumbnail && <Link className="post-thumbnail" href={postUrl}><img src={withPrefix(thumbnail)} alt={thumbnail.replace(/images\//g, '')} /></Link>}
           <header className="post-header">
             <h2 className="post-title"><Link href={postUrl}>{title}</Link></h2>
-            {category && <p className="post-category">{category.map(cat => <span>{cat}</span>)}</p>}
+            {category && <p className="post-category">{category.map((cat, index) => <span key={index}>{cat}</span>)}</p>}
             <div className="post-meta">
               <time className="published" dateTime={dateTimeAttr}>{formattedDate}</time>
             </div>
@@ -37,9 +37,13 @@ export default class Blog extends React.Component {
     const data = _.get(this.props, 'data');
     const config = _.get(data, 'config');
     const page = _.get(this.props, 'page');
+    const pageNo = _.get(this.props, 'pageNo');
     const title = _.get(page, 'title');
+    const subtitle = _.get(page, 'subtitle');
     const hideTitle = _.get(page, 'hide_title');
     const colNumber = _.get(page, 'col_number', 'three');
+    const prev = (pageNo) ? parseInt(pageNo) - 1 : null;
+    const next = (pageNo) ? parseInt(pageNo) + 1 : 2;
 
     return (
       <Layout page={page} config={config}>
@@ -50,7 +54,7 @@ export default class Blog extends React.Component {
             })}
           >
             <h1 className="page-title line-top">{title}</h1>
-            <div className="page-subtitle">初級者、中級者向けのプログラミング Tips です。</div>
+            <div className="page-subtitle">{subtitle}</div>
           </header>
           <div
             className={classNames('post-feed', 'grid', {
@@ -62,8 +66,13 @@ export default class Blog extends React.Component {
           </div>
         </div>
         <div className="pagenate-btn">
-            <Link to="/" className="button">前へ</Link>
-            <Link to="/" className="button">次へ</Link>
+          {prev >= 1 && (
+            <Link
+              href={(prev === 1) ? '/blog' : `/blog/page-no/${prev}`}
+              className="button"
+            >前へ</Link>
+          )}
+          {next && <Link href={`/blog/page-no/${next}`} className="button">次へ</Link>}
         </div>
       </Layout>
     );

@@ -7,6 +7,7 @@ import Header from './Header';
 import Layout from './Layout';
 import Icon from './Icon';
 import SectionContent from './SectionContent';
+import SectionAbout from './SectionAbout';
 import SectionForm from './SectionForm';
 import SectionGrid from './SectionGrid';
 import SectionHero from './SectionHero';
@@ -24,6 +25,7 @@ export {
     Layout,
     Icon,
     SectionContent,
+    SectionAbout,
     SectionForm,
     SectionGrid,
     SectionHero,
@@ -42,6 +44,7 @@ export default {
     Layout,
     Icon,
     SectionContent,
+    SectionAbout,
     SectionForm,
     SectionGrid,
     SectionHero,

@@ -1,10 +1,10 @@
 ---
-title: Thank You!
+title: 送信完了
 image: images/thank-you.jpg
 image_alt: Thank You Led Signage
 layout: page
 ---
-
-Thank you for contacting us! We will get back in touch with you soon.
-
-**Have a great day!**
+　  
+　  
+お問い合わせありがとうございます。  
+内容を確認してご連絡いたしますので、しばらくお待ちください。

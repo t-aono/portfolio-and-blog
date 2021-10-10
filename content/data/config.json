@@ -3,6 +3,7 @@
     "path_prefix": "/",
     "color_scheme": "dark",
     "accent_color": "blue",
+    "favicon": "/images/favicon.ico",
     "header": {
         "title": "Exto",
         "logo_img": "/images/site-logo-blippo.png",
@@ -19,6 +20,11 @@
                 "style": "link"
             },
             {
+                "label": "SkillSheet",
+                "url": "/skillsheet/",
+                "style": "link"
+            },
+            {
                 "label": "Blog",
                 "url": "/blog/",
                 "style": "link"
@@ -31,7 +37,7 @@
         ]
     },
     "footer": {
-        "content": "&copy; Stackbit. All rights reserved. This Jamstack site was created with <a href=\"https://www.stackbit.com/?utm_source=deployed-footer\" target=\"_blank\" rel=\"noopener\">Stackbit</a>. Create yours <a href=\"https://app.stackbit.com/create?theme=exto&utm_source=deployed-footer\" target=\"_blank\" rel=\"noopener\">now</a>",
+        "content": "当サイトのデザインは <a href=\"https:\/\/jamstackthemes.dev\/#ssg=next\" target=\"_blank\">Jamstack Themes</a> を利用しています。",
         "has_social": false,
         "social_links": [
             {
