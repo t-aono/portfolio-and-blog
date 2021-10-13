@@ -35,7 +35,7 @@ export default async function getPosts(type, startCursor = null) {
         date: row.properties.date.date.start,
         thumbnail: row.properties.thumbnail.rich_text[0].plain_text,
         __metadata: {
-          urlPath: `/blog/${row.id}`
+          urlPath: `/blog/post/${row.id}`
         }
       };
     } else {

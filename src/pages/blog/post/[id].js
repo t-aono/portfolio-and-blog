@@ -3,9 +3,9 @@ import fs from 'fs';
 import path from 'path';
 
 import pageLayouts from '../../../layouts';
-import { getPageContent, getProjects } from '../../../utils';
+import { getPageContent, getPosts } from '../../../utils';
 
-const Project = (props) => {
+const Post = (props) => {
   const modelName = _.get(props, 'page.__metadata.modelName');
   const PageLayout = pageLayouts[modelName];
   if (!PageLayout) {
@@ -22,17 +22,17 @@ const getConfig = async () => {
 
 export async function getServerSideProps({ params }) {
   console.log('Page [id].js getServerSideProps, params: ', params);
-  const projects = await getProjects();
-  const project = projects.find(pj => pj.pageId === params.id);
+  const posts = await getPosts('post', params.id);
+  const post = posts.find(po => po.pageId === params.id);
   const pageContent = await getPageContent(params.id);
   const props = await getConfig();
   props.page = {
-    __metadata: { modelName: 'project', urlPath: '/portfolio' },
-    seo: { title: project.title, description: `${project.skill} を使って${project.title}を制作` },
+    __metadata: { modelName: 'post', urlPath: '/blog' },
+    seo: { title: posts[0].title, description: `${posts[0].category.map(cat => cat + ',')} ${posts[0].title}` }
   }
-  props.project = project;
+  props.post = post;
   props.content = pageContent.content;
   return { props };
 }
 
-export default Project;
+export default Post;

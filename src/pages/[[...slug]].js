@@ -30,23 +30,9 @@ export async function getStaticProps({ params }) {
   console.log('Page [...slug].js getStaticProps, params: ', params);
   const pagePath = '/' + (params.slug ? params.slug.join('/') : '');
   const props = await sourcebitDataClient.getStaticPropsForPageAtPath(pagePath);
-console.log(props.data)
+
   if (params.slug && params.slug[0] === 'portfolio') {
-    const projects = await getProjects();
-/*
-    if (pagePath.match(/\/portfolio\/.+/)) {
-      const project = projects.find(pj => pj.pageId === params.slug[1]);
-      const pageContent = await getPageContent(params.slug[1]);
-      props.page = {
-        __metadata: { modelName: 'project', urlPath: '/portfolio' },
-        seo: { title: project.title, description: `${project.skill} を使って${project.title}を制作` }
-      }
-      props.project = project;
-      props.content = pageContent.content;
-      return { props };
-    }
-*/
-    props.projects = projects;
+    props.projects = await getProjects();
     return { props }
   }
 
@@ -60,19 +46,8 @@ console.log(props.data)
       props.post_count = postIds.length;
       posts = await getPosts('post', postIds[(params.slug[2] - 1) * 12]);
       props.page = props.pages.find(p => p.title === 'Blog');
-    } else if (params.slug[1] && params.slug[1] !== 'page-no') {
-      // 個別ページ
-      posts = await getPosts('post', params.slug[1]);
-      const pageContent = await getPageContent(params.slug[1]);
-      props.page = {
-        __metadata: { modelName: 'post', urlPath: '/blog' },
-        seo: { title: posts[0].title, description: `${posts[0].category.map(cat => cat + ',')} ${posts[0].title}` }
-      }
-      props.post = posts[0];
-      props.content = pageContent.content;
-      return { props };
     } else {
-      // 初期の一覧ページ
+      // １ページ目
       props.page_no = 1;
       posts = await getPosts('post');
     }
