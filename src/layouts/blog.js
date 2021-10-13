@@ -9,7 +9,7 @@ export default class Blog extends React.Component {
   renderPost(post, index) {
     const title = _.get(post, 'title');
     const category = _.get(post, 'category');
-    const thumbnail = _.get(post, 'thumbnail');
+    const thumbnail = (_.get(post, 'thumbnail')) ? _.get(post, 'thumbnail') : 'images/jellyfish.jpg';
     // const excerpt = _.get(post, 'excerpt');
     const date = _.get(post, 'date');
     const dateTimeAttr = moment(date).strftime('%Y-%m-%d %H:%M');
