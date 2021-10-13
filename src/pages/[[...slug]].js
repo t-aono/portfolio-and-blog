@@ -30,10 +30,10 @@ export async function getStaticProps({ params }) {
   console.log('Page [...slug].js getStaticProps, params: ', params);
   const pagePath = '/' + (params.slug ? params.slug.join('/') : '');
   const props = await sourcebitDataClient.getStaticPropsForPageAtPath(pagePath);
-
+console.log(props.data)
   if (params.slug && params.slug[0] === 'portfolio') {
     const projects = await getProjects();
-
+/*
     if (pagePath.match(/\/portfolio\/.+/)) {
       const project = projects.find(pj => pj.pageId === params.slug[1]);
       const pageContent = await getPageContent(params.slug[1]);
@@ -45,7 +45,7 @@ export async function getStaticProps({ params }) {
       props.content = pageContent.content;
       return { props };
     }
-
+*/
     props.projects = projects;
     return { props }
   }

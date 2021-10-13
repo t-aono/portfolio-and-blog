@@ -22,7 +22,7 @@ export default async function getProjects() {
       date: row.properties.date.date.start,
       thumbnail: row.properties.thumbnail.rich_text[0].plain_text,
       __metadata: {
-        urlPath: `/portfolio/${row.id}`
+        urlPath: `/portfolio/project/${row.id}`
       }
     }
   });
