@@ -21,8 +21,9 @@ export async function getStaticPaths() {
   console.log('Page [...slug].js getStaticPaths');
   const paths = await sourcebitDataClient.getStaticPaths();
   const postPaths = await getPosts('path');
-  const blogPagePaths = postPaths.map((p, i) => (i % 12 === 0) ? `/blog/page-no/${i / 12 + 2}` : null).filter(v => v);
-  paths.push(...[... await getProjectPaths(), ...postPaths, ...blogPagePaths]);
+  const blogPagingPaths = postPaths.map((p, i) => (i % 12 === 0) ? `/blog/page-no/${i / 12 + 2}` : null).filter(v => v);
+  // paths.push(...[... await getProjectPaths(), ...postPaths, ...blogPagePaths]);
+  paths.push(... blogPagingPaths);
   return { paths, fallback: false };
 }
 
