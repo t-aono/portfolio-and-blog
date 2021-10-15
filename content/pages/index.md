@@ -29,14 +29,14 @@ sections:
         url: blog
         style: button
 seo:
-  title: aono web tech
+  title: aono's web tech
   description: aonoによるWeb技術を公開
   extra:
     - name: 'og:type'
       value: website
       keyName: property
     - name: 'og:title'
-      value: aono web tech
+      value: aono's web tech
       keyName: property
     - name: 'og:description'
       value: aonoによるWeb技術を公開
@@ -48,7 +48,7 @@ seo:
     - name: 'twitter:card'
       value: summary_large_image
     - name: 'twitter:title'
-      value: aono web tech
+      value: aono's web tech
     - name: 'twitter:description'
       value: aonoによるWeb技術を公開
     - name: 'twitter:image'
