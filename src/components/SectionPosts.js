@@ -8,7 +8,7 @@ import CtaButtons from './CtaButtons';
 export default class SectionPosts extends React.Component {
   renderPost(post, index) {
     const title = _.get(post, 'title');
-    const thumbnail = _.get(post, 'thumbnail');
+    const thumbnail = (_.get(post, 'thumbnail')) ? _.get(post, 'thumbnail') : 'images/jellyfish.jpg';
     const category = _.get(post, 'category');
     const excerpt = _.get(post, 'excerpt');
     const date = _.get(post, 'date');

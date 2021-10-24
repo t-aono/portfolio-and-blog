@@ -126,14 +126,12 @@
   font-weight: bold;
   line-height: 1.2;
   padding: 0.9em 1em;
-  // right: 20%;
-  left: 45%;
+  left: 47%;
   position: relative;
-  top: 10%;
+  bottom: 8.5em;
   -webkit-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
   z-index: 2;
-  cursor: pointer;
 
   .accent-green & {
     color: _palette(accent-green);
@@ -247,12 +245,6 @@
   font-size: 0.88889em;
   font-weight: bold;
   margin: 0;
-}
-
-@media screen and (max-width: 760px) {
-  .view-all-button {
-    top: -50%;
-  }
 }
 
 @media only screen and (max-width: 600px) {

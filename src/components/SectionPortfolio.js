@@ -21,8 +21,8 @@ export default class SectionPortfolio extends React.Component {
                   <img src={withPrefix(thumbnail)} alt={thumbnail.replace(/images\//g, '')} />
                 </div>
               )}
+            <span className="view-all-button button">{viewAllLabel}</span>
           </Link>
-          <span className="view-all-button button">{viewAllLabel}</span>
         </article>
       );
     } else {
