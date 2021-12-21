@@ -1,11 +1,11 @@
 # Portfolio & Blog
 
-## Overview
+## 概要
 - Can be used as a portfolio site and blog site
 - Frontend built with Next.js (SSG / SSR)
 - Get contents using Notion API
 
-## Usage
-### develop locally
+## 使い方
+### ローカル
 - `yarn install` 
 - `yarn dev`
