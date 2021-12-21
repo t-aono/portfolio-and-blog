@@ -4,8 +4,8 @@ hide_title: true
 sections:
     - section_id: hero
       type: section_hero
-      title: Welcome to aono's web tech !!
-      content: サイトをご覧いただきありがとうございます。制作物などを公開しています。
+      title: Aono's Home Page
+      content: こんにちは、ソフトウェアエンジニアをしてるアオノです。個人で制作したWebアプリケーションやプログラミング関連ブログを公開しています。このサイトは Next.js (SSG/SSR) と Notion API を利用して構築しました。
     - section_id: latest-projects
       type: section_portfolio
       layout_style: mosaic

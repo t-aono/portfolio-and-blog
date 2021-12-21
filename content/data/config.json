@@ -1,12 +1,11 @@
 {
-    "title": "aono's web tech",
+    "title": "t-aono Portfolio & Blog",
     "path_prefix": "/",
     "color_scheme": "dark",
     "accent_color": "blue",
     "favicon": "/images/favicon.ico",
     "header": {
-        "title": "aono's web tech",
-        "logo_img": "/images/site-logo-blippo.png",
+        "title": "t-aono Portfolio & Blog",
         "has_nav": true,
         "nav_links": [
             {
@@ -37,7 +36,7 @@
         ]
     },
     "footer": {
-        "content": "当サイトは Next.js (SSG/SSR) と Notion API を使って制作しています。デザインは <a href=\"https:\/\/jamstackthemes.dev\/#ssg=next\" target=\"_blank\">Jamstack Themes</a> を利用しています。",
+        "content": "© t-aono",
         "has_social": false,
         "social_links": [
             {
@@ -45,27 +44,6 @@
                 "url": "https://twitter.com/",
                 "style": "icon",
                 "icon": "twitter",
-                "new_window": true
-            },
-            {
-                "label": "Instagram",
-                "url": "https://www.instagram.com/",
-                "style": "icon",
-                "icon": "instagram",
-                "new_window": true
-            },
-            {
-                "label": "Dribbble",
-                "url": "https://dribbble.com/",
-                "style": "icon",
-                "icon": "dribbble",
-                "new_window": true
-            },
-            {
-                "label": "LinkedIn",
-                "url": "https://www.linkedin.com/",
-                "style": "icon",
-                "icon": "linkedin",
                 "new_window": true
             }
         ]
