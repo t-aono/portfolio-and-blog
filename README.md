@@ -1,13 +1,11 @@
-# aono's web tech
+# Portfolio & Blog
 
-## 概要
-制作物やプログラミング関連のブログをまとめたサイト。  
-Next.js(SSG/SSR) と Notion API を利用して制作。  
+## Overview
+- Can be used as a portfolio site and blog site
+- Frontend built with Next.js (SSG / SSR)
+- Get contents using Notion API
 
-<br>
-
-## ローカルで開発
-```    
-yarn install
-yarn dev
-```
+## Usage
+### develop locally
+- `yarn install` 
+- `yarn dev`
