@@ -1,9 +1,9 @@
 # Portfolio & Blog
 
 ## 概要
-- Can be used as a portfolio site and blog site
-- Frontend built with Next.js (SSG / SSR)
-- Get contents using Notion API
+- ポートフォリオサイトやブログサイトで利用可能
+- フロントエンドは Next.js (SSG / SSR) で構築
+- Notion API を利用してコンテンツを取得
 
 ## 使い方
 ### ローカル
