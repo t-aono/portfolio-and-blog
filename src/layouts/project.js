@@ -28,7 +28,6 @@ export default class Project extends React.Component {
             </header>
             {content.map(item => (
               <div className="post-content inner-sm" key={item.block.id}>
-                {/* {console.log(item.type)} */}
                 {(item.type === 'heading_2') ? <p className="heading-2">{item.block.heading_2.text[0].text.content}</p> : ''}
                 {(item.type === 'heading_3') ? <p className="heading-3">{item.block.heading_3.text[0].text.content}</p> : ''}
                 {(item.type === 'image') ? <div className="capture-wrap"><img src={item.block.image.file.url} className="capture-image" /></div> : ''}

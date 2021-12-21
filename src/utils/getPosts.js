@@ -21,7 +21,7 @@ export default async function getPosts(type, startCursor = null) {
   if (type === 'post') queryParam.page_size = 12;
   if (startCursor) queryParam.start_cursor = startCursor;
   const response = await notion.databases.query(queryParam);
-// console.log(response)
+
   return response.results.map(row => {
     if (type === 'path') {
       return `/blog/${row.id}`

@@ -65,6 +65,7 @@ export async function getStaticProps({ params }) {
     return { props }
   }
 
+  // トップページ
   props.projects = await getProjects();
   props.posts = await getPosts('post');
   props.about = await getPageContent('cc9fe3c1f4774928ad90e364892f0c2b');
