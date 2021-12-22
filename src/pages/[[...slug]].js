@@ -57,18 +57,9 @@ export async function getStaticProps({ params }) {
     return { props }
   }
 
-  if (params.slug && params.slug[0] === 'skillsheet') {
-    const pageContent = await getPageContent('7a6de0538ee94b709afaa72fe4069725');
-    props.content = pageContent.content;
-    props.page = props.page = props.pages.find(p => p.title === 'Skill Sheet');
-    props.page.__metadata.modelName = 'skillsheet';
-    return { props }
-  }
-
   // トップページ
   props.projects = await getProjects();
   props.posts = await getPosts('post');
-  props.about = await getPageContent('cc9fe3c1f4774928ad90e364892f0c2b');
   return { props };
 }
 

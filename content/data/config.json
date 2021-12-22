@@ -1,11 +1,11 @@
 {
-    "title": "t-aono Portfolio & Blog",
+    "title": "aono's po-bl",
     "path_prefix": "/",
     "color_scheme": "dark",
     "accent_color": "blue",
     "favicon": "/images/favicon.ico",
     "header": {
-        "title": "t-aono Portfolio & Blog",
+        "title": "aono's po-bl",
         "has_nav": true,
         "nav_links": [
             {
@@ -16,11 +16,6 @@
             {
                 "label": "Portfolio",
                 "url": "/portfolio/",
-                "style": "link"
-            },
-            {
-                "label": "SkillSheet",
-                "url": "/skillsheet/",
                 "style": "link"
             },
             {

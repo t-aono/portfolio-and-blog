@@ -32,7 +32,8 @@ export default class Action extends React.Component {
                         <Icon icon={icon} />
                         <span className="screen-reader-text">{label}</span>
                     </React.Fragment>
-                ) :
+                ) : 
+                  (action.icon === 'github') ? <><Icon icon='github' />　{label}</> : 
                     label
                 }
             </Link>

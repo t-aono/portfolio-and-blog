@@ -4,7 +4,6 @@ import page from './page';
 import portfolio from './portfolio';
 import post from './post';
 import project from './project';
-import skillsheet from './skillsheet';
 
 export {
     advanced,
@@ -13,7 +12,6 @@ export {
     portfolio,
     post,
     project,
-    skillsheet
 };
 
 export default {
@@ -23,5 +21,4 @@ export default {
     portfolio,
     post,
     project,
-    skillsheet
 };
