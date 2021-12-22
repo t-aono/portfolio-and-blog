@@ -1,46 +1,46 @@
 {
-    "title": "aono's po-bl",
-    "path_prefix": "/",
-    "color_scheme": "dark",
-    "accent_color": "blue",
-    "favicon": "/images/favicon.ico",
-    "header": {
-        "title": "aono's po-bl",
-        "has_nav": true,
-        "nav_links": [
-            {
-                "label": "Home",
-                "url": "/",
-                "style": "link"
-            },
-            {
-                "label": "Portfolio",
-                "url": "/portfolio/",
-                "style": "link"
-            },
-            {
-                "label": "Blog",
-                "url": "/blog/",
-                "style": "link"
-            },
-            {
-                "label": "Contact",
-                "url": "/contact/",
-                "style": "link"
-            }
-        ]
-    },
-    "footer": {
-        "content": "© t-aono",
-        "has_social": false,
-        "social_links": [
-            {
-                "label": "Twitter",
-                "url": "https://twitter.com/",
-                "style": "icon",
-                "icon": "twitter",
-                "new_window": true
-            }
-        ]
-    }
+  "title": "aono's P&B",
+  "path_prefix": "/",
+  "color_scheme": "dark",
+  "accent_color": "blue",
+  "favicon": "/images/favicon.ico",
+  "header": {
+    "title": "aono's P&B",
+    "has_nav": true,
+    "nav_links": [
+      {
+        "label": "Home",
+        "url": "/",
+        "style": "link"
+      },
+      {
+        "label": "Portfolio",
+        "url": "/portfolio/",
+        "style": "link"
+      },
+      {
+        "label": "Blog",
+        "url": "/blog/",
+        "style": "link"
+      },
+      {
+        "label": "Contact",
+        "url": "/contact/",
+        "style": "link"
+      }
+    ]
+  },
+  "footer": {
+    "content": "© t-aono",
+    "has_social": false,
+    "social_links": [
+      {
+        "label": "Twitter",
+        "url": "https://twitter.com/",
+        "style": "icon",
+        "icon": "twitter",
+        "new_window": true
+      }
+    ]
+  }
 }

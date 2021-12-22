@@ -11,7 +11,7 @@ sections:
   - section_id: latest-projects
     type: section_portfolio
     layout_style: mosaic
-    title: 最近の制作物
+    title: 最近の個人開発
     view_all_label: もっと見る
     view_all_url: portfolio
   - section_id: abount
@@ -46,7 +46,7 @@ sections:
         url: blog
         style: button
 seo:
-  title: aono's po-bl
+  title: aono's P&B
   description: 個人開発したWebアプリケーションやプログラミング関連ブログを公開
   extra:
     - name: 'og:type'
