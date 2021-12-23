@@ -2,7 +2,7 @@
  * Projects
  */
 .project {
-  margin-bottom: 3em;
+  margin: 1em 0 0.1em;
   height: 15em;
 
   .project-link {
@@ -24,14 +24,15 @@
   margin: 0.5em 0;
 }
 
-.project-skill > p, .project-summary > p {
+.project-skill > p,
+.project-summary > p {
   color: #fff;
   margin-bottom: 0.3em;
   text-transform: none;
 }
 
 .project-summary {
-    min-height: 8.5em;
+  min-height: 8.5em;
 }
 
 .project-thumbnail {
@@ -40,18 +41,17 @@
   overflow: hidden;
   position: relative;
   width: 100%;
-  height: 15em;
 
   &:before {
-    content: "";
+    content: '';
     display: block;
     padding-top: 60%;
   }
 
   &:after {
-    background: rgba(_palette(charcoal), .65);
+    background: rgba(_palette(charcoal), 0.65);
     bottom: 0;
-    content: "";
+    content: '';
     left: 0;
     opacity: 0;
     position: absolute;
@@ -59,22 +59,23 @@
     top: 0;
     visibility: hidden;
     z-index: 1;
-    -webkit-transition: .3s ease;
-    transition: .3s ease;
+    -webkit-transition: 0.3s ease;
+    transition: 0.3s ease;
   }
 
   img {
     height: 100%;
     left: 0;
-    -o-object-fit: cover;
-    object-fit: cover;
+    -o-object-fit: contain;
+    object-fit: contain;
     position: absolute;
-    top: 0;
-    -webkit-transform: scale(1,1);
-    transform: scale(1,1);
+    top: 5em;
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
     -webkit-transition: 1s ease;
     transition: 1s ease;
     width: 100%;
+    height: 15em;
   }
 }
 
@@ -85,8 +86,8 @@
   &:hover,
   &:focus {
     img {
-      -webkit-transform: scale(1.05,1.05);
-      transform: scale(1.05,1.05);
+      -webkit-transform: scale(1.05, 1.05);
+      transform: scale(1.05, 1.05);
     }
   }
 }
@@ -95,7 +96,8 @@
   .project-header {
     position: relative;
     bottom: 15em;
-    padding: 0.5em
+    padding: 0.5em;
+    margin: 3em 0;
   }
 
   .project-thumbnail {
@@ -130,9 +132,11 @@
         -ms-flex-preferred-size: 50%;
         flex-basis: 50%;
         max-width: 50%;
+        height: 40vw;
+        max-height: 25em;
 
-        &:nth-child(4n+2),
-        &:nth-child(4n+3) {
+        &:nth-child(4n + 2),
+        &:nth-child(4n + 3) {
           -ms-flex-preferred-size: 40%;
           flex-basis: 50%;
           max-width: 50%;
@@ -160,10 +164,12 @@
       z-index: 2;
     }
 
-    .project-title, .project-skill, .project-summary {
+    .project-title,
+    .project-skill,
+    .project-summary {
       opacity: 0.3;
-      -webkit-transition: opacity .3s;
-      transition: opacity .3s;
+      -webkit-transition: opacity 0.3s;
+      transition: opacity 0.3s;
     }
 
     .project-link {
@@ -172,7 +178,9 @@
 
       &:hover,
       &:focus {
-        .project-title, .project-skill, .project-summary {
+        .project-title,
+        .project-skill,
+        .project-summary {
           opacity: 1;
         }
 

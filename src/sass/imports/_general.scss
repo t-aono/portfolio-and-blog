@@ -323,3 +323,21 @@ img {
 .row-md {
   line-height: 2.5em;
 }
+
+.emoji-md {
+  font-size: 3em;
+  width: 2em;
+  text-align: center;
+}
+
+.emoji-lg {
+  font-size: 5em;
+}
+
+.post-inside {
+  display: flex;
+
+  & > a {
+    border-bottom: none;
+  }
+}

@@ -28,13 +28,13 @@ export default async function getPosts(type, startCursor = null) {
     } else if (type === 'id') {
       return row.id
     } else if (type === 'post') {
-      const thumbnailText = (row.properties.thumbnail.rich_text.length > 0) ? row.properties.thumbnail.rich_text[0].plain_text : ''
+      const emoji = (row.icon) ? row.icon.emoji : '';
       return {
         pageId: row.id,
         title: row.properties.title.title[0].plain_text,
         category: row.properties.category.multi_select.map(cat => cat.name),
         date: row.properties.date.date.start,
-        thumbnail: thumbnailText,
+        emoji: emoji,
         __metadata: {
           urlPath: `/blog/post/${row.id}`
         }

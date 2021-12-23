@@ -67,7 +67,7 @@ export default class SectionPortfolio extends React.Component {
       <section id={sectionId} className="block-portfolio block outer">
         <div className="inner">
           {(title || subtitle) && (
-            <div className="block-header inner-sm">
+            <div className="block-header inner-sm porfolio-header">
               {title && <h2 className="block-title line-top">{title}</h2>}
               {subtitle && <p className="block-subtitle">{htmlToReact(subtitle)}</p>}
             </div>
