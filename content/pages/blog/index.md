@@ -2,7 +2,7 @@
 title: Blog
 subtitle: '誰かの役に立ちそうなのプログラミング Tips'
 hide_title: false
-col_number: three
+col_number: two
 seo:
   title: Blog
   description: 誰かの役に立ちそうなのプログラミング Tips

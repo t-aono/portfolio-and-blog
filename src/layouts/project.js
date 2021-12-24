@@ -13,7 +13,6 @@ export default class Project extends React.Component {
     const data = _.get(this.props, 'data');
     const config = _.get(data, 'config');
     const page = _.get(this.props, 'page');
-    const date = project.date ? project.date.replace(/\-/g, '/') : '';
 
     return (
       <Layout page={page} config={config}>
@@ -23,7 +22,6 @@ export default class Project extends React.Component {
               <h1 className="post-title line-top">{project.title}</h1>
               <div className="post-subtitle">
                 <span>{project.skill}</span>
-                <span className="post-date">{date}</span>
               </div>
             </header>
             {content.map(item => (
@@ -43,6 +41,9 @@ export default class Project extends React.Component {
                 {(item.type === 'bulleted_list_item') ? <li>{item.block.bulleted_list_item.text[0].plain_text}</li> : ''}
               </div>
             ))}
+              <div className="post-subtitle">
+                <span className="post-date">{project.term}</span>
+              </div>
             <footer className="post-meta inner-sm back-btn">
               <span className="button" onClick={() => Router.back()}>戻る</span>
             </footer>

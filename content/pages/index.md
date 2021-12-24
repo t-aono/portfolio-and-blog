@@ -23,8 +23,8 @@ sections:
       よく使うのは PHP / Laravel / JS / Vue.js / React / MySQL など。<br/>
       TypeScript / Next.js も学習中。<br/>
       <br/>
-      エンジニア歴は5年くらいで<br/>
-      今は、会社員とフリーランスを半々でやっている。<br/>
+      エンジニア歴は5年くらい。<br/>
+      半分は会社員で半分はフリーランス。<br/>
       <br/>
       経歴<br/>
       2011年 新卒で製薬メーカーに営業職で入社<br/>
@@ -43,7 +43,7 @@ sections:
     type: section_posts
     title: 最近のブログ記事
     posts_number: 6
-    col_number: three
+    col_number: two
     actions:
       - label: もっとみる
         url: blog
