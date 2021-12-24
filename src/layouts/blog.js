@@ -9,7 +9,7 @@ export default class Blog extends React.Component {
   renderPost(post, index) {
     const title = _.get(post, 'title');
     const category = _.get(post, 'category');
-    const thumbnail = (_.get(post, 'thumbnail')) ? _.get(post, 'thumbnail') : 'images/jellyfish.jpg';
+    const emoji = _.get(post, 'emoji');
     // const excerpt = _.get(post, 'excerpt');
     const date = _.get(post, 'date');
     const dateTimeAttr = moment(date).strftime('%Y-%m-%d %H:%M');
@@ -19,7 +19,9 @@ export default class Blog extends React.Component {
     return (
       <article key={index} className="post grid-item">
         <div className="post-inside">
-          {thumbnail && <Link className="post-thumbnail" href={postUrl}><img src={withPrefix(thumbnail)} alt={thumbnail.replace(/images\//g, '')} /></Link>}
+          <Link href={postUrl}>
+            <div className='emoji-md'>{emoji ? emoji : 'X'}</div> 
+          </Link>
           <header className="post-header">
             <h2 className="post-title"><Link href={postUrl}>{title}</Link></h2>
             {category && <p className="post-category">{category.map((cat, index) => <span key={index}>{cat}</span>)}</p>}

@@ -66,7 +66,7 @@ export default class SectionPosts extends React.Component {
             </div>
           </div>
           {!_.isEmpty(actions) && (
-            <div className="block-buttons inner-sm">
+            <div className="block-buttons inner-sm section-bottom-btn">
               <CtaButtons actions={actions} />
             </div>
           )}

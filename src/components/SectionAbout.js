@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 
 import { htmlToReact, withPrefix, markdownify, Link } from '../utils';
-import { CtaButtons, Icon } from '.';
+import { CtaButtons } from '.';
 
 export default class SectionAbount extends React.Component {
   render() {
@@ -35,7 +35,7 @@ export default class SectionAbount extends React.Component {
             </div>
           )}
           {!_.isEmpty(actions) && (
-            <div className="block-buttons inner-sm" style={{ marginTop: '3em' }}>
+            <div className="block-buttons inner-sm section-bottom-btn">
               <CtaButtons actions={actions} />
             </div>
           )}

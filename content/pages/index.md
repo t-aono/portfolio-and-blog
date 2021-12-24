@@ -5,15 +5,17 @@ sections:
   - section_id: hero
     type: section_hero
     title: aono's Portfolio & Blog
-    content: こんにちは、ソフトウェアエンジニアをしてるアオノといいます。<br/>
+    content: ソフトウェアエンジニアをしてるアオノといいます。<br/>
       個人開発したWebアプリケーションやプログラミング関連ブログを公開中です。<br/>
       当サイトは Next.js (SSG/SSR) と Notion API で構築しています。
   - section_id: latest-projects
     type: section_portfolio
     layout_style: mosaic
     title: 最近の個人開発
-    view_all_label: もっと見る
-    view_all_url: portfolio
+    actions:
+      - label: もっと見る
+        url: portfolio
+        style: button
   - section_id: abount
     type: section_about
     title: 自己紹介
@@ -32,17 +34,18 @@ sections:
       2020年 小規模な会社にて打合せ・設計・実装・テストなどの開発工程を幅広く経験<br/>
       2021年 フリーランスとして Laravel / Vue.js を使った開発も経験<br/>
     actions:
-      - label: GigHub
+      - label: GitHub
         url: https://github.com/t-aono
         style: button
         icon: github
+        new_window: true
   - section_id: latest-posts
     type: section_posts
-    title: 最近書いたブログ記事
-    posts_number: 3
+    title: 最近のブログ記事
+    posts_number: 6
     col_number: three
     actions:
-      - label: ブログを見る
+      - label: もっとみる
         url: blog
         style: button
 seo:
