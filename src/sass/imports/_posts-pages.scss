@@ -175,6 +175,23 @@
   font-weight: bold;
 }
 
+.search-form {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 3em;
+  max-width: 90%;
+  padding: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.categories {
+  display: flex;
+  column-gap: 2em;
+}
+
 @media only screen and (min-width: 541px) {
   .post-feed {
     &.grid-col-2 {

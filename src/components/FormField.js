@@ -2,6 +2,10 @@ import React from 'react';
 import _ from 'lodash';
 
 export default class FormField extends React.Component {
+    constructor(props) {
+      super(props);
+    }
+
     render() {
         const field = _.get(this.props, 'field');
         const inputType = _.get(field, 'input_type');
@@ -19,13 +23,20 @@ export default class FormField extends React.Component {
             attr.required = true;
         }
 
-        switch (inputType) {
+      switch (inputType) {
             case 'checkbox':
-                return (
-                    <div className="form-group form-checkbox">
-                        <input type="checkbox" id={name} name={name} {...attr} />
-                        {label && <label htmlFor={name}>{label}</label>}
-                    </div>
+              return (
+                <div className="form-group form-checkbox">
+                  <input type="checkbox" id={name} name={name} {...attr} />
+                  {label && <label htmlFor={name}>{label}</label>}
+                </div>
+              );
+            case 'radio':
+              return (
+                <div className="form-group form-radio">
+                  <input type="radio" id={label} name={name} value={label} onClick={this.props.onSetValue} />
+                      {label && <label htmlFor={label}>{label}</label>}
+                  </div>
                 );
             case 'select':
                 return (
@@ -53,7 +64,7 @@ export default class FormField extends React.Component {
                 return (
                     <div className="form-group">
                         {label && <label htmlFor={name}>{label}</label>}
-                        <input type={inputType} name={name} id={name} {...(defaultValue ? { placeholder: defaultValue } : null)} {...attr} />
+                    <input type={inputType} name={name} id={name} {...(defaultValue ? { placeholder: defaultValue } : null)} {...attr} onChange={this.props.onInputChange} />
                         <span className="animate-border" aria-hidden="true" />
                     </div>
                 );

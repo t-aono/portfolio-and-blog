@@ -21,7 +21,7 @@ export async function getStaticPaths() {
   console.log('Page [...slug].js getStaticPaths');
   const paths = await sourcebitDataClient.getStaticPaths();
   const postPaths = await getPosts('path');
-  const blogPagingPaths = postPaths.map((p, i) => (i % 12 === 0) ? `/blog/page-no/${i / 12 + 2}` : null).filter(v => v);
+  const blogPagingPaths = postPaths.map((p, i) => (i % 12 === 0) ? `/blog/paginate/${i / 12 + 2}` : null).filter(v => v);
   // paths.push(...[... await getProjectPaths(), ...postPaths, ...blogPagePaths]);
   paths.push(... blogPagingPaths);
   return { paths, fallback: false };
@@ -37,23 +37,19 @@ export async function getStaticProps({ params }) {
     return { props }
   }
 
-  if (params.slug && params.slug[0] === 'blog') {
-    let posts = [];
-    
-    if (params.slug[1] && params.slug[1] === 'page-no') {
+  if (params.slug && params.slug[0] === 'blog') {    
+    if (params.slug[1] && params.slug[1] === 'paginate') {
       // ページネーション
       props.page_no = params.slug[2];
       const postIds = await getPosts('id');
       props.post_count = postIds.length;
-      posts = await getPosts('post', postIds[(params.slug[2] - 1) * 12]);
+      props.posts = await getPosts('post', postIds[(params.slug[2] - 1) * 12]);
       props.page = props.pages.find(p => p.title === 'Blog');
     } else {
       // １ページ目
       props.page_no = 1;
-      posts = await getPosts('post');
+      props.posts = await getPosts('post');
     }
-
-    props.posts = posts;
     return { props }
   }
 
