@@ -198,8 +198,32 @@
   column-gap: 2em;
 }
 
-.no-hit-message {
-  margin: 0 auto;
+.no-hit {
+  text-align: center;
+  & div {
+    margin-bottom: 3em;
+  }
+  & img {
+    padding-top: 3em;
+    opacity: 30%;
+    width: 30%;
+  }
+}
+
+.loading-image {
+  width: 50%;
+  margin: 5em auto;
+  opacity: 30%;
+  animation: 3s linear infinite rotation;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @media only screen and (min-width: 541px) {

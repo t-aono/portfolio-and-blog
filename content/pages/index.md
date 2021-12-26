@@ -6,8 +6,7 @@ sections:
     type: section_hero
     title: aono's Portfolio & Blog
     content: ソフトウェアエンジニアをしてるアオノといいます。<br/>
-      個人開発したWebアプリケーションやプログラミング関連ブログを公開中です。<br/>
-      当サイトは Next.js (SSG/SSR) と Notion API で構築しています。
+      個人開発したWebアプリケーションやプログラミング関連ブログを公開しています。<br/>
   - section_id: latest-projects
     type: section_portfolio
     layout_style: mosaic
@@ -22,6 +21,7 @@ sections:
     content: プログラムを書いたりWebアプリケーションを作るのが好き。<br/>
       よく使うのは PHP / Laravel / JS / Vue.js / React / MySQL など。<br/>
       TypeScript / Next.js も学習中。<br/>
+      当サイトは Next.js (SSG/SSR) と Notion API で構築。<br/>
       <br/>
       エンジニア歴は5年くらい。<br/>
       半分は会社員で半分はフリーランス。<br/>

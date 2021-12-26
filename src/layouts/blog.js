@@ -12,7 +12,8 @@ export default class Blog extends React.Component {
     this.state = {
       categories: props.categories,
       posts: props.posts,
-      isSearched: false
+      isSearched: false,
+      isLoading: false
     };
     this.setValue = this.setValue.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -45,6 +46,7 @@ export default class Blog extends React.Component {
   }, 1000);
 
   searchPosts(query) {
+    this.setState({ isLoading: true });
     fetch('/api/search', {
       body: JSON.stringify({ query }),
       headers: {
@@ -57,6 +59,7 @@ export default class Blog extends React.Component {
       })
       .then((data) => {
         this.setState({ posts: data, isSearched: true });
+        this.setState({ isLoading: false });
       })
       .catch((error) => {
         console.log(error);
@@ -114,6 +117,8 @@ export default class Blog extends React.Component {
     const postCount = _.get(this.props, 'post_count');
     const prev = pageNo ? parseInt(pageNo) - 1 : null;
     const next = pageNo > 1 ? (pageNo * 12 < postCount ? parseInt(pageNo) + 1 : null) : 2;
+    const loadingImage = '/images/earth_simple.png';
+    const noHit = '/images/cat_02_simple.png';
 
     return (
       <Layout page={page} config={config}>
@@ -135,35 +140,46 @@ export default class Blog extends React.Component {
             <FormField field={{ input_type: 'text', name: 'query', default_value: 'Search ...' }} onInputChange={this.onInputChange} />
           </form>
 
-          <div
-            className={classNames('post-feed', 'grid', {
-              'grid-col-2': colNumber === 'two',
-              'grid-col-3': colNumber === 'three'
-            })}
-          >
-            {this.state.posts.length > 0 ? (
-              this.state.posts.map((post, index) => this.renderPost(post, index))
-            ) : (
-              <div className="no-hit-message">記事がありません！</div>
-            )}
-          </div>
+          {this.state.isLoading ? (
+            <div className="loading-image">
+              <img src={withPrefix(loadingImage)} alt={loadingImage.replace(/images\//g, '')} />
+            </div>
+          ) : (
+            <>
+              <div
+                className={classNames('post-feed', 'grid', {
+                  'grid-col-2': colNumber === 'two',
+                  'grid-col-3': colNumber === 'three'
+                })}
+              >
+                {this.state.posts.length > 0 ? (
+                  this.state.posts.map((post, index) => this.renderPost(post, index))
+                ) : (
+                  <div className="no-hit">
+                    <div>記事がありません！</div>
+                    <img src={withPrefix(noHit)} alt={noHit.replace(/images\//g, '')} />
+                  </div>
+                )}
+              </div>
+              {this.state.isSearched ? (
+                ''
+              ) : (
+                <div className="pagenate-btn">
+                  {prev >= 1 && (
+                    <Link href={prev === 1 ? '/blog' : `/blog/paginate/${prev}`} className="button">
+                      前へ
+                    </Link>
+                  )}
+                  {next && (
+                    <Link href={`/blog/paginate/${next}`} className="button">
+                      次へ
+                    </Link>
+                  )}
+                </div>
+              )}
+            </>
+          )}
         </div>
-        {this.state.isSearched ? (
-          ''
-        ) : (
-          <div className="pagenate-btn">
-            {prev >= 1 && (
-              <Link href={prev === 1 ? '/blog' : `/blog/paginate/${prev}`} className="button">
-                前へ
-              </Link>
-            )}
-            {next && (
-              <Link href={`/blog/paginate/${next}`} className="button">
-                次へ
-              </Link>
-            )}
-          </div>
-        )}
       </Layout>
     );
   }
