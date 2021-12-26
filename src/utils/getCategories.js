@@ -25,7 +25,7 @@ export default async function getCategories() {
     const multi_select = row.properties.category.multi_select;
     if (multi_select) {
       for (let cate of multi_select) {
-        if (categories.includes(cate.name) === false && cate.name !== 'other') {
+        if (categories.includes(cate.name) === false) {
           categories.push(cate.name);
         }
       }
