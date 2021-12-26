@@ -33,7 +33,7 @@ export default class SectionPortfolio extends React.Component {
           </header>
         </Link>
       </article>
-    )
+    );
   }
 
   render() {

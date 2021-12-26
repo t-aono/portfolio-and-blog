@@ -1,4 +1,4 @@
-const { Client } = require("@notionhq/client")
+const { Client } = require('@notionhq/client');
 
 export default async function getProjects() {
   const notion = new Client({ auth: process.env.NOTION_TOKEN });
@@ -19,7 +19,7 @@ export default async function getProjects() {
     }
   };
   const response = await notion.databases.query(queryParam);
-  return response.results.map(row => {    
+  return response.results.map((row) => {
     return {
       pageId: row.id,
       title: row.properties.title.title[0].plain_text,
@@ -30,6 +30,6 @@ export default async function getProjects() {
       __metadata: {
         urlPath: `/portfolio/project/${row.id}`
       }
-    }
+    };
   });
 }

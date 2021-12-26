@@ -29,11 +29,7 @@ export default class SectionAbount extends React.Component {
               <img src={withPrefix(image)} alt={imageAlt} />
             </div>
           )}
-          {content && (
-            <div className="post-content inner-sm row-md">
-              {markdownify(content)}
-            </div>
-          )}
+          {content && <div className="post-content inner-sm row-md">{markdownify(content)}</div>}
           {!_.isEmpty(actions) && (
             <div className="block-buttons inner-sm section-bottom-btn">
               <CtaButtons actions={actions} />

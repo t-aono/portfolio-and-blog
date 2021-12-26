@@ -20,15 +20,25 @@ export default class SectionPosts extends React.Component {
       <article key={index} className="post grid-item">
         <div className="post-inside">
           <Link href={postUrl}>
-            <div className='emoji-md'>{emoji ? emoji : 'X'}</div> 
+            <div className="emoji-md">{emoji ? emoji : 'X'}</div>
           </Link>
           <div>
-            <h3 className="post-title"><Link href={postUrl}>{title}</Link></h3>
-            {category && <p className="post-category">{category.map((cat, index) => <span key={index}>{cat}</span>)}</p>}
+            <h3 className="post-title">
+              <Link href={postUrl}>{title}</Link>
+            </h3>
+            {category && (
+              <p className="post-category">
+                {category.map((cat, index) => (
+                  <span key={index}>{cat}</span>
+                ))}
+              </p>
+            )}
             <div className="post-meta">
-              <time className="published" dateTime={dateTimeAttr}>{formattedDate}</time>
+              <time className="published" dateTime={dateTimeAttr}>
+                {formattedDate}
+              </time>
             </div>
-          {excerpt && <p className="post-content">{excerpt}</p>}
+            {excerpt && <p className="post-content">{excerpt}</p>}
           </div>
         </div>
       </article>

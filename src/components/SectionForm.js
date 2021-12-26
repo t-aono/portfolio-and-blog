@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import Router from 'next/router';
-import Loader from "react-loader-spinner";
+import Loader from 'react-loader-spinner';
 
 import { htmlToReact, markdownify } from '../utils';
 import FormField from './FormField';
@@ -26,7 +26,7 @@ export default class SectionForm extends React.Component {
     const formHoneypotName = formId + '-bot-field';
     const sending = this.state.sending;
 
-    const sendForm = async event => {
+    const sendForm = async (event) => {
       event.preventDefault();
       this.setState({ sending: true });
 
@@ -44,7 +44,7 @@ export default class SectionForm extends React.Component {
       });
 
       if (res.ok) Router.push('/thank-you');
-    }
+    };
 
     return (
       <section id={sectionId} className="block block-form outer">
@@ -57,13 +57,7 @@ export default class SectionForm extends React.Component {
           )}
           <div className="block-content inner-sm">
             {content && markdownify(content)}
-            <form
-              onSubmit={sendForm}
-              name={formId}
-              id={formId}
-              data-netlify="true"
-              data-netlify-honeypot={formHoneypotName}
-            >
+            <form onSubmit={sendForm} name={formId} id={formId} data-netlify="true" data-netlify-honeypot={formHoneypotName}>
               <div className="screen-reader-text">
                 <label id={formHoneypotLabelId} htmlFor={formHoneypotInputId}>
                   Don't fill this out if you're human:
@@ -71,11 +65,15 @@ export default class SectionForm extends React.Component {
                 </label>
               </div>
               <input type="hidden" name="form-name" value={formId} />
-              {_.map(formFields, (field, index) => <FormField key={index} {...this.props} field={field} />)}
-              <div className="form-submit" style={{ display: (sending) ? 'none' : 'block' }}>
-                <button type="submit" className="button">{submitLabel}</button>
+              {_.map(formFields, (field, index) => (
+                <FormField key={index} {...this.props} field={field} />
+              ))}
+              <div className="form-submit" style={{ display: sending ? 'none' : 'block' }}>
+                <button type="submit" className="button">
+                  {submitLabel}
+                </button>
               </div>
-              <Loader style={{ display: (sending) ? 'block' : 'none' }} type="ThreeDots" color="#23d3ff" height={80} width={80}/>
+              <Loader style={{ display: sending ? 'block' : 'none' }} type="ThreeDots" color="#23d3ff" height={80} width={80} />
             </form>
           </div>
         </div>

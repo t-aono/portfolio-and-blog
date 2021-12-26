@@ -17,19 +17,19 @@ const Project = (props) => {
 const getConfig = async () => {
   const filePath = path.join(process.cwd(), 'content/data/config.json');
   const config = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-  return { data: { config }};
-}
+  return { data: { config } };
+};
 
 export async function getServerSideProps({ params }) {
   console.log('Page [id].js getServerSideProps, params: ', params);
   const projects = await getProjects();
-  const project = projects.find(pj => pj.pageId === params.id);
+  const project = projects.find((pj) => pj.pageId === params.id);
   const pageContent = await getPageContent(params.id);
   const props = await getConfig();
   props.page = {
     __metadata: { modelName: 'project', urlPath: '/portfolio' },
-    seo: { title: project.title, description: `${project.skill} を使って${project.title}を制作` },
-  }
+    seo: { title: project.title, description: `${project.skill} を使って${project.title}を制作` }
+  };
   props.project = project;
   props.content = pageContent.content;
   return { props };
