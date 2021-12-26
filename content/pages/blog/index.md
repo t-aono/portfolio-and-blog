@@ -1,11 +1,11 @@
 ---
 title: Blog
-subtitle: '誰かの役に立ちそうなのプログラミング Tips'
+subtitle: 'Webプログラミング Tips'
 hide_title: false
 col_number: two
 seo:
   title: Blog
-  description: 誰かの役に立ちそうなのプログラミング Tips
+  description: Webプログラミング Tips
   extra:
     - name: 'og:type'
       value: website
@@ -14,7 +14,7 @@ seo:
       value: Blog
       keyName: property
     - name: 'og:description'
-      value: 誰かの役に立ちそうなのプログラミング Tips
+      value: Webプログラミング Tips
       keyName: property
     - name: 'og:image'
       value: images/12.jpg
@@ -25,7 +25,7 @@ seo:
     - name: 'twitter:title'
       value: Blog
     - name: 'twitter:description'
-      value: 誰かの役に立ちそうなのプログラミング Tips
+      value: Webプログラミング Tips
     - name: 'twitter:image'
       value: images/12.jpg
       relativeUrl: true

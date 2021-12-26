@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import { sourcebitDataClient } from 'sourcebit-target-next';
 import { withRemoteDataUpdates } from 'sourcebit-target-next/with-remote-data-updates';
-import { getProjects, getProjectPaths, getPageContent, getPosts } from '../utils';
+import { getProjects, getPosts, getCategories } from '../utils';
 
 import pageLayouts from '../layouts';
 
@@ -21,9 +21,8 @@ export async function getStaticPaths() {
   console.log('Page [...slug].js getStaticPaths');
   const paths = await sourcebitDataClient.getStaticPaths();
   const postPaths = await getPosts('path');
-  const blogPagingPaths = postPaths.map((p, i) => (i % 12 === 0) ? `/blog/paginate/${i / 12 + 2}` : null).filter(v => v);
-  // paths.push(...[... await getProjectPaths(), ...postPaths, ...blogPagePaths]);
-  paths.push(... blogPagingPaths);
+  const blogPagingPaths = postPaths.map((p, i) => (i % 12 === 0 ? `/blog/paginate/${i / 12 + 2}` : null)).filter((v) => v);
+  paths.push(...blogPagingPaths);
   return { paths, fallback: false };
 }
 
@@ -34,23 +33,24 @@ export async function getStaticProps({ params }) {
 
   if (params.slug && params.slug[0] === 'portfolio') {
     props.projects = await getProjects();
-    return { props }
+    return { props };
   }
 
-  if (params.slug && params.slug[0] === 'blog') {    
+  if (params.slug && params.slug[0] === 'blog') {
     if (params.slug[1] && params.slug[1] === 'paginate') {
       // ページネーション
       props.page_no = params.slug[2];
       const postIds = await getPosts('id');
       props.post_count = postIds.length;
       props.posts = await getPosts('post', postIds[(params.slug[2] - 1) * 12]);
-      props.page = props.pages.find(p => p.title === 'Blog');
+      props.page = props.pages.find((p) => p.title === 'Blog');
     } else {
       // １ページ目
       props.page_no = 1;
       props.posts = await getPosts('post');
     }
-    return { props }
+    props.categories = await getCategories();
+    return { props };
   }
 
   // トップページ

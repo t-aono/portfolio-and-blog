@@ -10,18 +10,21 @@ export default class Blog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: ['React', 'Next.js'],
-      targetCategory: '',
+      categories: props.categories,
       posts: props.posts,
+      isSearched: false
     };
     this.setValue = this.setValue.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
   }
-  
+
   setValue(e) {
-    const index = this.state.categories.findIndex(category => category === e.target.value);
-    this.state.targetCategory = this.state.categories[index];
+    const index = this.state.categories.findIndex((category) => category === e.target.value);
+    if (this.state.categories[index]) this.searchPosts(this.state.categories[index]);
+    else this.setState({ posts: this.props.posts, isSearched: false });
+
+    document.getElementById('query').value = '';
   }
 
   onSubmit(e) {
@@ -29,30 +32,35 @@ export default class Blog extends React.Component {
     return false;
   }
 
-  onInputChange = _.debounce(e => {
+  onInputChange = _.debounce((e) => {
     e.preventDefault();
-    
+
     if (e.target.value) this.searchPosts(e.target.value);
-    else this.setState({ posts: this.props.posts })
-  }, 1000)
+    else this.setState({ posts: this.props.posts, isSearched: false });
+
+    // カテゴリー選択を解除
+    for (let elem of document.getElementsByTagName('input')) {
+      if (elem.checked) elem.checked = false;
+    }
+  }, 1000);
 
   searchPosts(query) {
     fetch('/api/search', {
-      body: JSON.stringify({
-        query: query
-      }),
+      body: JSON.stringify({ query }),
       headers: {
         'Content-Type': 'application/json'
       },
       method: 'POST'
-    }).then(res => {
-      return res.json();
-    }).then(data => {
-      console.log(data)
-      this.setState({posts: data})
-    }).catch(error => {
-      console.log(error);
-    });
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        this.setState({ posts: data, isSearched: true });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   renderPost(post, index) {
@@ -69,13 +77,23 @@ export default class Blog extends React.Component {
       <article key={index} className="post grid-item">
         <div className="post-inside">
           <Link href={postUrl}>
-            <div className='emoji-md'>{emoji ? emoji : 'X'}</div> 
+            <div className="emoji-md">{emoji ? emoji : 'X'}</div>
           </Link>
           <header className="post-header">
-            <h2 className="post-title"><Link href={postUrl}>{title}</Link></h2>
-            {category && <p className="post-category">{category.map((cat, index) => <span key={index}>{cat}</span>)}</p>}
+            <h2 className="post-title">
+              <Link href={postUrl}>{title}</Link>
+            </h2>
+            {category && (
+              <p className="post-category">
+                {category.map((cat, index) => (
+                  <span key={index}>{cat}</span>
+                ))}
+              </p>
+            )}
             <div className="post-meta">
-              <time className="published" dateTime={dateTimeAttr}>{formattedDate}</time>
+              <time className="published" dateTime={dateTimeAttr}>
+                {formattedDate}
+              </time>
             </div>
           </header>
           {/* {excerpt && <p className="post-content">{excerpt}</p>} */}
@@ -94,8 +112,8 @@ export default class Blog extends React.Component {
     const hideTitle = _.get(page, 'hide_title');
     const colNumber = _.get(page, 'col_number', 'three');
     const postCount = _.get(this.props, 'post_count');
-    const prev = (pageNo) ? parseInt(pageNo) - 1 : null;
-    const next = (pageNo > 1) ? (pageNo * 12 < postCount) ? parseInt(pageNo) + 1 : null : 2;
+    const prev = pageNo ? parseInt(pageNo) - 1 : null;
+    const next = pageNo > 1 ? (pageNo * 12 < postCount ? parseInt(pageNo) + 1 : null) : 2;
 
     return (
       <Layout page={page} config={config}>
@@ -108,13 +126,13 @@ export default class Blog extends React.Component {
             <h1 className="page-title line-top">{title}</h1>
             <div className="page-subtitle">{subtitle}</div>
           </header>
-          <form onSubmit={this.onSubmit} className='search-form'>
+          <form onSubmit={this.onSubmit} className="search-form">
             <div className="categories">
-              {this.state.categories.map(category => (
-                <FormField onSetValue={this.setValue} key={category} field={{ input_type: "radio", name: 'category', label: category }}/>
+              {this.state.categories.map((category) => (
+                <FormField onSetValue={this.setValue} key={category} field={{ input_type: 'radio', name: 'category', label: category }} />
               ))}
             </div>
-            <FormField field={{ input_type: "text", name: "query", default_value: "Search ..." }} onInputChange={this.onInputChange} />
+            <FormField field={{ input_type: 'text', name: 'query', default_value: 'Search ...' }} onInputChange={this.onInputChange} />
           </form>
 
           <div
@@ -123,18 +141,29 @@ export default class Blog extends React.Component {
               'grid-col-3': colNumber === 'three'
             })}
           >
-            {this.state.posts.map((post, index) => this.renderPost(post, index))}
+            {this.state.posts.length > 0 ? (
+              this.state.posts.map((post, index) => this.renderPost(post, index))
+            ) : (
+              <div className="no-hit-message">記事がありません！</div>
+            )}
           </div>
         </div>
-        <div className="pagenate-btn">
-          {prev >= 1 && (
-            <Link
-              href={(prev === 1) ? '/blog' : `/blog/paginate/${prev}`}
-              className="button"
-            >前へ</Link>
-          )}
-          {next && <Link href={`/blog/paginate/${next}`} className="button">次へ</Link>}
-        </div>
+        {this.state.isSearched ? (
+          ''
+        ) : (
+          <div className="pagenate-btn">
+            {prev >= 1 && (
+              <Link href={prev === 1 ? '/blog' : `/blog/paginate/${prev}`} className="button">
+                前へ
+              </Link>
+            )}
+            {next && (
+              <Link href={`/blog/paginate/${next}`} className="button">
+                次へ
+              </Link>
+            )}
+          </div>
+        )}
       </Layout>
     );
   }

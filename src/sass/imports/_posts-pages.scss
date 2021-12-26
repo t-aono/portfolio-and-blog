@@ -178,6 +178,7 @@
 .search-form {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
   column-gap: 3em;
   max-width: 90%;
   padding: 1em;
@@ -185,11 +186,20 @@
   margin-bottom: 1em;
   margin-left: auto;
   margin-right: auto;
+
+  & > div:nth-child(2) {
+    flex: 40% 0;
+  }
 }
 
 .categories {
   display: flex;
+  flex-wrap: wrap;
   column-gap: 2em;
+}
+
+.no-hit-message {
+  margin: 0 auto;
 }
 
 @media only screen and (min-width: 541px) {
@@ -228,5 +238,9 @@
 
   .post-subtitle {
     font-size: 1.22222em;
+  }
+
+  .search-form {
+    display: block;
   }
 }
