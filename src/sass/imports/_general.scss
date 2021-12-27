@@ -300,20 +300,6 @@ video {
   max-width: 100%;
 }
 
-.post-content,
-.block-content {
-  iframe[src*='vimeo.com'],
-  iframe[src*='youtube.com'] {
-    display: block;
-    margin-bottom: 1.66667em;
-    margin-top: 1.66667em;
-
-    &:first-child {
-      margin-top: 0;
-    }
-  }
-}
-
 // Images
 img {
   height: auto;

@@ -36,6 +36,21 @@
   }
 }
 
+.post-content,
+.block-content {
+  line-height: 1.8em;
+  iframe[src*='vimeo.com'],
+  iframe[src*='youtube.com'] {
+    display: block;
+    margin-bottom: 1.66667em;
+    margin-top: 1.66667em;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}
+
 .post-date {
   float: right;
 }
