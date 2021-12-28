@@ -23,6 +23,9 @@ export default class Project extends React.Component {
               <div className="post-subtitle">
                 <span>{project.skill}</span>
               </div>
+              <div className="post-date">
+                <span>{project.term}</span>
+            </div>
             </header>
             {content.map((item) => (
               <div className="post-content inner-sm" key={item.block.id}>
@@ -52,15 +55,12 @@ export default class Project extends React.Component {
                 ) : (
                   ''
                 )}
-                {item.type === 'bulleted_list_item' ? <li>{item.block.bulleted_list_item.text[0].plain_text}</li> : ''}
+                {item.type === 'bulleted_list_item' ? <ul><li>{item.block.bulleted_list_item.text[0].plain_text}</li></ul> : ''}
               </div>
             ))}
-            <div className="post-subtitle">
-              <span className="post-date">{project.term}</span>
-            </div>
             <footer className="post-meta inner-sm back-btn">
               <span className="button" onClick={() => Router.back()}>
-                戻る
+                一覧へ戻る
               </span>
             </footer>
           </article>

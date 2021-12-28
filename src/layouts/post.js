@@ -106,8 +106,8 @@ const Post = (props) => {
               ) : (
                 ''
               )}
-              {item.type === 'bulleted_list_item' ? <li>{item.block.bulleted_list_item.text[0].plain_text}</li> : ''}
-              {item.type === 'numbered_list_item' ? <li>{item.block.numbered_list_item.text[0].plain_text}</li> : ''}
+              {item.type === 'bulleted_list_item' ? <ul><li>{item.block.bulleted_list_item.text[0].plain_text}</li></ul> : ''}
+              {item.type === 'numbered_list_item' ? <ol><li>{item.block.numbered_list_item.text[0].plain_text}</li></ol> : ''}
               {item.type === 'paragraph' ? (
                 <div>
                   {item.block.paragraph.text.length > 0
