@@ -232,6 +232,20 @@
   animation: 3s linear infinite rotation;
 }
 
+.post-related {
+  margin-top: 3em;
+}
+
+.related-posts {
+  display: flex;
+  column-gap: 1em;
+  margin-bottom: 2em;
+
+  & a {
+    border-bottom: none;
+  }
+}
+
 @keyframes rotation {
   0% {
     transform: rotate(0);

@@ -23,7 +23,7 @@ const getConfig = async () => {
 export async function getServerSideProps({ params }) {
   console.log('Page [id].js getServerSideProps, params: ', params);
   const posts = await getPosts('post', params.id);
-  const post = posts.find((po) => po.pageId === params.id);
+  const post = posts.find((post) => post.pageId === params.id);
   const pageContent = await getPageContent(params.id);
   const props = await getConfig();
   props.page = {
