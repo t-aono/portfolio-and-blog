@@ -214,6 +214,7 @@
 }
 
 .no-hit {
+  margin: 0 auto;
   text-align: center;
   & div {
     margin-bottom: 3em;
@@ -226,7 +227,7 @@
 }
 
 .loading-image {
-  width: 50%;
+  width: 30%;
   margin: 5em auto;
   opacity: 30%;
   animation: 3s linear infinite rotation;
