@@ -22,15 +22,15 @@
       .accent-green & {
         color: _palette(accent-green);
       }
-    
+
       .accent-blue & {
         color: _palette(accent-blue);
       }
-    
+
       .accent-violet & {
         color: _palette(accent-violet);
       }
-    
+
       .accent-yellow & {
         color: _palette(accent-yellow);
       }
@@ -87,6 +87,7 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    justify-content: center;
   }
 
   .social-links {

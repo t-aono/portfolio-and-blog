@@ -16,6 +16,10 @@
 
 .block-header {
   margin-bottom: 2.5em;
+
+  .porfolio-header {
+    margin-bottom: 4em;
+  }
 }
 
 .block-title {
@@ -75,7 +79,7 @@
   &:after {
     border: 2px solid _palette(charcoal-light-75);
     box-sizing: border-box;
-    content: "";
+    content: '';
     height: 35%;
     left: 0;
     position: absolute;
@@ -129,8 +133,8 @@
   left: 47%;
   position: relative;
   bottom: 8.5em;
-  -webkit-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   z-index: 2;
 
   .accent-green & {
@@ -153,26 +157,26 @@
   &:after {
     border: 2px solid _palette(accent);
     box-sizing: border-box;
-    content: "";
+    content: '';
     height: 32%;
     left: 0;
     position: absolute;
-    transition: .3s ease;
-    -webkit-transition: .3s ease;
+    transition: 0.3s ease;
+    -webkit-transition: 0.3s ease;
     width: 100%;
 
     .accent-green & {
       border-color: _palette(accent-green);
     }
-  
+
     .accent-blue & {
       border-color: _palette(accent-blue);
     }
-  
+
     .accent-violet & {
       border-color: _palette(accent-violet);
     }
-  
+
     .accent-yellow & {
       border-color: _palette(accent-yellow);
     }
@@ -262,4 +266,26 @@
     }
   }
 
+  .view-all-button {
+    bottom: 4.5em;
+  }
+}
+
+.post-inside {
+  display: flex;
+
+  & > a {
+    border-bottom: none;
+  }
+}
+
+.section-bottom-btn {
+  margin-top: 2em;
+  margin-bottom: 3em;
+}
+
+@media only screen and (max-width: 760px) {
+  .portfolio-more {
+    margin-top: 5em;
+  }
 }

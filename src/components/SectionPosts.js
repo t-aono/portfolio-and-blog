@@ -8,7 +8,7 @@ import CtaButtons from './CtaButtons';
 export default class SectionPosts extends React.Component {
   renderPost(post, index) {
     const title = _.get(post, 'title');
-    const thumbnail = (_.get(post, 'thumbnail')) ? _.get(post, 'thumbnail') : 'images/jellyfish.jpg';
+    const emoji = _.get(post, 'emoji');
     const category = _.get(post, 'category');
     const excerpt = _.get(post, 'excerpt');
     const date = _.get(post, 'date');
@@ -19,15 +19,27 @@ export default class SectionPosts extends React.Component {
     return (
       <article key={index} className="post grid-item">
         <div className="post-inside">
-          {thumbnail && <Link className="post-thumbnail" href={postUrl}><img src={withPrefix(thumbnail)} alt={thumbnail.replace(/images\//g, '')} /></Link>}
-          <header className="post-header">
-            <h3 className="post-title"><Link href={postUrl}>{title}</Link></h3>
-            {category && <p className="post-category">{category.map((cat, index) => <span key={index}>{cat}</span>)}</p>}
+          <Link href={postUrl}>
+            <div className="emoji-md">{emoji ? emoji : 'X'}</div>
+          </Link>
+          <div>
+            <h3 className="post-title">
+              <Link href={postUrl}>{title}</Link>
+            </h3>
+            {category && (
+              <p className="post-category">
+                {category.map((cat, index) => (
+                  <span key={index}>{cat}</span>
+                ))}
+              </p>
+            )}
             <div className="post-meta">
-              <time className="published" dateTime={dateTimeAttr}>{formattedDate}</time>
+              <time className="published" dateTime={dateTimeAttr}>
+                {formattedDate}
+              </time>
             </div>
-          </header>
-          {excerpt && <p className="post-content">{excerpt}</p>}
+            {excerpt && <p className="post-content">{excerpt}</p>}
+          </div>
         </div>
       </article>
     );
@@ -64,7 +76,7 @@ export default class SectionPosts extends React.Component {
             </div>
           </div>
           {!_.isEmpty(actions) && (
-            <div className="block-buttons inner-sm">
+            <div className="block-buttons inner-sm section-bottom-btn">
               <CtaButtons actions={actions} />
             </div>
           )}

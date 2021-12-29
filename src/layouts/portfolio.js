@@ -5,7 +5,6 @@ import { Layout } from '../components/index';
 import { getPageUrl, Link, withPrefix } from '../utils';
 
 export default class Portfolio extends React.Component {
-
   renderProject(project) {
     const pageId = _.get(project, 'pageId');
     const projectUrl = getPageUrl(project, { withPrefix: true });
@@ -56,9 +55,7 @@ export default class Portfolio extends React.Component {
             <h1 className="page-title line-top">{title}</h1>
             <div className="page-subtitle">{subtitle}</div>
           </header>
-          <div className={`portfolio-feed layout-${layoutStyle}`}>
-            {this.props.projects.map(project => this.renderProject(project))}
-          </div>
+          <div className={`portfolio-feed layout-${layoutStyle}`}>{this.props.projects.map((project) => this.renderProject(project))}</div>
         </div>
       </Layout>
     );

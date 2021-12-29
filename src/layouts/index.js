@@ -4,24 +4,14 @@ import page from './page';
 import portfolio from './portfolio';
 import post from './post';
 import project from './project';
-import skillsheet from './skillsheet';
 
-export {
-    advanced,
-    blog,
-    page,
-    portfolio,
-    post,
-    project,
-    skillsheet
-};
+export { advanced, blog, page, portfolio, post, project };
 
 export default {
-    advanced,
-    blog,
-    page,
-    portfolio,
-    post,
-    project,
-    skillsheet
+  advanced,
+  blog,
+  page,
+  portfolio,
+  post,
+  project
 };
