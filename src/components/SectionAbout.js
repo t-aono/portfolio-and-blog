@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 
 import { htmlToReact, withPrefix, markdownify, Link } from '../utils';
-import { CtaButtons, Icon } from '.';
+import { CtaButtons } from '.';
 
 export default class SectionAbount extends React.Component {
   render() {
@@ -13,7 +13,7 @@ export default class SectionAbount extends React.Component {
     const image = _.get(section, 'image');
     const imageAlt = _.get(section, 'image_alt', '');
     const actions = _.get(section, 'actions');
-    const about = _.get(this.props, 'about');
+    const content = _.get(section, 'content');
 
     return (
       <section id={sectionId} className="block block-text outer">
@@ -29,23 +29,9 @@ export default class SectionAbount extends React.Component {
               <img src={withPrefix(image)} alt={imageAlt} />
             </div>
           )}
-          {about.content.map(item => (
-            <div className="post-content inner-sm" key={item.block.id}>
-              {(item.type === 'paragraph') ? (
-                <div>
-                  {(item.block.paragraph.text.length > 0) ? (
-                    item.block.paragraph.text.map((text, index) => (text.href) ? (
-                      <Link href={text.href} target="_blank" key={index} style={{ borderBottom: 0 }}>
-                        <div style={{ display: 'flex' }}><Icon icon="github" />&ensp;{text.plain_text}</div>
-                      </Link>
-                    ) : <span key={index}>{text.plain_text}</span>)
-                  ) : "　"}
-                </div>
-              ) : ''}
-            </div>
-          ))}
+          {content && <div className="post-content inner-sm row-md">{markdownify(content)}</div>}
           {!_.isEmpty(actions) && (
-            <div className="block-buttons inner-sm" style={{marginTop: '3em'}}>
+            <div className="block-buttons inner-sm section-bottom-btn">
               <CtaButtons actions={actions} />
             </div>
           )}

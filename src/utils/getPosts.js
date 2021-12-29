@@ -1,4 +1,4 @@
-const { Client } = require("@notionhq/client")
+const { Client } = require('@notionhq/client');
 
 export default async function getPosts(type, startCursor = null) {
   const notion = new Client({ auth: process.env.NOTION_TOKEN });
@@ -20,27 +20,32 @@ export default async function getPosts(type, startCursor = null) {
   };
   if (type === 'post') queryParam.page_size = 12;
   if (startCursor) queryParam.start_cursor = startCursor;
-  const response = await notion.databases.query(queryParam);
-// console.log(response)
-  return response.results.map(row => {
+  let response = null;
+  try {
+    response = await notion.databases.query(queryParam);
+  } catch (error) {
+    return null;
+  }
+
+  return response.results.map((row) => {
     if (type === 'path') {
-      return `/blog/${row.id}`
+      return `/blog/${row.id}`;
     } else if (type === 'id') {
-      return row.id
+      return row.id;
     } else if (type === 'post') {
-      const thumbnailText = (row.properties.thumbnail.rich_text.length > 0) ? row.properties.thumbnail.rich_text[0].plain_text : ''
+      const emoji = row.icon ? row.icon.emoji : '';
       return {
         pageId: row.id,
         title: row.properties.title.title[0].plain_text,
-        category: row.properties.category.multi_select.map(cat => cat.name),
+        category: row.properties.category.multi_select.map((cat) => cat.name),
         date: row.properties.date.date.start,
-        thumbnail: thumbnailText,
+        emoji: emoji,
         __metadata: {
           urlPath: `/blog/post/${row.id}`
         }
       };
     } else {
-      return null
+      return null;
     }
   });
 }

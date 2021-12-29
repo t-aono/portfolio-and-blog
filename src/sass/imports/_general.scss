@@ -30,8 +30,8 @@ a {
   border-bottom: 1px solid currentColor;
   color: _palette(accent);
   text-decoration: none;
-  -webkit-transition: .3s ease;
-  transition: .3s ease;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
 
   .accent-green & {
     color: _palette(accent-green);
@@ -174,7 +174,7 @@ blockquote {
 
   &:before {
     color: _palette(accent);
-    content: "\201C";
+    content: '\201C';
     font-size: 2.5em;
     left: 0;
     line-height: 1;
@@ -235,7 +235,7 @@ dd {
 
 ul,
 ol {
-  margin: 0 0 1.66667em;
+  margin: 0.2em 0;
   padding: 0 0 0 1.33333em;
 }
 
@@ -300,22 +300,28 @@ video {
   max-width: 100%;
 }
 
-.post-content,
-.block-content {
-  iframe[src*="vimeo.com"],
-  iframe[src*="youtube.com"] {
-    display: block;
-    margin-bottom: 1.66667em;
-    margin-top: 1.66667em;
-
-    &:first-child {
-        margin-top: 0;
-    }
-  }
-}
-
 // Images
 img {
   height: auto;
   max-width: 100%;
+}
+
+.row-md {
+  line-height: 2.5em;
+}
+
+.emoji-md {
+  font-size: 3em;
+  width: 2em;
+  text-align: center;
+}
+
+.emoji-lg {
+  font-size: 5em;
+}
+
+.mainte-image {
+  width: 50%;
+  margin: 5em auto;
+  opacity: 30%;
 }

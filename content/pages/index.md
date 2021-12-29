@@ -4,33 +4,53 @@ hide_title: true
 sections:
   - section_id: hero
     type: section_hero
-    title: Welcome to aono's web tech !!
-    content: サイトをご覧いただきありがとうございます。制作物などを公開しています。
+    title: aono's Portfolio & Blog
+    content: ソフトウェアエンジニアをしてるアオノといいます。<br/>
+      個人開発したWebアプリケーションやプログラミング関連ブログを公開しています。<br/>
   - section_id: latest-projects
     type: section_portfolio
     layout_style: mosaic
-    title: 最近の制作物
-    view_all_label: もっと見る
-    view_all_url: portfolio
+    title: 最近の個人開発
+    actions:
+      - label: もっと見る
+        url: portfolio
+        style: button
   - section_id: abount
     type: section_about
     title: 自己紹介
+    content: プログラムを書いたりWebアプリケーションを作るのが好き。<br/>
+      よく使うのは PHP / Laravel / JS / Vue.js / React / MySQL など。<br/>
+      TypeScript / Next.js も学習中。<br/>
+      当サイトは Next.js (SSG/SSR) と Notion API で構築。<br/>
+      <br/>
+      エンジニア歴は5年くらい。<br/>
+      半分は会社員で半分はフリーランス。<br/>
+      <br/>
+      経歴<br/>
+      2011年 新卒で製薬メーカーに営業職で入社<br/>
+      2016年 ITの勉強をした後にエンジニアとして働き始める<br/>
+      2017年 Java / VBA を使った保守開発の経験を積む<br/>
+      2018年 PHP / JS での開発経験を積む<br/>
+      2020年 小規模な会社にて打合せ・設計・実装・テストなどの開発工程を幅広く経験<br/>
+      2021年 フリーランスとして Laravel / Vue.js を使った開発も経験<br/>
     actions:
-      - label: スキルシートを見る
-        url: skillsheet
+      - label: GitHub
+        url: https://github.com/t-aono
         style: button
+        icon: github
+        new_window: true
   - section_id: latest-posts
     type: section_posts
-    title: 最近書いたブログ記事
-    posts_number: 3
-    col_number: three
+    title: 最近のブログ記事
+    posts_number: 6
+    col_number: two
     actions:
-      - label: ブログを見る
+      - label: もっとみる
         url: blog
         style: button
 seo:
-  title: aono's web tech
-  description: aonoによるWeb技術を公開
+  title: aono's P&B
+  description: 個人開発したWebアプリケーションやプログラミング関連ブログを公開
   extra:
     - name: 'og:type'
       value: website
@@ -39,7 +59,7 @@ seo:
       value: aono's web tech
       keyName: property
     - name: 'og:description'
-      value: aonoによるWeb技術を公開
+      value: 個人開発したWebアプリケーションやプログラミング関連ブログを公開
       keyName: property
     - name: 'og:image'
       value: images/exto_preview.png
@@ -50,7 +70,7 @@ seo:
     - name: 'twitter:title'
       value: aono's web tech
     - name: 'twitter:description'
-      value: aonoによるWeb技術を公開
+      value: 個人開発したWebアプリケーションやプログラミング関連ブログを公開
     - name: 'twitter:image'
       value: images/exto_preview.png
       relativeUrl: true
