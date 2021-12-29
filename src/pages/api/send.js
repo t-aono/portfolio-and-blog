@@ -18,7 +18,7 @@ export default function handler(req, res) {
       } catch (error) {
         console.error(error);
         if (error.response) {
-          console.error(error.response.body)
+          console.error(error.response.body);
         }
       }
     })();

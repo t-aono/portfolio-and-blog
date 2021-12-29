@@ -12,3 +12,4 @@ export { default as getProjects } from './getProjects';
 export { default as getProjectPaths } from './getProjectPaths';
 export { default as getPageContent } from './getPageContent';
 export { default as getPosts } from './getPosts';
+export { default as getCategories } from './getCategories';

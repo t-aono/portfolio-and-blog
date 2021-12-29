@@ -12,13 +12,13 @@ label {
   }
 }
 
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="tel"],
-input[type="number"],
-input[type="search"],
-input[type="url"],
+input[type='text'],
+input[type='password'],
+input[type='email'],
+input[type='tel'],
+input[type='number'],
+input[type='search'],
+input[type='url'],
 select,
 textarea {
   background: transparent;
@@ -60,22 +60,22 @@ option {
     height: 2px;
     left: 0;
     position: absolute;
-    -webkit-transition: width .3s;
-    transition: width .3s;
+    -webkit-transition: width 0.3s;
+    transition: width 0.3s;
     width: 0;
 
     .accent-green & {
       background: _palette(accent-green);
     }
-  
+
     .accent-blue & {
       background: _palette(accent-blue);
     }
-  
+
     .accent-violet & {
       background: _palette(accent-violet);
     }
-  
+
     .accent-yellow & {
       background: _palette(accent-yellow);
     }
@@ -106,9 +106,9 @@ option {
   &:before,
   &:after {
     border: solid transparent;
-    border-width: .3125em;
+    border-width: 0.3125em;
     box-sizing: border-box;
-    content: "";
+    content: '';
     position: absolute;
     right: 5px;
     top: 50%;
@@ -117,7 +117,7 @@ option {
 
   &:before {
     border-top-color: _palette(charcoal-light-40);
-    margin-top: .125em;
+    margin-top: 0.125em;
 
     .palette-dark & {
       border-top-color: _palette(charcoal-light-25);
@@ -126,7 +126,7 @@ option {
 
   &:after {
     border-bottom-color: _palette(charcoal-light-40);
-    margin-top: -.75em;
+    margin-top: -0.75em;
 
     .palette-dark & {
       border-bottom-color: _palette(charcoal-light-25);
@@ -142,11 +142,21 @@ option {
     font-weight: normal;
   }
 
-  input[type=checkbox] {
-    height: 1.5em;
+  input[type='checkbox'] {
+    height: 1.2em;
     left: 0;
     position: absolute;
     top: 0;
+  }
+}
+
+.form-radio {
+  & input {
+    display: none;
+  }
+  & input:checked + label {
+    font-size: 1.5em;
+    border-bottom: 1px _palette(accent-blue) solid;
   }
 }
 
@@ -176,20 +186,20 @@ option {
   ::-webkit-input-placeholder {
     color: _palette(charcoal-light-25);
   }
-  
+
   ::-moz-placeholder {
     color: _palette(charcoal-light-25);
     opacity: 1;
   }
-  
+
   :-ms-input-placeholder {
     color: _palette(charcoal-light-25);
   }
-  
+
   ::-ms-input-placeholder {
     color: _palette(charcoal-light-25);
   }
-  
+
   ::placeholder {
     color: _palette(charcoal-light-25);
   }
