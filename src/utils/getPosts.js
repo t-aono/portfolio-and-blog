@@ -20,7 +20,12 @@ export default async function getPosts(type, startCursor = null) {
   };
   if (type === 'post') queryParam.page_size = 12;
   if (startCursor) queryParam.start_cursor = startCursor;
-  const response = await notion.databases.query(queryParam);
+  let response = null;
+  try {
+    response = await notion.databases.query(queryParam);
+  } catch (error) {
+    return null;
+  }
 
   return response.results.map((row) => {
     if (type === 'path') {

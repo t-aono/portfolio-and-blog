@@ -26,12 +26,23 @@ export async function getServerSideProps({ params }) {
   const project = projects.find((pj) => pj.pageId === params.id);
   const pageContent = await getPageContent(params.id);
   const props = await getConfig();
-  props.page = {
-    __metadata: { modelName: 'project', urlPath: '/portfolio' },
-    seo: { title: project.title, description: `${project.skill} を使って${project.title}を制作` }
-  };
-  props.project = project;
-  props.content = pageContent.content;
+
+  if (project !== undefined) {
+    props.page = {
+      __metadata: { modelName: 'project', urlPath: '/portfolio' },
+      seo: { title: project.title, description: `${project.skill} を使って${project.title}を制作` }
+    };
+    props.project = project;
+    props.content = pageContent.content;
+  } else {
+    props.page = {
+      __metadata: { modelName: 'project', urlPath: '/portfolio' },
+      seo: { title: 'メンテナンス中', description: '' }
+    };
+    props.project = {};
+    props.pageContent = null;
+  }
+
   return { props };
 }
 

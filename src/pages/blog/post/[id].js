@@ -22,16 +22,28 @@ const getConfig = async () => {
 
 export async function getServerSideProps({ params }) {
   console.log('Page [id].js getServerSideProps, params: ', params);
-  const posts = await getPosts('post', params.id);
-  const post = posts.find((po) => po.pageId === params.id);
-  const pageContent = await getPageContent(params.id);
   const props = await getConfig();
-  props.page = {
-    __metadata: { modelName: 'post', urlPath: '/blog' },
-    seo: { title: posts[0].title, description: `${posts[0].category.map((cat) => cat + ',')} ${posts[0].title}` }
-  };
-  props.post = post;
-  props.content = pageContent.content;
+  const posts = await getPosts('post', params.id);
+
+  if (posts) {
+    const post = posts.find((po) => po.pageId === params.id);
+    const pageContent = await getPageContent(params.id);
+
+    props.page = {
+      __metadata: { modelName: 'post', urlPath: '/blog' },
+      seo: { title: posts[0].title, description: `${posts[0].category.map((cat) => cat + ',')} ${posts[0].title}` }
+    };
+    props.post = post;
+    props.content = pageContent.content;
+  } else {
+    props.page = {
+      __metadata: { modelName: 'post', urlPath: '/blog' },
+      seo: { title: 'メンテナンス中', description: '' }
+    };
+    props.post = {};
+    props.content = null;
+  }
+
   return { props };
 }
 
