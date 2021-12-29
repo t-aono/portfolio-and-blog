@@ -23,6 +23,9 @@ export default class Project extends React.Component {
               <div className="post-subtitle">
                 <span>{project.skill}</span>
               </div>
+              <div className="post-date">
+                <span>{project.term}</span>
+              </div>
             </header>
             {content ? (
               content.map((item) => (
@@ -64,9 +67,6 @@ export default class Project extends React.Component {
                 </div>
               </div>
             )}
-            <div className="post-subtitle">
-              <span className="post-date">{project.term}</span>
-            </div>
             <footer className="post-meta inner-sm back-btn">
               <span className="button" onClick={() => Router.back()}>
                 一覧に戻る

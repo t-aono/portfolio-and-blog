@@ -93,7 +93,7 @@
   }
 }
 
-@media only screen and (max-width: 760px) {
+@media only screen and (max-width: 960px) {
   .project-header {
     position: relative;
     bottom: 26em;
@@ -106,11 +106,12 @@
 
     img {
       top: 2em;
+      height: 10em;
     }
   }
 }
 
-@media only screen and (min-width: 761px) {
+@media only screen and (min-width: 961px) {
   .portfolio-feed {
     display: -webkit-box;
     display: -ms-flexbox;

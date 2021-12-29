@@ -51,13 +51,13 @@
   }
 }
 
-.post-date {
-  float: right;
-}
-
 .post-subtitle {
   font-size: 1.33333em;
   line-height: 1.4;
+}
+
+.post-date {
+  text-align: right;
 }
 
 .post-category {
@@ -230,6 +230,20 @@
   margin: 5em auto;
   opacity: 30%;
   animation: 3s linear infinite rotation;
+}
+
+.post-related {
+  margin-top: 3em;
+}
+
+.related-posts {
+  display: flex;
+  column-gap: 1em;
+  margin-bottom: 2em;
+
+  & a {
+    border-bottom: none;
+  }
 }
 
 @keyframes rotation {

@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
 import Prism from 'prismjs';
 import Router from 'next/router';
+import moment from 'moment-strftime';
 
 import { Layout } from '../components/index';
-import { withPrefix, Link } from '../utils';
+import { withPrefix, Link, getPageUrl } from '../utils';
 
 const Post = (props) => {
   const post = _.get(props, 'post');
@@ -15,9 +16,61 @@ const Post = (props) => {
   const date = post.date ? post.date.replace(/\-/g, '/') : '';
   const mainteImage = '/images/construction_simple.png';
 
+  const [relatedPosts, setRelatedPosts] = useState([]);
+
   useEffect(() => {
     Prism.highlightAll();
+
+    fetch('/api/search', {
+      body: JSON.stringify({ query: post.category[0], pageSize: 3 }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST'
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setRelatedPosts(data.filter((p) => p.pageId !== post.pageId));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
+
+  const renderRelatedPosts = (post) => {
+    const title = _.get(post, 'title');
+    const category = _.get(post, 'category');
+    const emoji = _.get(post, 'emoji');
+    const date = _.get(post, 'date');
+    const dateTimeAttr = moment(date).strftime('%Y-%m-%d %H:%M');
+    const formattedDate = moment(date).strftime('%Y/%m/%d');
+    const postUrl = getPageUrl(post, { withPrefix: true });
+
+    return (
+      <div className="inner-sm related-posts" key={post.pageId}>
+        <Link href={postUrl}>
+          <div className="emoji-md">{emoji ? emoji : 'X'}</div>
+        </Link>
+        <div>
+          <div>
+            <Link href={postUrl}>{title}</Link>
+          </div>
+          {category && (
+            <p className="post-category">
+              {category.map((cat, index) => (
+                <span key={index}>{cat}</span>
+              ))}
+            </p>
+          )}
+          <div>
+            <time dateTime={dateTimeAttr}>{formattedDate}</time>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <Layout page={page} config={config}>
@@ -85,9 +138,10 @@ const Post = (props) => {
               </div>
             </div>
           )}
+          <article className="post-related">{relatedPosts.map((post) => renderRelatedPosts(post))}</article>
           <footer className="post-meta inner-sm back-btn">
             <span className="button" onClick={() => Router.back()}>
-              戻る
+              一覧へ戻る
             </span>
           </footer>
         </article>

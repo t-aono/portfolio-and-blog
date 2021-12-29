@@ -5,9 +5,11 @@ export default function handler(req, res) {
 
   const searchPosts = async (req) => {
     const notion = new Client({ auth: process.env.NOTION_TOKEN });
-    const queryParam = {
+    let queryParam = {
       query: req.body.query
     };
+
+    if (req.body.pageSize) queryParam.page_size = req.body.pageSize;
 
     const pages = await notion.search(queryParam);
 
