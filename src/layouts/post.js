@@ -64,9 +64,6 @@ const Post = (props) => {
               ))}
             </p>
           )}
-          <div>
-            <time dateTime={dateTimeAttr}>{formattedDate}</time>
-          </div>
         </div>
       </div>
     );
@@ -80,7 +77,9 @@ const Post = (props) => {
             <h1 className="post-title line-top">{post.title}</h1>
             <div className="post-subtitle">
               <span>{post.category ? post.category.map((cat, index) => <label key={index}>{cat}</label>) : ''}</span>
-              <span className="post-date">{date}</span>
+            </div>
+            <div className="post-date">
+              <span>{date}</span>
             </div>
           </header>
           {content ? (
