@@ -5,8 +5,8 @@ sections:
   - section_id: hero
     type: section_hero
     title: aono's Portfolio & Blog
-    content: ソフトウェアエンジニアをしてるアオノといいます。<br/>
-      個人開発したWebアプリケーションやプログラミング関連ブログを公開しています。<br/>
+    content: ソフトウェアエンジニアをしてるアオノです。<br/>
+      当サイトでは個人で開発したWebアプリケーションやプログラミング関連ブログを公開しています。<br/>
   - section_id: latest-projects
     type: section_portfolio
     layout_style: mosaic
