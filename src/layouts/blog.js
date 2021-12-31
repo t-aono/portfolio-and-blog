@@ -20,6 +20,12 @@ export default class Blog extends React.Component {
     this.onInputChange = this.onInputChange.bind(this);
   }
 
+  componentDidUpdate(prevPros) {
+    if (this.props.posts[0].title !== prevPros.posts[0].title) {
+      this.setState({ posts: this.props.posts });
+    }
+  }
+
   setValue(e) {
     const index = this.state.categories.findIndex((category) => category === e.target.value);
     if (this.state.categories[index]) this.searchPosts(this.state.categories[index]);
