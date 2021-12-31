@@ -4,7 +4,7 @@ image: images/thank-you.jpg
 image_alt: Thank You Led Signage
 layout: page
 ---
-　  
-　  
+
 お問い合わせありがとうございます。  
-内容を確認してご連絡いたしますので、しばらくお待ちください。
+回答にしばらくお時間を頂けると幸いです。  
+よろしくお願い致します。

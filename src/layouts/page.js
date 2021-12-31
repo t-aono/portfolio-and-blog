@@ -14,6 +14,7 @@ export default class Page extends React.Component {
     const image = _.get(page, 'image');
     const imageAlt = _.get(page, 'image_alt', '');
     const markdownContent = _.get(page, 'markdown_content');
+    const path = _.get(this.props, 'path');
 
     return (
       <Layout page={page} config={config}>
@@ -28,7 +29,9 @@ export default class Page extends React.Component {
                 <img src={withPrefix(image)} alt={imageAlt} />
               </div>
             )}
-            {markdownContent && <div className="post-content inner-sm">{markdownify(markdownContent)}</div>}
+            {markdownContent && (
+              <div className={(path === '/thank-you' ? 'message-center ' : 'post-content ') + 'inner-sm'}>{markdownify(markdownContent)}</div>
+            )}
           </article>
         </div>
       </Layout>

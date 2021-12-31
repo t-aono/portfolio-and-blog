@@ -63,6 +63,10 @@
 .post-category {
   margin-top: 0.5em;
   margin-bottom: 0;
+
+  span {
+    padding-right: 1em;
+  }
 }
 
 .post-meta {
@@ -241,6 +245,10 @@
   & a {
     border-bottom: none;
   }
+}
+
+.message-center {
+  text-align: center;
 }
 
 @keyframes rotation {
