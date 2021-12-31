@@ -7,7 +7,7 @@ sections:
     content: >-
       興味を持って頂き、ありがとうございます。<br/>
       以下のお問い合わせフォームに記入して頂くか、  
-      こちらのメールアドレスにメールを送信してください。[aonoweb@aol.com](mailto:aonoweb@aol.com)
+      こちらのメールアドレスにメールを送信してください。[info@t-aono.net](mailto:info@t-aono.net)
     form_id: contactForm
     form_fields:
       - input_type: text
