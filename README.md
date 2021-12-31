@@ -45,5 +45,9 @@
 
 ### Vercel へのデプロイ
 
-- `vercel-ignore-build-step.sh`: main ブランチ以外はプレビューデプロイを無視
-- `vercel.json`: Vercel Bot からのプルリクへのコメントをオフに
+1. branch 作成
+2. commit & push
+3. GitHub で PR 作成 & merge
+
+- `vercel-ignore-build-step.sh` : main ブランチ以外はプレビューデプロイを無視
+- `vercel.json` : Vercel Bot からのプルリクへのコメントをオフに
