@@ -5,7 +5,6 @@ import _ from 'lodash';
 import { withPrefix, classNames } from '../utils';
 import Header from './Header';
 import Footer from './Footer';
-import { GA_TRACKING_ID } from '../lib/gtag';
 
 export default class Body extends React.Component {
   constructor(props) {
@@ -73,20 +72,6 @@ export default class Body extends React.Component {
           {seoExtra}
           <link href="https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i&display=swap" rel="stylesheet" />
           {favicon && <link rel="icon" href={withPrefix(favicon)} />}
-          {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
-          <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}></script>
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_TRACKING_ID}', {
-              page_path: window.location.pathname,
-            });
-          `
-            }}
-          />
           <body className={classNames(`palette-${colorScheme}`, `accent-${accentColor}`)} />
         </Helmet>
         <div id="page" className="site">
