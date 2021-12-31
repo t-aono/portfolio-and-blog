@@ -33,6 +33,10 @@
 
 .project-summary {
   min-height: 8.5em;
+
+  p {
+    text-align: left;
+  }
 }
 
 .project-thumbnail {
@@ -41,7 +45,7 @@
   overflow: hidden;
   position: relative;
   width: 100%;
-  height: 26em;
+  height: 24em;
 
   &:before {
     content: '';
