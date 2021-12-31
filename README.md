@@ -42,3 +42,8 @@
 
 - 制作物・ブログ詳細：SSR  
   notion 側で編集
+
+### Vercel へのデプロイ
+
+- `vercel-ignore-build-step.sh`: main ブランチ以外はプレビューデプロイを無視
+- `vercel.json`: Vercel Bot からのプルリクへのコメントをオフに
