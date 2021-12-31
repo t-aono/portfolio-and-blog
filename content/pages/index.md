@@ -4,7 +4,7 @@ hide_title: true
 sections:
   - section_id: hero
     type: section_hero
-    title: aono's Portfolio & Blog
+    title: Portfolio & Blog
     content: ソフトウェアエンジニアのアオノです。<br/>
       個人開発したWebアプリケーションやプログラミング関連ブログを公開しています。<br/>
   - section_id: latest-projects
@@ -59,7 +59,7 @@ seo:
       value: website
       keyName: property
     - name: 'og:title'
-      value: aono's web tech
+      value: aono's P&B
       keyName: property
     - name: 'og:description'
       value: 個人開発したWebアプリケーションやプログラミング関連ブログを公開
@@ -71,7 +71,7 @@ seo:
     - name: 'twitter:card'
       value: summary_large_image
     - name: 'twitter:title'
-      value: aono's web tech
+      value: aono's P&B
     - name: 'twitter:description'
       value: 個人開発したWebアプリケーションやプログラミング関連ブログを公開
     - name: 'twitter:image'
