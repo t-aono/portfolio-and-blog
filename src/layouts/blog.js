@@ -28,7 +28,7 @@ export default class Blog extends React.Component {
 
   setValue(e) {
     const index = this.state.categories.findIndex((category) => category === e.target.value);
-    if (this.state.categories[index]) this.searchPosts(this.state.categories[index]);
+    if (this.state.categories[index]) this.searchPosts({ category: this.state.categories[index] });
     else this.setState({ posts: this.props.posts, isSearched: false });
 
     document.getElementById('query').value = '';
@@ -42,7 +42,7 @@ export default class Blog extends React.Component {
   onInputChange = _.debounce((e) => {
     e.preventDefault();
 
-    if (e.target.value) this.searchPosts(e.target.value);
+    if (e.target.value) this.searchPosts({ title: e.target.value });
     else this.setState({ posts: this.props.posts, isSearched: false });
 
     // カテゴリー選択を解除
@@ -53,8 +53,8 @@ export default class Blog extends React.Component {
 
   searchPosts(query) {
     this.setState({ isLoading: true });
-    fetch('/api/search', {
-      body: JSON.stringify({ query }),
+    fetch('/api/search/', {
+      body: JSON.stringify(query),
       headers: {
         'Content-Type': 'application/json'
       },
