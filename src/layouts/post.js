@@ -21,8 +21,8 @@ const Post = (props) => {
   useEffect(() => {
     Prism.highlightAll();
 
-    fetch('/api/search', {
-      body: JSON.stringify({ query: post.category[0], pageSize: 3 }),
+    fetch('/api/search/', {
+      body: JSON.stringify({ category: post.category[0], count: 3 }),
       headers: {
         'Content-Type': 'application/json'
       },

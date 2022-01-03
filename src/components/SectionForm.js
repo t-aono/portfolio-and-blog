@@ -30,7 +30,7 @@ export default class SectionForm extends React.Component {
       event.preventDefault();
       this.setState({ sending: true });
 
-      const res = await fetch('/api/send', {
+      const res = await fetch('/api/send/', {
         body: JSON.stringify({
           name: event.target.name.value,
           email: event.target.email.value,

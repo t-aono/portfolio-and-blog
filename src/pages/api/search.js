@@ -2,21 +2,56 @@ const { Client } = require('@notionhq/client');
 
 export default function handler(req, res) {
   let response = null;
+  let posts = [];
 
   const searchPosts = async (req) => {
     const notion = new Client({ auth: process.env.NOTION_TOKEN });
-    let queryParam = {
-      query: req.body.query
-    };
+    const databaseId = '75d817d15e21455f8df10c68aa28f7de';
 
-    if (req.body.pageSize) queryParam.page_size = req.body.pageSize;
+    if (req.body.category) {
+      const queryParam = {
+        database_id: databaseId,
+        sorts: [
+          {
+            property: 'date',
+            direction: 'descending'
+          }
+        ],
+        filter: {
+          and: [
+            {
+              property: 'publish',
+              checkbox: {
+                equals: true
+              }
+            },
+            {
+              property: 'category',
+              multi_select: {
+                contains: req.body.category
+              }
+            }
+          ]
+        }
+      };
 
-    const pages = await notion.search(queryParam);
+      if (req.body.count) queryParam.page_size = req.body.count + 1;
 
-    // ブログ以外もヒットするのでカテゴリ有無で絞る
-    const publishedPost = await pages.results.filter((page) => page.properties.category && page.properties.publish.checkbox);
+      const data = await notion.databases.query(queryParam);
+      posts = data.results;
+    }
 
-    return publishedPost.map((row) => {
+    if (req.body.title) {
+      const queryParam = {
+        query: req.body.title
+      };
+
+      const data = await notion.search(queryParam);
+      // ブログ以外もヒットするのでカテゴリ有無で絞る
+      posts = data.results.filter((page) => page.properties.category && page.properties.publish.checkbox);
+    }
+
+    return posts.map((row) => {
       const emoji = row.icon ? row.icon.emoji : '';
       return {
         pageId: row.id,
@@ -37,10 +72,8 @@ export default function handler(req, res) {
         response = await searchPosts(req);
         res.status(200).json(JSON.stringify(response));
       } catch (error) {
-        console.error(error);
-        if (error.response) {
-          console.error(error.response.body);
-        }
+        console.log(error);
+        res.status(error.body.status).end();
       }
     })();
   }
