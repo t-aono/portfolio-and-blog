@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
 import moment from 'moment-strftime';
 
@@ -6,44 +6,62 @@ import { Layout } from '../components/index';
 import { classNames, getPageUrl, Link, withPrefix } from '../utils';
 import FormField from '../components/FormField';
 
-export default class Blog extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      categories: props.categories,
-      posts: props.posts,
-      isSearched: false,
-      isLoading: false
-    };
-    this.setValue = this.setValue.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onInputChange = this.onInputChange.bind(this);
-  }
+export default function Blog(props) {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     categories: props.categories,
+  //     posts: props.posts,
+  //     isSearched: false,
+  //     isLoading: false
+  //   };
+  //   this.setValue = this.setValue.bind(this);
+  //   this.onSubmit = this.onSubmit.bind(this);
+  //   this.onInputChange = this.onInputChange.bind(this);
+  // }
+  const categories = props.categories;
+  const [posts, setPosts] = useState(props.posts);
+  const [isSearched, setIsSearched] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  
+  // useEffect(() => {
+  //   const prevProps = usePrevious(posts[0]);
+  //   if (posts[0].title !== prevPros.posts[0].title) {
+  //     setPosts(posts);
+  //   }
+  // });
+  // const componentDidUpdate = (prevPros) => {
+  //   if (posts[0].title !== prevPros.posts[0].title) {
+  //     setPosts(posts);
+  //   }
+  // }
 
-  componentDidUpdate(prevPros) {
-    if (this.props.posts[0].title !== prevPros.posts[0].title) {
-      this.setState({ posts: this.props.posts });
+  const setValue = (e) => {
+    const index = categories.findIndex((category) => category === e.target.value);
+    if (categories[index]) {
+      searchPosts({ category: categories[index] });
+    }else {
+      setPosts(posts);
+      setIsSearched(false);
     }
-  }
-
-  setValue(e) {
-    const index = this.state.categories.findIndex((category) => category === e.target.value);
-    if (this.state.categories[index]) this.searchPosts({ category: this.state.categories[index] });
-    else this.setState({ posts: this.props.posts, isSearched: false });
 
     document.getElementById('query').value = '';
   }
 
-  onSubmit(e) {
+  const onSubmit = (e) => {
     e.preventDefault();
     return false;
   }
 
-  onInputChange = _.debounce((e) => {
+  const onInputChange = _.debounce((e) => {
     e.preventDefault();
 
-    if (e.target.value) this.searchPosts({ title: e.target.value });
-    else this.setState({ posts: this.props.posts, isSearched: false });
+    if (e.target.value) {
+      searchPosts({ title: e.target.value });
+    } else {
+      setPosts(posts);
+      setIsSearched(false);
+    }
 
     // カテゴリー選択を解除
     for (let elem of document.getElementsByTagName('input')) {
@@ -51,8 +69,8 @@ export default class Blog extends React.Component {
     }
   }, 1000);
 
-  searchPosts(query) {
-    this.setState({ isLoading: true });
+  const searchPosts = (query) => {
+    setIsLoading(true);
     fetch('/api/search/', {
       body: JSON.stringify(query),
       headers: {
@@ -64,15 +82,16 @@ export default class Blog extends React.Component {
         return res.json();
       })
       .then((data) => {
-        this.setState({ posts: data, isSearched: true });
-        this.setState({ isLoading: false });
+        setPosts(data);
+        setIsSearched(true);
+        setIsLoading(true);
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
-  renderPost(post, index) {
+  const renderPost = (post, index) => {
     const title = _.get(post, 'title');
     const category = _.get(post, 'category');
     const emoji = _.get(post, 'emoji');
@@ -81,16 +100,24 @@ export default class Blog extends React.Component {
     const dateTimeAttr = moment(date).strftime('%Y-%m-%d %H:%M');
     const formattedDate = moment(date).strftime('%Y/%m/%d');
     const postUrl = getPageUrl(post, { withPrefix: true });
+    const loadingImage = '/images/svg-loader-spinning-circles.svg';
+    const [isLoading, setIsLoading] = useState(false);
 
     return (
       <article key={index} className="post grid-item">
         <div className="post-inside">
-          <Link href={postUrl}>
-            <div className="emoji-md">{emoji ? emoji : 'X'}</div>
+          <Link href={postUrl} onClick={() => setIsLoading(true)}>
+            <div className="emoji-md">
+            {isLoading ? (
+              <img src={withPrefix(loadingImage)} alt={loadingImage.replace(/images\//g, '')} />
+            ) : (
+              emoji ? emoji : 'X'
+              )}
+              </div>
           </Link>
           <header className="post-header">
             <h2 className="post-title">
-              <Link href={postUrl}>{title}</Link>
+              <Link href={postUrl} onClick={() => setIsLoading(true)}>{title}</Link>
             </h2>
             {category && (
               <p className="post-category">
@@ -111,19 +138,19 @@ export default class Blog extends React.Component {
     );
   }
 
-  render() {
-    const data = _.get(this.props, 'data');
+    const data = _.get(props, 'data');
     const config = _.get(data, 'config');
-    const page = _.get(this.props, 'page');
-    const pageNo = _.get(this.props, 'page_no');
+    const page = _.get(props, 'page');
+    const pageNo = _.get(props, 'page_no');
     const title = _.get(page, 'title');
     const subtitle = _.get(page, 'subtitle');
     const hideTitle = _.get(page, 'hide_title');
     const colNumber = _.get(page, 'col_number', 'three');
-    const postCount = _.get(this.props, 'post_count');
+    const postCount = _.get(props, 'post_count');
     const prev = pageNo ? parseInt(pageNo) - 1 : null;
     const next = pageNo > 1 ? (pageNo * 12 < postCount ? parseInt(pageNo) + 1 : null) : 2;
-    const loadingImage = '/images/earth_simple.png';
+    // const loadingImage = '/images/earth_simple.png';
+    const loadingImage = '/images/svg-loader-spinning-circles.svg';
     const noHit = '/images/cat_02_simple.png';
 
     return (
@@ -137,16 +164,16 @@ export default class Blog extends React.Component {
             <h1 className="page-title line-top">{title}</h1>
             <div className="page-subtitle">{subtitle}</div>
           </header>
-          <form onSubmit={this.onSubmit} className="search-form">
+          <form onSubmit={onSubmit} className="search-form">
             <div className="categories">
-              {this.state.categories.map((category) => (
-                <FormField onSetValue={this.setValue} key={category} field={{ input_type: 'radio', name: 'category', label: category }} />
+              {categories.map((category) => (
+                <FormField onSetValue={setValue} key={category} field={{ input_type: 'radio', name: 'category', label: category }} />
               ))}
             </div>
-            <FormField field={{ input_type: 'text', name: 'query', default_value: 'Search ...' }} onInputChange={this.onInputChange} />
+            <FormField field={{ input_type: 'text', name: 'query', default_value: 'Search ...' }} onInputChange={onInputChange} />
           </form>
 
-          {this.state.isLoading ? (
+          {isLoading ? (
             <div className="loading-image">
               <img src={withPrefix(loadingImage)} alt={loadingImage.replace(/images\//g, '')} />
             </div>
@@ -158,8 +185,8 @@ export default class Blog extends React.Component {
                   'grid-col-3': colNumber === 'three'
                 })}
               >
-                {this.state.posts.length > 0 ? (
-                  this.state.posts.map((post, index) => this.renderPost(post, index))
+                {posts.length > 0 ? (
+                  posts.map((post, index) => renderPost(post, index))
                 ) : (
                   <div className="no-hit">
                     <div>記事がありません！</div>
@@ -167,7 +194,7 @@ export default class Blog extends React.Component {
                   </div>
                 )}
               </div>
-              {this.state.isSearched ? (
+              {isSearched ? (
                 ''
               ) : (
                 <div className="pagenate-btn">
@@ -188,5 +215,4 @@ export default class Blog extends React.Component {
         </div>
       </Layout>
     );
-  }
 }

@@ -4,27 +4,26 @@ import _ from 'lodash';
 import { getPageUrl, htmlToReact, Link, withPrefix } from '../utils';
 import { CtaButtons } from '.';
 
-const SectionPortfolio = (props) => {
+export default function SectionPortfolio(props) {
   const renderProject = (project, index, projectCount) => {
     const title = _.get(project, 'title');
     const skill = _.get(project, 'skill');
     const summary = _.get(project, 'summary');
     const thumbnail = _.get(project, 'thumbnail');
     const projectUrl = getPageUrl(project, { withPrefix: true });
-    const loadingImage = '/images/earth_simple.png';
+    const loadingImage = '/images/svg-loader-spinning-circles.svg';
     const [isLoading, setIsLoading] = useState(false);
 
     return (
       <article key={index} className="project">
-        {isLoading ? (
-          <div className="loading-image">
-            <img src={withPrefix(loadingImage)} alt={loadingImage.replace(/images\//g, '')} />
-          </div>
-        ) : (
           <Link href={projectUrl} className="project-link" onClick={() => setIsLoading(true)}>
             {thumbnail && (
               <div className="project-thumbnail">
+              {isLoading ? (
+                <img src={withPrefix(loadingImage)} alt={loadingImage.replace(/images\//g, '')} />
+              ) : (
                 <img src={withPrefix(thumbnail)} alt={thumbnail.replace(/images\//g, '')} />
+              )}
               </div>
             )}
             <header className="project-header">
@@ -39,7 +38,6 @@ const SectionPortfolio = (props) => {
               </div>
             </header>
           </Link>
-        )}
       </article>
     );
   };
@@ -76,4 +74,3 @@ const SectionPortfolio = (props) => {
   );
 };
 
-export default SectionPortfolio;

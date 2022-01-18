@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import _ from 'lodash';
 import moment from 'moment-strftime';
 
 import { getPageUrl, htmlToReact, classNames, Link, withPrefix } from '../utils';
 import CtaButtons from './CtaButtons';
 
-export default class SectionPosts extends React.Component {
-  renderPost(post, index) {
+export default function SectionPosts(props) {
+  const renderPost = (post, index) => {
     const title = _.get(post, 'title');
     const emoji = _.get(post, 'emoji');
     const category = _.get(post, 'category');
@@ -15,16 +15,24 @@ export default class SectionPosts extends React.Component {
     const dateTimeAttr = moment(date).strftime('%Y-%m-%d');
     const formattedDate = moment(date).strftime('%Y/%m/%d');
     const postUrl = getPageUrl(post, { withPrefix: true });
+    const loadingImage = '/images/svg-loader-spinning-circles.svg';
+    const [isLoading, setIsLoading] = useState(false);
 
     return (
       <article key={index} className="post grid-item">
         <div className="post-inside">
-          <Link href={postUrl}>
-            <div className="emoji-md">{emoji ? emoji : 'X'}</div>
+          <Link href={postUrl} onClick={() => setIsLoading(true)}>
+            <div className="emoji-md">
+            {isLoading ? (
+              <img src={withPrefix(loadingImage)} alt={loadingImage.replace(/images\//g, '')} />
+            ) : (
+              emoji ? emoji : 'X'
+              )}
+              </div>
           </Link>
           <div>
             <h3 className="post-title">
-              <Link href={postUrl}>{title}</Link>
+              <Link href={postUrl} onClick={() => setIsLoading(true)}>{title}</Link>
             </h3>
             {category && (
               <p className="post-category">
@@ -45,14 +53,13 @@ export default class SectionPosts extends React.Component {
     );
   }
 
-  render() {
-    const section = _.get(this.props, 'section');
+    const section = _.get(props, 'section');
     const sectionId = _.get(section, 'section_id');
     const title = _.get(section, 'title');
     const subtitle = _.get(section, 'subtitle');
     const actions = _.get(section, 'actions');
     const colNumber = _.get(section, 'col_number', 'three');
-    const posts = _.orderBy(_.get(this.props, 'posts', []), 'date', 'desc');
+    const posts = _.orderBy(_.get(props, 'posts', []), 'date', 'desc');
     const postsNumber = _.get(section, 'posts_number', 3);
     const recentPosts = posts.slice(0, postsNumber);
 
@@ -72,7 +79,7 @@ export default class SectionPosts extends React.Component {
                 'grid-col-3': colNumber === 'three'
               })}
             >
-              {_.map(recentPosts, (post, index) => this.renderPost(post, index))}
+              {_.map(recentPosts, (post, index) => renderPost(post, index))}
             </div>
           </div>
           {!_.isEmpty(actions) && (
@@ -83,5 +90,4 @@ export default class SectionPosts extends React.Component {
         </div>
       </section>
     );
-  }
 }
