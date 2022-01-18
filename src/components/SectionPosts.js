@@ -23,16 +23,14 @@ export default function SectionPosts(props) {
         <div className="post-inside">
           <Link href={postUrl} onClick={() => setIsLoading(true)}>
             <div className="emoji-md">
-            {isLoading ? (
-              <img src={withPrefix(loadingImage)} alt={loadingImage.replace(/images\//g, '')} />
-            ) : (
-              emoji ? emoji : 'X'
-              )}
-              </div>
+              {isLoading ? <img src={withPrefix(loadingImage)} alt={loadingImage.replace(/images\//g, '')} /> : emoji ? emoji : 'X'}
+            </div>
           </Link>
           <div>
             <h3 className="post-title">
-              <Link href={postUrl} onClick={() => setIsLoading(true)}>{title}</Link>
+              <Link href={postUrl} onClick={() => setIsLoading(true)}>
+                {title}
+              </Link>
             </h3>
             {category && (
               <p className="post-category">
@@ -51,43 +49,43 @@ export default function SectionPosts(props) {
         </div>
       </article>
     );
-  }
+  };
 
-    const section = _.get(props, 'section');
-    const sectionId = _.get(section, 'section_id');
-    const title = _.get(section, 'title');
-    const subtitle = _.get(section, 'subtitle');
-    const actions = _.get(section, 'actions');
-    const colNumber = _.get(section, 'col_number', 'three');
-    const posts = _.orderBy(_.get(props, 'posts', []), 'date', 'desc');
-    const postsNumber = _.get(section, 'posts_number', 3);
-    const recentPosts = posts.slice(0, postsNumber);
+  const section = _.get(props, 'section');
+  const sectionId = _.get(section, 'section_id');
+  const title = _.get(section, 'title');
+  const subtitle = _.get(section, 'subtitle');
+  const actions = _.get(section, 'actions');
+  const colNumber = _.get(section, 'col_number', 'three');
+  const posts = _.orderBy(_.get(props, 'posts', []), 'date', 'desc');
+  const postsNumber = _.get(section, 'posts_number', 3);
+  const recentPosts = posts.slice(0, postsNumber);
 
-    return (
-      <section id={sectionId} className="block block-posts outer">
-        <div className="inner">
-          {(title || subtitle) && (
-            <div className="block-header inner-sm">
-              {title && <h2 className="block-title line-top">{title}</h2>}
-              {subtitle && <p className="block-subtitle">{htmlToReact(subtitle)}</p>}
-            </div>
-          )}
-          <div className="block-content">
-            <div
-              className={classNames('post-feed', 'grid', {
-                'grid-col-2': colNumber === 'two',
-                'grid-col-3': colNumber === 'three'
-              })}
-            >
-              {_.map(recentPosts, (post, index) => renderPost(post, index))}
-            </div>
+  return (
+    <section id={sectionId} className="block block-posts outer">
+      <div className="inner">
+        {(title || subtitle) && (
+          <div className="block-header inner-sm">
+            {title && <h2 className="block-title line-top">{title}</h2>}
+            {subtitle && <p className="block-subtitle">{htmlToReact(subtitle)}</p>}
           </div>
-          {!_.isEmpty(actions) && (
-            <div className="block-buttons inner-sm section-bottom-btn">
-              <CtaButtons actions={actions} />
-            </div>
-          )}
+        )}
+        <div className="block-content">
+          <div
+            className={classNames('post-feed', 'grid', {
+              'grid-col-2': colNumber === 'two',
+              'grid-col-3': colNumber === 'three'
+            })}
+          >
+            {_.map(recentPosts, (post, index) => renderPost(post, index))}
+          </div>
         </div>
-      </section>
-    );
+        {!_.isEmpty(actions) && (
+          <div className="block-buttons inner-sm section-bottom-btn">
+            <CtaButtons actions={actions} />
+          </div>
+        )}
+      </div>
+    </section>
+  );
 }
