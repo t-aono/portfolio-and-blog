@@ -105,12 +105,12 @@
   margin: 0.5em;
 }
 
-.pagenate-btn {
+.paginate-btn {
   text-align: center;
   margin-top: 3em;
 }
 
-.pagenate-btn > a {
+.paginate-btn > a {
   margin: 0 1em;
   cursor: pointer;
 }
@@ -227,10 +227,8 @@
 }
 
 .loading-image {
-  width: 30%;
-  margin: 5em auto;
-  opacity: 30%;
-  animation: 3s linear infinite rotation;
+  margin: 7em auto;
+  text-align: center;
 }
 
 .post-related {

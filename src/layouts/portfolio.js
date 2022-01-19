@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import _ from 'lodash';
 
 import { Layout } from '../components/index';
 import { getPageUrl, Link, withPrefix } from '../utils';
 
-export default class Portfolio extends React.Component {
-  renderProject(project) {
+export default function Portfolio (props) {
+  const renderProject = (project) => {
     const pageId = _.get(project, 'pageId');
     const projectUrl = getPageUrl(project, { withPrefix: true });
     const title = _.get(project, 'title');
@@ -15,13 +15,19 @@ export default class Portfolio extends React.Component {
     // const date = _.get(project, 'date');
     // const dateTimeAttr = moment(date).strftime('%Y-%m-%d %H:%M');
     // const formattedDate = moment(date).strftime('%Y/%m/%d');
+    const loadingImage = '/images/svg-loader-spinning-circles.svg';
+    const [isLoading, setIsLoading] = useState(false);
 
     return (
       <article key={pageId} className="project">
-        <Link href={projectUrl} className="project-link">
+        <Link href={projectUrl} className="project-link" onClick={() => setIsLoading(true)}>
           {thumbnail && (
             <div className="project-thumbnail">
-              <img src={withPrefix(thumbnail)} alt={thumbnail.replace(/images\//g, '')} />
+              {isLoading ? (
+                <img src={withPrefix(loadingImage)} alt={loadingImage.replace(/images\//g, '')} />
+              ) : (
+                <img src={withPrefix(thumbnail)} alt={thumbnail.replace(/images\//g, '')} />
+              )}
             </div>
           )}
           <header className="project-header">
@@ -38,26 +44,24 @@ export default class Portfolio extends React.Component {
         </Link>
       </article>
     );
-  }
+  };
 
-  render() {
-    const data = _.get(this.props, 'data');
-    const config = _.get(data, 'config');
-    const page = _.get(this.props, 'page');
-    const title = _.get(page, 'title');
-    const subtitle = _.get(page, 'subtitle');
-    const layoutStyle = _.get(page, 'layout_style', 'mosaic');
+  const data = _.get(props, 'data');
+  const config = _.get(data, 'config');
+  const page = _.get(props, 'page');
+  const title = _.get(page, 'title');
+  const subtitle = _.get(page, 'subtitle');
+  const layoutStyle = _.get(page, 'layout_style', 'mosaic');
 
-    return (
-      <Layout page={page} config={config}>
-        <div className="inner outer">
-          <header className="page-header inner-sm">
-            <h1 className="page-title line-top">{title}</h1>
-            <div className="page-subtitle">{subtitle}</div>
-          </header>
-          <div className={`portfolio-feed layout-${layoutStyle}`}>{this.props.projects.map((project) => this.renderProject(project))}</div>
-        </div>
-      </Layout>
-    );
-  }
-}
+  return (
+    <Layout page={page} config={config}>
+      <div className="inner outer">
+        <header className="page-header inner-sm">
+          <h1 className="page-title line-top">{title}</h1>
+          <div className="page-subtitle">{subtitle}</div>
+        </header>
+        <div className={`portfolio-feed layout-${layoutStyle}`}>{props.projects.map((project) => renderProject(project))}</div>
+      </div>
+    </Layout>
+  );
+};

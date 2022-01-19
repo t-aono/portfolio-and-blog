@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
 import moment from 'moment-strftime';
 
@@ -6,53 +6,78 @@ import { Layout } from '../components/index';
 import { classNames, getPageUrl, Link, withPrefix } from '../utils';
 import FormField from '../components/FormField';
 
-export default class Blog extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      categories: props.categories,
-      posts: props.posts,
-      isSearched: false,
-      isLoading: false
-    };
-    this.setValue = this.setValue.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onInputChange = this.onInputChange.bind(this);
-  }
+export default function Blog(props) {
+  const data = _.get(props, 'data');
+  const config = _.get(data, 'config');
+  const page = _.get(props, 'page');
+  const pageNo = _.get(props, 'page_no');
+  const title = _.get(page, 'title');
+  const subtitle = _.get(page, 'subtitle');
+  const hideTitle = _.get(page, 'hide_title');
+  const colNumber = _.get(page, 'col_number', 'three');
+  const postCount = _.get(props, 'post_count');
+  const prev = pageNo ? parseInt(pageNo) - 1 : null;
+  const next = pageNo > 1 ? (pageNo * 12 < postCount ? parseInt(pageNo) + 1 : null) : 2;
+  const noHit = '/images/cat_02_simple.png';
+  const loadingImage = '/images/svg-loader-spinning-circles.svg';
+  const categories = props.categories;
+  const [currentCategory, setCurrentCategory] = useState('');
+  const [posts, setPosts] = useState(props.posts);
+  const originalPosts = props.posts;
+  const [isSearched, setIsSearched] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
+  const [isLoading, setIsLoading] = useState([...Array(posts.length)].map(() => false));
 
-  componentDidUpdate(prevPros) {
-    if (this.props.posts[0].title !== prevPros.posts[0].title) {
-      this.setState({ posts: this.props.posts });
+  useEffect(() => {
+    setPosts(posts);
+  }, []);
+
+  const setValue = (e) => {
+    const index = categories.findIndex((category) => category === e.target.value);
+    if (categories[index]) {
+      if (currentCategory === categories[index]) {
+        setPosts(originalPosts);
+        clearCategorySelect();
+      } else {
+        searchPosts({ category: categories[index] });
+        setCurrentCategory(categories[index]);
+      }
+    } else {
+      setPosts(posts);
+      setIsSearched(false);
     }
-  }
-
-  setValue(e) {
-    const index = this.state.categories.findIndex((category) => category === e.target.value);
-    if (this.state.categories[index]) this.searchPosts({ category: this.state.categories[index] });
-    else this.setState({ posts: this.props.posts, isSearched: false });
-
     document.getElementById('query').value = '';
-  }
+  };
 
-  onSubmit(e) {
+  const onInputChange = _.debounce((e) => {
     e.preventDefault();
-    return false;
-  }
+    if (e.target.value) {
+      searchPosts({ title: e.target.value });
+    } else {
+      setPosts(originalPosts);
+      setIsSearched(false);
+    }
+    clearCategorySelect();
+  }, 1000);
 
-  onInputChange = _.debounce((e) => {
-    e.preventDefault();
-
-    if (e.target.value) this.searchPosts({ title: e.target.value });
-    else this.setState({ posts: this.props.posts, isSearched: false });
-
+  const clearCategorySelect = () => {
     // カテゴリー選択を解除
     for (let elem of document.getElementsByTagName('input')) {
       if (elem.checked) elem.checked = false;
     }
-  }, 1000);
+  }
 
-  searchPosts(query) {
-    this.setState({ isLoading: true });
+  const onSubmit = (e) => {
+    e.preventDefault();
+    return false;
+  };
+
+  const setPageLoading = (index) => {
+    setIsLoading(isLoading.map((_, i) => i === index ? true : false));
+  }
+
+  const searchPosts = (query) => {
+    setIsSearching(true);
     fetch('/api/search/', {
       body: JSON.stringify(query),
       headers: {
@@ -64,15 +89,16 @@ export default class Blog extends React.Component {
         return res.json();
       })
       .then((data) => {
-        this.setState({ posts: data, isSearched: true });
-        this.setState({ isLoading: false });
+        setPosts(data);
+        setIsSearched(true);
+        setIsSearching(false);
       })
       .catch((error) => {
         console.log(error);
       });
-  }
+  };
 
-  renderPost(post, index) {
+    const renderPost = (post, index) => {
     const title = _.get(post, 'title');
     const category = _.get(post, 'category');
     const emoji = _.get(post, 'emoji');
@@ -85,12 +111,16 @@ export default class Blog extends React.Component {
     return (
       <article key={index} className="post grid-item">
         <div className="post-inside">
-          <Link href={postUrl}>
-            <div className="emoji-md">{emoji ? emoji : 'X'}</div>
+          <Link href={postUrl} onClick={() => setPageLoading(index)}>
+            <div className="emoji-md">
+              {isLoading[index] ? <img src={withPrefix(loadingImage)} alt={loadingImage.replace(/images\//g, '')} /> : emoji ? emoji : 'X'}
+            </div>
           </Link>
           <header className="post-header">
             <h2 className="post-title">
-              <Link href={postUrl}>{title}</Link>
+              <Link href={postUrl} onClick={() => setPageLoading(index)}>
+                {title}
+              </Link>
             </h2>
             {category && (
               <p className="post-category">
@@ -109,84 +139,68 @@ export default class Blog extends React.Component {
         </div>
       </article>
     );
-  }
+  };
 
-  render() {
-    const data = _.get(this.props, 'data');
-    const config = _.get(data, 'config');
-    const page = _.get(this.props, 'page');
-    const pageNo = _.get(this.props, 'page_no');
-    const title = _.get(page, 'title');
-    const subtitle = _.get(page, 'subtitle');
-    const hideTitle = _.get(page, 'hide_title');
-    const colNumber = _.get(page, 'col_number', 'three');
-    const postCount = _.get(this.props, 'post_count');
-    const prev = pageNo ? parseInt(pageNo) - 1 : null;
-    const next = pageNo > 1 ? (pageNo * 12 < postCount ? parseInt(pageNo) + 1 : null) : 2;
-    const loadingImage = '/images/earth_simple.png';
-    const noHit = '/images/cat_02_simple.png';
+  return (
+    <Layout page={page} config={config}>
+      <div className="inner outer">
+        <header
+          className={classNames('page-header', 'inner-sm', {
+            'screen-reader-text': hideTitle
+          })}
+        >
+          <h1 className="page-title line-top">{title}</h1>
+          <div className="page-subtitle">{subtitle}</div>
+        </header>
+        <form onSubmit={onSubmit} className="search-form">
+          <div className="categories">
+            {categories.map((category) => (
+              <FormField onSetValue={setValue} key={category} field={{ input_type: 'radio', name: 'category', label: category }} />
+            ))}
+          </div>
+          <FormField field={{ input_type: 'text', name: 'query', default_value: 'Search ...' }} onInputChange={onInputChange} />
+        </form>
 
-    return (
-      <Layout page={page} config={config}>
-        <div className="inner outer">
-          <header
-            className={classNames('page-header', 'inner-sm', {
-              'screen-reader-text': hideTitle
-            })}
-          >
-            <h1 className="page-title line-top">{title}</h1>
-            <div className="page-subtitle">{subtitle}</div>
-          </header>
-          <form onSubmit={this.onSubmit} className="search-form">
-            <div className="categories">
-              {this.state.categories.map((category) => (
-                <FormField onSetValue={this.setValue} key={category} field={{ input_type: 'radio', name: 'category', label: category }} />
-              ))}
-            </div>
-            <FormField field={{ input_type: 'text', name: 'query', default_value: 'Search ...' }} onInputChange={this.onInputChange} />
-          </form>
-
-          {this.state.isLoading ? (
-            <div className="loading-image">
-              <img src={withPrefix(loadingImage)} alt={loadingImage.replace(/images\//g, '')} />
-            </div>
-          ) : (
-            <>
-              <div
-                className={classNames('post-feed', 'grid', {
-                  'grid-col-2': colNumber === 'two',
-                  'grid-col-3': colNumber === 'three'
-                })}
-              >
-                {this.state.posts.length > 0 ? (
-                  this.state.posts.map((post, index) => this.renderPost(post, index))
-                ) : (
-                  <div className="no-hit">
-                    <div>記事がありません！</div>
-                    <img src={withPrefix(noHit)} alt={noHit.replace(/images\//g, '')} />
-                  </div>
-                )}
-              </div>
-              {this.state.isSearched ? (
-                ''
+        {isSearching ? (
+          <div className="loading-image">
+            <img src={withPrefix(loadingImage)} alt={loadingImage.replace(/images\//g, '')} />
+          </div>
+        ) : (
+          <>
+            <div
+              className={classNames('post-feed', 'grid', {
+                'grid-col-2': colNumber === 'two',
+                'grid-col-3': colNumber === 'three'
+              })}
+            >
+              {posts.length > 0 ? (
+                posts.map((post, index) => renderPost(post, index))
               ) : (
-                <div className="pagenate-btn">
-                  {prev >= 1 && (
-                    <Link href={prev === 1 ? '/blog' : `/blog/paginate/${prev}`} className="button">
-                      前へ
-                    </Link>
-                  )}
-                  {next && (
-                    <Link href={`/blog/paginate/${next}`} className="button">
-                      次へ
-                    </Link>
-                  )}
+                <div className="no-hit">
+                  <div>記事がありません！</div>
+                  <img src={withPrefix(noHit)} alt={noHit.replace(/images\//g, '')} />
                 </div>
               )}
-            </>
-          )}
-        </div>
-      </Layout>
-    );
-  }
+            </div>
+            {isSearched ? (
+              ''
+            ) : (
+              <div className="paginate-btn">
+                {prev >= 1 && (
+                  <Link href={prev === 1 ? '/blog' : `/blog/paginate/${prev}`} className="button">
+                    前へ
+                  </Link>
+                )}
+                {next && (
+                  <Link href={`/blog/paginate/${next}`} className="button">
+                    次へ
+                  </Link>
+                )}
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </Layout>
+  );
 }
