@@ -7,53 +7,6 @@ import { classNames, getPageUrl, Link, withPrefix } from '../utils';
 import FormField from '../components/FormField';
 
 export default function Blog(props) {
-  const renderPost = (post, index) => {
-    const title = _.get(post, 'title');
-    const category = _.get(post, 'category');
-    const emoji = _.get(post, 'emoji');
-    // const excerpt = _.get(post, 'excerpt');
-    const date = _.get(post, 'date');
-    const dateTimeAttr = moment(date).strftime('%Y-%m-%d %H:%M');
-    const formattedDate = moment(date).strftime('%Y/%m/%d');
-    const postUrl = getPageUrl(post, { withPrefix: true });
-    // const [isLoading, setIsLoading] = useState(false);
-    const setIsLoading = () => {
-      post.isLoading = true;
-    };
-
-    return (
-      <article key={index} className="post grid-item">
-        <div className="post-inside">
-          <Link href={postUrl} onClick={() => setIsLoading(true)}>
-            <div className="emoji-md">
-              {post.isLoading ? <img src={withPrefix(loadingImage)} alt={loadingImage.replace(/images\//g, '')} /> : emoji ? emoji : 'X'}
-            </div>
-          </Link>
-          <header className="post-header">
-            <h2 className="post-title">
-              <Link href={postUrl} onClick={() => setIsLoading(true)}>
-                {title}
-              </Link>
-            </h2>
-            {category && (
-              <p className="post-category">
-                {category.map((cat, index) => (
-                  <span key={index}>{cat}</span>
-                ))}
-              </p>
-            )}
-            <div className="post-meta">
-              <time className="published" dateTime={dateTimeAttr}>
-                {formattedDate}
-              </time>
-            </div>
-          </header>
-          {/* {excerpt && <p className="post-content">{excerpt}</p>} */}
-        </div>
-      </article>
-    );
-  };
-
   const data = _.get(props, 'data');
   const config = _.get(data, 'config');
   const page = _.get(props, 'page');
@@ -68,18 +21,27 @@ export default function Blog(props) {
   const noHit = '/images/cat_02_simple.png';
   const loadingImage = '/images/svg-loader-spinning-circles.svg';
   const categories = props.categories;
+  const [currentCategory, setCurrentCategory] = useState('');
   const [posts, setPosts] = useState(props.posts);
+  const originalPosts = props.posts;
   const [isSearched, setIsSearched] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
+  const [isLoading, setIsLoading] = useState([...Array(posts.length)].map(() => false));
 
   useEffect(() => {
     setPosts(posts);
-  }, [posts]);
+  }, []);
 
   const setValue = (e) => {
     const index = categories.findIndex((category) => category === e.target.value);
     if (categories[index]) {
-      searchPosts({ category: categories[index] });
+      if (currentCategory === categories[index]) {
+        setPosts(originalPosts);
+        clearCategorySelect();
+      } else {
+        searchPosts({ category: categories[index] });
+        setCurrentCategory(categories[index]);
+      }
     } else {
       setPosts(posts);
       setIsSearched(false);
@@ -87,25 +49,32 @@ export default function Blog(props) {
     document.getElementById('query').value = '';
   };
 
+  const onInputChange = _.debounce((e) => {
+    e.preventDefault();
+    if (e.target.value) {
+      searchPosts({ title: e.target.value });
+    } else {
+      setPosts(originalPosts);
+      setIsSearched(false);
+    }
+    clearCategorySelect();
+  }, 1000);
+
+  const clearCategorySelect = () => {
+    // カテゴリー選択を解除
+    for (let elem of document.getElementsByTagName('input')) {
+      if (elem.checked) elem.checked = false;
+    }
+  }
+
   const onSubmit = (e) => {
     e.preventDefault();
     return false;
   };
 
-  const onInputChange = _.debounce((e) => {
-    e.preventDefault();
-
-    if (e.target.value) {
-      searchPosts({ title: e.target.value });
-    } else {
-      setPosts(posts);
-      setIsSearched(false);
-    }
-    // カテゴリー選択を解除
-    for (let elem of document.getElementsByTagName('input')) {
-      if (elem.checked) elem.checked = false;
-    }
-  }, 1000);
+  const setPageLoading = (index) => {
+    setIsLoading(isLoading.map((_, i) => i === index ? true : false));
+  }
 
   const searchPosts = (query) => {
     setIsSearching(true);
@@ -127,6 +96,49 @@ export default function Blog(props) {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+    const renderPost = (post, index) => {
+    const title = _.get(post, 'title');
+    const category = _.get(post, 'category');
+    const emoji = _.get(post, 'emoji');
+    // const excerpt = _.get(post, 'excerpt');
+    const date = _.get(post, 'date');
+    const dateTimeAttr = moment(date).strftime('%Y-%m-%d %H:%M');
+    const formattedDate = moment(date).strftime('%Y/%m/%d');
+    const postUrl = getPageUrl(post, { withPrefix: true });
+
+    return (
+      <article key={index} className="post grid-item">
+        <div className="post-inside">
+          <Link href={postUrl} onClick={() => setPageLoading(index)}>
+            <div className="emoji-md">
+              {isLoading[index] ? <img src={withPrefix(loadingImage)} alt={loadingImage.replace(/images\//g, '')} /> : emoji ? emoji : 'X'}
+            </div>
+          </Link>
+          <header className="post-header">
+            <h2 className="post-title">
+              <Link href={postUrl} onClick={() => setPageLoading(index)}>
+                {title}
+              </Link>
+            </h2>
+            {category && (
+              <p className="post-category">
+                {category.map((cat, index) => (
+                  <span key={index}>{cat}</span>
+                ))}
+              </p>
+            )}
+            <div className="post-meta">
+              <time className="published" dateTime={dateTimeAttr}>
+                {formattedDate}
+              </time>
+            </div>
+          </header>
+          {/* {excerpt && <p className="post-content">{excerpt}</p>} */}
+        </div>
+      </article>
+    );
   };
 
   return (
