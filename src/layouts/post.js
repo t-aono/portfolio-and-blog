@@ -9,6 +9,9 @@ import { withPrefix, Link, getPageUrl } from '../utils';
 
 const Post = (props) => {
   const post = _.get(props, 'post');
+  const title = _.get(post, 'title');
+  const category = _.get(post, 'category');
+  const emoji = _.get(post, 'emoji');
   const content = _.get(props, 'content');
   const heading = _.get(props, 'heading');
   const data = _.get(props, 'data');
@@ -44,9 +47,6 @@ const Post = (props) => {
     const title = _.get(post, 'title');
     const category = _.get(post, 'category');
     const emoji = _.get(post, 'emoji');
-    const date = _.get(post, 'date');
-    const dateTimeAttr = moment(date).strftime('%Y-%m-%d %H:%M');
-    const formattedDate = moment(date).strftime('%Y/%m/%d');
     const postUrl = getPageUrl(post, { withPrefix: true });
 
     return (
@@ -75,9 +75,10 @@ const Post = (props) => {
       <div className="inner outer">
         <article className="post post-full">
           <header className="post-header inner-sm">
-            <h1 className="post-title line-top">{post.title}</h1>
+            <div className="emoji-lg">{emoji ? emoji : 'X'}</div>
+            <h1 className="post-title line-top">{title}</h1>
             <div className="post-subtitle">
-              <span>{post.category ? post.category.map((cat, index) => <label key={index}>{cat}</label>) : ''}</span>
+              <span>{category ? category.map((cat, index) => <label key={index}>{cat}</label>) : ''}</span>
             </div>
             <div className="post-date">
               <span>{date}</span>

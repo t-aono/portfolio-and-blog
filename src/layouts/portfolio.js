@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { Layout } from '../components/index';
 import { getPageUrl, Link, withPrefix } from '../utils';
 
-export default function Portfolio (props) {
+export default function Portfolio(props) {
   const renderProject = (project) => {
     const pageId = _.get(project, 'pageId');
     const projectUrl = getPageUrl(project, { withPrefix: true });
@@ -12,9 +12,6 @@ export default function Portfolio (props) {
     const skill = _.get(project, 'skill');
     const summary = _.get(project, 'summary');
     const thumbnail = _.get(project, 'thumbnail');
-    // const date = _.get(project, 'date');
-    // const dateTimeAttr = moment(date).strftime('%Y-%m-%d %H:%M');
-    // const formattedDate = moment(date).strftime('%Y/%m/%d');
     const loadingImage = '/images/svg-loader-spinning-circles.svg';
     const [isLoading, setIsLoading] = useState(false);
 
@@ -64,4 +61,4 @@ export default function Portfolio (props) {
       </div>
     </Layout>
   );
-};
+}

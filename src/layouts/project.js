@@ -8,6 +8,10 @@ import { withPrefix, Link } from '../utils';
 export default class Project extends React.Component {
   render() {
     const project = _.get(this.props, 'project');
+    const thumbnail = _.get(project, 'thumbnail');
+    const title = _.get(project, 'title');
+    const skill = _.get(project, 'skill');
+    const term = _.get(project, 'term');
     const content = _.get(this.props, 'content');
     const data = _.get(this.props, 'data');
     const config = _.get(data, 'config');
@@ -19,13 +23,18 @@ export default class Project extends React.Component {
         <div className="inner outer">
           <article className="post post-full">
             <header className="post-header inner-sm">
-              <h1 className="post-title line-top">{project.title}</h1>
+              <h1 className="post-title line-top">{title}</h1>
               <div className="post-subtitle">
-                <span>{project.skill}</span>
+                <span>{skill}</span>
               </div>
               <div className="post-date">
-                <span>{project.term}</span>
+                <span>{term}</span>
               </div>
+              {thumbnail && (
+                <div className="project-thumbnail">
+                  <img src={withPrefix(thumbnail)} alt={thumbnail.replace(/images\//g, '')} />
+                </div>
+              )}
             </header>
             {content ? (
               content.map((item) => (
