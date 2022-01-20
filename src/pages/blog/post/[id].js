@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 import pageLayouts from '../../../layouts';
-import { getPageContent, getPosts } from '../../../utils';
+import { getPageContent, getPosts, getPageHeading } from '../../../utils';
 
 const Post = (props) => {
   const modelName = _.get(props, 'page.__metadata.modelName');
@@ -28,6 +28,7 @@ export async function getServerSideProps({ params }) {
   if (posts) {
     const post = posts.find((po) => po.pageId === params.id);
     const pageContent = await getPageContent(params.id);
+    const pageHeading = await getPageHeading(pageContent.content);
 
     props.page = {
       __metadata: { modelName: 'post', urlPath: '/blog' },
@@ -35,6 +36,7 @@ export async function getServerSideProps({ params }) {
     };
     props.post = post;
     props.content = pageContent.content;
+    props.heading = pageHeading;
   } else {
     props.page = {
       __metadata: { modelName: 'post', urlPath: '/blog' },

@@ -10,11 +10,12 @@ import { withPrefix, Link, getPageUrl } from '../utils';
 const Post = (props) => {
   const post = _.get(props, 'post');
   const content = _.get(props, 'content');
+  const heading = _.get(props, 'heading');
   const data = _.get(props, 'data');
   const config = _.get(data, 'config');
   const page = _.get(props, 'page');
   const date = post.date ? post.date.replace(/\-/g, '/') : '';
-  const mainteImage = '/images/construction_simple.png';
+  const construction = '/images/construction_simple.png';
 
   const [relatedPosts, setRelatedPosts] = useState([]);
 
@@ -82,6 +83,23 @@ const Post = (props) => {
               <span>{date}</span>
             </div>
           </header>
+          {heading ? (
+            <>
+              <hr />
+              <section className="table-of-contents inner-sm">
+                <legend>目次</legend>
+                {heading.map((item) => (
+                  <div>
+                    <div className="heading-big">{item.content}</div>
+                    {item.child ? <div className="heading-small">{item.child.content}</div> : ''}
+                  </div>
+                ))}
+              </section>
+              <hr />
+            </>
+          ) : (
+            ''
+          )}
           {content ? (
             content.map((item) => (
               <div className="post-content inner-sm" key={item.block.id}>
@@ -133,7 +151,7 @@ const Post = (props) => {
             <div className="post-content inner-sm">
               <p className="heading-2">メンテナンス中...</p>
               <div className="mainte-image">
-                <img src={withPrefix(mainteImage)} alt={mainteImage.replace(/images\//g, '')} />
+                <img src={withPrefix(construction)} alt={construction.replace(/images\//g, '')} />
               </div>
             </div>
           )}
