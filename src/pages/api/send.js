@@ -15,15 +15,16 @@ export default function handler(req, res) {
     (async () => {
       try {
         response = await sgMail.send(msg);
+        res.status(200);
+        res.send(response);
       } catch (error) {
         console.error(error);
         if (error.response) {
           console.error(error.response.body);
+          res.status(error.code);
+          res.send(response);
         }
       }
     })();
   }
-
-  res.status(200);
-  res.send(response);
 }
