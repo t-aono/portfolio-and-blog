@@ -22,7 +22,7 @@ export default function handler(req, res) {
         if (error.response) {
           console.error(error.response.body);
           res.status(error.code);
-          res.json(error.response.body);
+          res.send(response);
         }
       }
     })();
