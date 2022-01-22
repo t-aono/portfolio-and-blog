@@ -43,7 +43,12 @@ export default class SectionForm extends React.Component {
         method: 'POST'
       });
 
-      if (res.ok) Router.push('/thank-you');
+      if (res.ok) {
+        Router.push('/thank-you');
+      } else {
+        alert('エラーが発生しました');
+        this.setState({ sending: false });
+      }
     };
 
     return (
