@@ -6,6 +6,7 @@ import FormField from './FormField';
 import Header from './Header';
 import Layout from './Layout';
 import Icon from './Icon';
+import Mainte from './Mainte';
 import SectionContent from './SectionContent';
 import SectionAbout from './SectionAbout';
 import SectionForm from './SectionForm';
@@ -24,6 +25,7 @@ export {
   Header,
   Layout,
   Icon,
+  Mainte,
   SectionContent,
   SectionAbout,
   SectionForm,
@@ -43,6 +45,7 @@ export default {
   Header,
   Layout,
   Icon,
+  Mainte,
   SectionContent,
   SectionAbout,
   SectionForm,

@@ -162,6 +162,7 @@
 
   .post-title {
     font-size: 1.33333em;
+    line-height: 1.5em;
 
     a {
       border: 0;
@@ -260,6 +261,15 @@
 
   & a {
     border-bottom: none;
+  }
+
+  & > div {
+    flex: 1;
+  }
+
+  .related-sub-text {
+    display: flex;
+    justify-content: space-between;
   }
 }
 
