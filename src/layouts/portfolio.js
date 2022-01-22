@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import _ from 'lodash';
+import Loader from 'react-loader-spinner';
 
 import { Layout } from '../components/index';
 import { getPageUrl, Link, withPrefix } from '../utils';
@@ -12,21 +13,19 @@ export default function Portfolio(props) {
     const skill = _.get(project, 'skill');
     const summary = _.get(project, 'summary');
     const thumbnail = _.get(project, 'thumbnail');
-    const loadingImage = '/images/svg-loader-spinning-circles.svg';
     const [isLoading, setIsLoading] = useState(false);
 
     return (
       <article key={pageId} className="project">
         <Link href={projectUrl} className="project-link" onClick={() => setIsLoading(true)}>
-          {thumbnail && (
-            <div className="project-thumbnail">
-              {isLoading ? (
-                <img src={withPrefix(loadingImage)} alt={loadingImage.replace(/images\//g, '')} />
-              ) : (
+          {thumbnail &&
+            (isLoading ? (
+              <Loader className="project-loader" type="ThreeDots" color="#23d3ff" height={80} width={80} />
+            ) : (
+              <div className="project-thumbnail">
                 <img src={withPrefix(thumbnail)} alt={thumbnail.replace(/images\//g, '')} />
-              )}
-            </div>
-          )}
+              </div>
+            ))}
           <header className="project-header">
             <h2 className="project-title">{title}</h2>
             <div className="project-skill">

@@ -31,7 +31,7 @@ export default class Project extends React.Component {
                 <span>{term}</span>
               </div>
               {thumbnail && (
-                <div className="project-thumbnail">
+                <div className="project-page-thumbnail">
                   <img src={withPrefix(thumbnail)} alt={thumbnail.replace(/images\//g, '')} />
                 </div>
               )}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
 import moment from 'moment-strftime';
+import Loader from 'react-loader-spinner';
 
 import { Layout } from '../components/index';
 import { classNames, getPageUrl, Link, withPrefix } from '../utils';
@@ -19,7 +20,6 @@ export default function Blog(props) {
   const prev = pageNo ? parseInt(pageNo) - 1 : null;
   const next = pageNo > 1 ? (pageNo * 12 < postCount ? parseInt(pageNo) + 1 : null) : 2;
   const noHit = '/images/cat_02_simple.png';
-  const loadingImage = '/images/svg-loader-spinning-circles.svg';
   const categories = props.categories;
   const [currentCategory, setCurrentCategory] = useState('');
   const [posts, setPosts] = useState(props.posts);
@@ -65,7 +65,7 @@ export default function Blog(props) {
     for (let elem of document.getElementsByTagName('input')) {
       if (elem.checked) elem.checked = false;
     }
-  }
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -73,8 +73,8 @@ export default function Blog(props) {
   };
 
   const setPageLoading = (index) => {
-    setIsLoading(isLoading.map((_, i) => i === index ? true : false));
-  }
+    setIsLoading(isLoading.map((_, i) => (i === index ? true : false)));
+  };
 
   const searchPosts = (query) => {
     setIsSearching(true);
@@ -98,7 +98,7 @@ export default function Blog(props) {
       });
   };
 
-    const renderPost = (post, index) => {
+  const renderPost = (post, index) => {
     const title = _.get(post, 'title');
     const category = _.get(post, 'category');
     const emoji = _.get(post, 'emoji');
@@ -112,9 +112,11 @@ export default function Blog(props) {
       <article key={index} className="post grid-item">
         <div className="post-inside">
           <Link href={postUrl} onClick={() => setPageLoading(index)}>
-            <div className="emoji-md">
-              {isLoading[index] ? <img src={withPrefix(loadingImage)} alt={loadingImage.replace(/images\//g, '')} /> : emoji ? emoji : 'X'}
-            </div>
+            {isLoading[index] ? (
+              <Loader className="post-loader" type="ThreeDots" color="#23d3ff" height={80} width={80} />
+            ) : (
+              <div className="emoji-md">{emoji ? emoji : 'X'}</div>
+            )}
           </Link>
           <header className="post-header">
             <h2 className="post-title">
@@ -162,9 +164,7 @@ export default function Blog(props) {
         </form>
 
         {isSearching ? (
-          <div className="loading-image">
-            <img src={withPrefix(loadingImage)} alt={loadingImage.replace(/images\//g, '')} />
-          </div>
+          <Loader className="search-loader" type="ThreeDots" color="#23d3ff" height={80} width={80} />
         ) : (
           <>
             <div

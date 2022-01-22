@@ -226,6 +226,10 @@
   }
 }
 
+.search-loader {
+  text-align: center;
+}
+
 .categories {
   display: flex;
   flex-wrap: wrap;
@@ -243,11 +247,6 @@
     opacity: 30%;
     width: 30%;
   }
-}
-
-.loading-image {
-  margin: 7em auto;
-  text-align: center;
 }
 
 .post-related {
