@@ -3,7 +3,7 @@ import Router from 'next/router';
 import { Layout } from './index';
 import { withPrefix } from '../utils';
 
-export default function Mainte(props) {
+export default function Fixing(props) {
   const construction = '/images/construction_simple.png';
   return (
     <Layout page={props.page} config={props.config}>
@@ -15,7 +15,7 @@ export default function Mainte(props) {
           <div className="post-content in ner-sm">
             <p className="heading-2">メンテナンス中...</p>
           </div>
-          <div className="mainte-image">
+          <div className="fixing-image">
             <img src={withPrefix(construction)} alt={construction.replace(/images\//g, '')} />
           </div>
         </article>

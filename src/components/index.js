@@ -6,35 +6,14 @@ import FormField from './FormField';
 import Header from './Header';
 import Layout from './Layout';
 import Icon from './Icon';
-import Mainte from './Mainte';
-import SectionContent from './SectionContent';
+import Fixing from './Fixing';
 import SectionAbout from './SectionAbout';
 import SectionForm from './SectionForm';
-import SectionGrid from './SectionGrid';
 import SectionHero from './SectionHero';
 import SectionPortfolio from './SectionPortfolio';
 import SectionPosts from './SectionPosts';
-import SectionTestimonials from './SectionTestimonials';
 
-export {
-  Action,
-  ActionLink,
-  CtaButtons,
-  Footer,
-  FormField,
-  Header,
-  Layout,
-  Icon,
-  Mainte,
-  SectionContent,
-  SectionAbout,
-  SectionForm,
-  SectionGrid,
-  SectionHero,
-  SectionPortfolio,
-  SectionPosts,
-  SectionTestimonials
-};
+export { Action, ActionLink, CtaButtons, Footer, FormField, Header, Layout, Icon, Fixing, SectionAbout, SectionHero, SectionPortfolio, SectionPosts };
 
 export default {
   Action,
@@ -45,13 +24,10 @@ export default {
   Header,
   Layout,
   Icon,
-  Mainte,
-  SectionContent,
+  Fixing,
   SectionAbout,
   SectionForm,
-  SectionGrid,
   SectionHero,
   SectionPortfolio,
-  SectionPosts,
-  SectionTestimonials
+  SectionPosts
 };
