@@ -1,54 +1,55 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Router from 'next/router';
 import _ from 'lodash';
 
 import { Link, withPrefix, classNames, getPageUrl } from '../utils';
 import Action from './Action';
 
-export default class Header extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleWindowResize = this.handleWindowResize.bind(this);
-    this.handleRouteChange = this.handleRouteChange.bind(this);
-    this.menuOpenRef = React.createRef();
-  }
+export default function Header(props) {
+  // constructor(props) {
+  //   super(props);
+  //   this.handleWindowResize = this.handleWindowResize.bind(this);
+  //   this.handleRouteChange = this.handleRouteChange.bind(this);
+  //   this.menuOpenRef = React.createRef();
+  // }
+  const menuOpenRef = useRef(false);
 
-  componentDidMount() {
-    window.addEventListener('resize', this.handleWindowResize, true);
-    Router.events.on('routeChangeStart', this.handleRouteChange);
-  }
+  const componentDidMount = () => {
+    window.addEventListener('resize', handleWindowResize, true);
+    Router.events.on('routeChangeStart', handleRouteChange);
+  };
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.handleWindowResize, true);
-    Router.events.off('routeChangeStart', this.handleRouteChange);
-  }
+  const componentWillUnmount = () => {
+    window.removeEventListener('resize', handleWindowResize, true);
+    Router.events.off('routeChangeStart', handleRouteChange);
+  };
 
-  handleWindowResize() {
-    const menuOpenElm = _.get(this.menuOpenRef, 'current.offsetParent');
+  const handleWindowResize = () => {
+    const menuOpenElm = _.get(menuOpenRef, 'current.offsetParent');
     if (menuOpenElm === null) {
       document.body.classList.remove('menu--opened');
     }
-  }
+  };
 
-  handleRouteChange() {
+  const handleRouteChange = () => {
     document.body.classList.remove('menu--opened');
-  }
+  };
 
-  handleMenuToggle(event) {
+  const handleMenuToggle = (event) => {
     event.preventDefault();
     document.body.classList.toggle('menu--opened');
-  }
+  };
 
-  renderNavLinks(navLinks, pageUrl) {
+  const renderNavLinks = (navLinks, pageUrl) => {
     return (
-      <React.Fragment>
-        <button id="menu-open" className="menu-toggle" ref={this.menuOpenRef} onClick={this.handleMenuToggle.bind(this)}>
+      <>
+        <button id="menu-open" className="menu-toggle" ref={menuOpenRef} onClick={handleMenuToggle.bind(this)}>
           <span className="screen-reader-text">Open Menu</span>
           <span className="icon-menu" aria-hidden="true" />
         </button>
         <nav id="main-navigation" className="site-navigation" aria-label="Main Navigation">
           <div className="site-nav-inside">
-            <button id="menu-close" className="menu-toggle" onClick={this.handleMenuToggle.bind(this)}>
+            <button id="menu-close" className="menu-toggle" onClick={handleMenuToggle.bind(this)}>
               <span className="screen-reader-text">Close Menu</span>
               <span className="icon-close" aria-hidden="true" />
             </button>
@@ -71,42 +72,40 @@ export default class Header extends React.Component {
             </ul>
           </div>
         </nav>
-      </React.Fragment>
+      </>
     );
-  }
+  };
 
-  render() {
-    const page = _.get(this.props, 'page');
-    const pageUrl = _.trim(getPageUrl(page), '/');
-    const config = _.get(this.props, 'config');
-    const header = _.get(config, 'header');
-    const logo = _.get(header, 'logo_img');
-    const logoAlt = _.get(header, 'logo_img_alt', '');
-    const title = _.get(header, 'title');
-    const hasNav = _.get(header, 'has_nav');
-    const navLinks = _.get(header, 'nav_links');
+  const page = _.get(props, 'page');
+  const pageUrl = _.trim(getPageUrl(page), '/');
+  const config = _.get(props, 'config');
+  const header = _.get(config, 'header');
+  const logo = _.get(header, 'logo_img');
+  const logoAlt = _.get(header, 'logo_img_alt', '');
+  const title = _.get(header, 'title');
+  const hasNav = _.get(header, 'has_nav');
+  const navLinks = _.get(header, 'nav_links');
 
-    return (
-      <header id="masthead" className="site-header outer">
-        <div className="inner">
-          <div className="site-header-inside">
-            <div className="site-branding">
-              {logo ? (
-                <p className="site-logo">
-                  <Link href={withPrefix('/')}>
-                    <img src={withPrefix(logo)} alt={logoAlt} />
-                  </Link>
-                </p>
-              ) : (
-                <p className="site-title">
-                  <Link href={withPrefix('/')}>{title}</Link>
-                </p>
-              )}
-            </div>
-            {hasNav && !_.isEmpty(navLinks) && this.renderNavLinks(navLinks, pageUrl)}
+  return (
+    <header id="masthead" className="site-header outer">
+      <div className="inner">
+        <div className="site-header-inside">
+          <div className="site-branding">
+            {logo ? (
+              <p className="site-logo">
+                <Link href={withPrefix('/')}>
+                  <img src={withPrefix(logo)} alt={logoAlt} />
+                </Link>
+              </p>
+            ) : (
+              <p className="site-title">
+                <Link href={withPrefix('/')}>{title}</Link>
+              </p>
+            )}
           </div>
+          {hasNav && !_.isEmpty(navLinks) && renderNavLinks(navLinks, pageUrl)}
         </div>
-      </header>
-    );
-  }
+      </div>
+    </header>
+  );
 }

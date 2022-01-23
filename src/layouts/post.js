@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
 import Prism from 'prismjs';
 import Router from 'next/router';
-import moment from 'moment-strftime';
 
-import { Layout, Mainte } from '../components/index';
+import { Layout, Fixing } from '../components/index';
 import { Link, getPageUrl } from '../utils';
 
 const Post = (props) => {
@@ -77,7 +76,7 @@ const Post = (props) => {
   };
 
   if (!content) {
-    return <Mainte page={page} config={config} />;
+    return <Fixing page={page} config={config} />;
   }
 
   return (

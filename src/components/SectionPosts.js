@@ -3,7 +3,7 @@ import _ from 'lodash';
 import moment from 'moment-strftime';
 import Loader from 'react-loader-spinner';
 
-import { getPageUrl, htmlToReact, classNames, Link, withPrefix } from '../utils';
+import { getPageUrl, htmlToReact, classNames, Link } from '../utils';
 import CtaButtons from './CtaButtons';
 
 export default function SectionPosts(props) {

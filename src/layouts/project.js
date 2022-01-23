@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import Router from 'next/router';
 
-import { Layout, Mainte } from '../components/index';
+import { Layout, Fixing } from '../components/index';
 import { withPrefix, Link } from '../utils';
 
 export default class Project extends React.Component {
@@ -18,7 +18,7 @@ export default class Project extends React.Component {
     const page = _.get(this.props, 'page');
 
     if (!content) {
-      return <Mainte page={page} config={config} />;
+      return <Fixing page={page} config={config} />;
     }
 
     return (

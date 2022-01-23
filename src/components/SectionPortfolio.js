@@ -6,7 +6,7 @@ import { getPageUrl, htmlToReact, Link, withPrefix } from '../utils';
 import { CtaButtons } from '.';
 
 export default function SectionPortfolio(props) {
-  const renderProject = (project, index, projectCount) => {
+  const renderProject = (project, index) => {
     const title = _.get(project, 'title');
     const skill = _.get(project, 'skill');
     const summary = _.get(project, 'summary');
@@ -49,7 +49,6 @@ export default function SectionPortfolio(props) {
   const actions = _.get(section, 'actions');
   const projects = _.get(props, 'projects');
   const recentProjects = projects.slice(0, 4);
-  const projectCount = _.size(recentProjects);
 
   return (
     <section id={sectionId} className="block-portfolio block outer">
@@ -61,7 +60,7 @@ export default function SectionPortfolio(props) {
           </div>
         )}
         <div className="block-content">
-          <div className={`portfolio-feed layout-${layoutStyle}`}>{_.map(recentProjects, (project, index) => renderProject(project, index, projectCount))}</div>
+          <div className={`portfolio-feed layout-${layoutStyle}`}>{_.map(recentProjects, (project, index) => renderProject(project, index))}</div>
         </div>
         {!_.isEmpty(actions) && (
           <div className="block-buttons inner-sm section-bottom-btn portfolio-more">

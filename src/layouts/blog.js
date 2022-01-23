@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import _ from 'lodash';
 import moment from 'moment-strftime';
 import Loader from 'react-loader-spinner';
