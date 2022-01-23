@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import Router from 'next/router';
 import _ from 'lodash';
 
@@ -6,12 +6,6 @@ import { Link, withPrefix, classNames, getPageUrl } from '../utils';
 import Action from './Action';
 
 export default function Header(props) {
-  // constructor(props) {
-  //   super(props);
-  //   this.handleWindowResize = this.handleWindowResize.bind(this);
-  //   this.handleRouteChange = this.handleRouteChange.bind(this);
-  //   this.menuOpenRef = React.createRef();
-  // }
   const menuOpenRef = useRef(false);
 
   const componentDidMount = () => {
