@@ -48,7 +48,9 @@ export default function handler(req, res) {
 
       const data = await notion.search(queryParam);
       // ブログ以外もヒットするのでカテゴリ有無で絞る
-      posts = data.results.filter((page) => page.properties.category && page.properties.publish.checkbox);
+      posts = data.results
+        .filter((page) => page.properties.category && page.properties.publish.checkbox)
+        .sort((a, b) => new Date(b.properties.date.date.start).getTime() - new Date(a.properties.date.date.start).getTime());
     }
 
     return posts.map((row) => {

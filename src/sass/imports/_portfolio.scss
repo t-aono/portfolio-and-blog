@@ -12,6 +12,28 @@
     .palette-dark & {
       color: _palette(charcoal-light-40);
     }
+
+    display: block;
+    position: relative;
+
+    &:hover,
+    &:focus {
+      img {
+        -webkit-transform: scale(1.05, 1.05);
+        transform: scale(1.05, 1.05);
+      }
+    }
+
+    & > .project-loader {
+      text-align: center;
+      border: 0;
+      display: block;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      height: 24em;
+      top: 12em;
+    }
   }
 }
 
@@ -39,7 +61,8 @@
   }
 }
 
-.project-thumbnail {
+.project-thumbnail,
+.project-page-thumbnail {
   border: 0;
   display: block;
   overflow: hidden;
@@ -81,19 +104,6 @@
     transition: 1s ease;
     width: 100%;
     height: 15em;
-  }
-}
-
-.project-link {
-  display: block;
-  position: relative;
-
-  &:hover,
-  &:focus {
-    img {
-      -webkit-transform: scale(1.05, 1.05);
-      transform: scale(1.05, 1.05);
-    }
   }
 }
 

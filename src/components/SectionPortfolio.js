@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import _ from 'lodash';
+import Loader from 'react-loader-spinner';
 
 import { getPageUrl, htmlToReact, Link, withPrefix } from '../utils';
 import { CtaButtons } from '.';
@@ -11,33 +12,31 @@ export default function SectionPortfolio(props) {
     const summary = _.get(project, 'summary');
     const thumbnail = _.get(project, 'thumbnail');
     const projectUrl = getPageUrl(project, { withPrefix: true });
-    const loadingImage = '/images/svg-loader-spinning-circles.svg';
     const [isLoading, setIsLoading] = useState(false);
 
     return (
       <article key={index} className="project">
-          <Link href={projectUrl} className="project-link" onClick={() => setIsLoading(true)}>
-            {thumbnail && (
+        <Link href={projectUrl} className="project-link" onClick={() => setIsLoading(true)}>
+          {thumbnail &&
+            (isLoading ? (
+              <Loader className="project-loader" type="MutatingDots" color="#23d3ff" height={80} width={80} />
+            ) : (
               <div className="project-thumbnail">
-              {isLoading ? (
-                <img src={withPrefix(loadingImage)} alt={loadingImage.replace(/images\//g, '')} />
-              ) : (
                 <img src={withPrefix(thumbnail)} alt={thumbnail.replace(/images\//g, '')} />
-              )}
               </div>
-            )}
-            <header className="project-header">
-              <h2 className="project-title">{title}</h2>
-              <div className="project-skill">
-                <label>使用技術</label>
-                <p>{skill}</p>
-              </div>
-              <div className="project-summary">
-                <label>概要</label>
-                <p>{summary}</p>
-              </div>
-            </header>
-          </Link>
+            ))}
+          <header className="project-header">
+            <h2 className="project-title">{title}</h2>
+            <div className="project-skill">
+              <label>使用技術</label>
+              <p>{skill}</p>
+            </div>
+            <div className="project-summary">
+              <label>概要</label>
+              <p>{summary}</p>
+            </div>
+          </header>
+        </Link>
       </article>
     );
   };
@@ -72,5 +71,4 @@ export default function SectionPortfolio(props) {
       </div>
     </section>
   );
-};
-
+}

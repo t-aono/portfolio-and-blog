@@ -276,6 +276,10 @@
 
   & > a {
     border-bottom: none;
+
+    & > .post-loader {
+      padding: 0 1em;
+    }
   }
 }
 

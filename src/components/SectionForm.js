@@ -78,7 +78,7 @@ export default class SectionForm extends React.Component {
                   {submitLabel}
                 </button>
               </div>
-              <Loader style={{ display: sending ? 'block' : 'none' }} type="ThreeDots" color="#23d3ff" height={80} width={80} />
+              <Loader style={{ display: sending ? 'block' : 'none' }} type="MutatingDots" color="#23d3ff" height={80} width={80} />
             </form>
           </div>
         </div>

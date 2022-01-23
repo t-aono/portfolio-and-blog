@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import _ from 'lodash';
 import moment from 'moment-strftime';
+import Loader from 'react-loader-spinner';
 
 import { getPageUrl, htmlToReact, classNames, Link, withPrefix } from '../utils';
 import CtaButtons from './CtaButtons';
@@ -15,16 +16,17 @@ export default function SectionPosts(props) {
     const dateTimeAttr = moment(date).strftime('%Y-%m-%d');
     const formattedDate = moment(date).strftime('%Y/%m/%d');
     const postUrl = getPageUrl(post, { withPrefix: true });
-    const loadingImage = '/images/svg-loader-spinning-circles.svg';
     const [isLoading, setIsLoading] = useState(false);
 
     return (
       <article key={index} className="post grid-item">
         <div className="post-inside">
           <Link href={postUrl} onClick={() => setIsLoading(true)}>
-            <div className="emoji-md">
-              {isLoading ? <img src={withPrefix(loadingImage)} alt={loadingImage.replace(/images\//g, '')} /> : emoji ? emoji : 'X'}
-            </div>
+            {isLoading ? (
+              <Loader className="post-loader" type="MutatingDots" color="#23d3ff" height={80} width={80} />
+            ) : (
+              <div className="emoji-md">{emoji ? emoji : 'X'}</div>
+            )}
           </Link>
           <div>
             <h3 className="post-title">

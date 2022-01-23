@@ -22,7 +22,7 @@ body {
 
   &.palette-dark {
     background: _palette(charcoal);
-    color: _palette(charcoal-light-75);
+    color: _palette(charcoal-light-80);
   }
 }
 
@@ -318,6 +318,7 @@ img {
 
 .emoji-lg {
   font-size: 5em;
+  text-align: center;
 }
 
 .mainte-image {

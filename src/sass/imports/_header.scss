@@ -238,11 +238,13 @@
   }
 
   .menu {
-    padding: calc(2em + 30px) 3vw 3.33333em;
+    text-align: center;
+    padding: 3em;
   }
 
   .menu-item {
     border-top: 1px solid _palette(charcoal-light-75);
+    line-height: 3em;
     display: block;
 
     .palette-dark & {
