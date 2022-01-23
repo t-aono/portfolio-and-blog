@@ -8,8 +8,17 @@ export default function handler(req, res) {
       to: req.body.email,
       cc: 'info@t-aono.net',
       from: 'noreply@t-aono.net',
-      subject: 'お問合せありがとうございました。',
-      text: `${req.body.name} 様\nお問合せを受け付けました。回答にしばらくお時間を頂けると幸いです。\n\n【件名】${req.body.subject}\n${req.body.message}`
+      subject: '【t-aono.net】お問合せ受付け完了',
+      text: `${req.body.name} 様
+
+お問い合わせありがとうございました。
+内容を確認してご連絡致します。
+
+もし連絡が届かない場合はお手数ですがメールを頂けると幸いです。
+info@t-aono.net
+
+- - - - - - - 
+【件名】${req.body.subject}\n${req.body.message}`
     };
 
     (async () => {

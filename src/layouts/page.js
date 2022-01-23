@@ -13,6 +13,7 @@ export default class Page extends React.Component {
     const subtitle = _.get(page, 'subtitle');
     const image = _.get(page, 'image');
     const imageAlt = _.get(page, 'image_alt', '');
+    const imageType = _.get(page, 'image_type', '');
     const markdownContent = _.get(page, 'markdown_content');
     const path = _.get(this.props, 'path');
 
@@ -25,7 +26,7 @@ export default class Page extends React.Component {
               {subtitle && <div className="post-subtitle">{htmlToReact(subtitle)}</div>}
             </header>
             {image && (
-              <div className="post-image">
+              <div className={imageType ? imageType : 'post-image'}>
                 <img src={withPrefix(image)} alt={imageAlt} />
               </div>
             )}

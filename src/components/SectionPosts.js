@@ -23,7 +23,7 @@ export default function SectionPosts(props) {
         <div className="post-inside">
           <Link href={postUrl} onClick={() => setIsLoading(true)}>
             {isLoading ? (
-              <Loader className="post-loader" type="ThreeDots" color="#23d3ff" height={80} width={80} />
+              <Loader className="post-loader" type="MutatingDots" color="#23d3ff" height={80} width={80} />
             ) : (
               <div className="emoji-md">{emoji ? emoji : 'X'}</div>
             )}
