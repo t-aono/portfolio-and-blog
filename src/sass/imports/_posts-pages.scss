@@ -14,6 +14,7 @@
 .page-title,
 .post-title {
   margin-bottom: 0;
+  line-height: 1.5em;
 }
 
 .page-subtitle,
@@ -246,7 +247,7 @@
   margin: 0 auto;
   text-align: center;
   & div {
-    margin-bottom: 3em;
+    margin: 1em 0;
   }
   & img {
     padding-top: 3em;
