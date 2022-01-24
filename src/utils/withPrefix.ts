@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const pathPrefix = require('../../content/data/config.json').path_prefix;
+const pathPrefix: string = require('../../content/data/config.json').path_prefix;
 
 export default function withPrefix(url) {
   if (!url) {

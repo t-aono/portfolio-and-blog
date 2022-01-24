@@ -1,4 +1,3 @@
-import React from 'react';
 import _ from 'lodash';
 import { sourcebitDataClient } from 'sourcebit-target-next';
 import { withRemoteDataUpdates } from 'sourcebit-target-next/with-remote-data-updates';
@@ -6,16 +5,14 @@ import { getProjects, getPosts, getCategories } from '../utils';
 
 import pageLayouts from '../layouts';
 
-class Page extends React.Component {
-  render() {
-    const modelName = _.get(this.props, 'page.__metadata.modelName');
-    const PageLayout = pageLayouts[modelName];
-    if (!PageLayout) {
-      throw new Error(`no page layout matching the page model: ${modelName}`);
-    }
-    return <PageLayout {...this.props} />;
+const Page = (props) => {
+  const modelName = _.get(props, 'page.__metadata.modelName');
+  const PageLayout = pageLayouts[modelName];
+  if (!PageLayout) {
+    throw new Error(`no page layout matching the page model: ${modelName}`);
   }
-}
+  return <PageLayout {...props} />;
+};
 
 export async function getStaticPaths() {
   console.log('Page [...slug].js getStaticPaths');
