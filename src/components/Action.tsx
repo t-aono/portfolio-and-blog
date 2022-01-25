@@ -1,9 +1,21 @@
 import _ from 'lodash';
+import React from 'react';
 
 import { Link, withPrefix, classNames } from '../utils';
 import Icon from './Icon';
 
-export default function Action(props) {
+type Props = {
+  action: {
+    url: string;
+    label: string;
+    style: string;
+    icon: string;
+  };
+};
+
+type Link = typeof Link;
+
+export default function Action(props): Link {
   const action = _.get(props, 'action');
   const url = _.get(action, 'url');
   const label = _.get(action, 'label');
@@ -15,7 +27,10 @@ export default function Action(props) {
   });
   const newWindow = _.get(action, 'new_window');
   const noFollow = _.get(action, 'no_follow');
-  const attrs = {};
+  const attrs: {
+    target?: string;
+    rel?: string;
+  } = {};
   if (newWindow) {
     attrs.target = '_blank';
   }

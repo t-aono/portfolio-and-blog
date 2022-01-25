@@ -1,4 +1,4 @@
-import Action from './Action';
+import Action from './Action.tsx';
 import ActionLink from './ActionLink';
 import CtaButtons from './CtaButtons';
 import Footer from './Footer';
