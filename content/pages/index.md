@@ -55,6 +55,12 @@ seo:
   title: aono's P&B
   description: 個人開発したWebアプリケーションやプログラミング関連ブログを公開
   extra:
+    - name: 'og:url'
+      value: https://t-aono.net
+      keyName: property
+    - name: 'og:site_name'
+      value: aono's P&B
+      keyName: property
     - name: 'og:type'
       value: website
       keyName: property
@@ -65,9 +71,9 @@ seo:
       value: 個人開発したWebアプリケーションやプログラミング関連ブログを公開
       keyName: property
     - name: 'og:image'
-      value: images/exto_preview.png
       keyName: property
-      relativeUrl: true
+      value: https://t-aono.net/images/ogp_image.png
+      relativeUrl: false
     - name: 'twitter:card'
       value: summary
     - name: 'twitter:title'
@@ -75,7 +81,7 @@ seo:
     - name: 'twitter:description'
       value: 個人開発したWebアプリケーションやプログラミング関連ブログを公開
     - name: 'twitter:image'
-      value: images/exto_preview.png
-      relativeUrl: true
+      value: https://t-aono.net/images/ogp_image.png
+      relativeUrl: false
 layout: advanced
 ---
