@@ -19,11 +19,11 @@ sections:
     type: section_about
     title: 自己紹介
     content: ものづくりが好きプログラミングに興味を持ちました。<br/>
-      学習期間を経てエンジニアに転職してから5年くらい経ちます。<br/>
+      スキル習得のための学習を始めエンジニアに転職してから5年くらい経ちます。<br/>
       <br/>
-      受託開発の会社で働きつつ個人でも業務委託の仕事を請ける働き方をしています。<br/>
+      現在は受託開発の会社で働きつつ個人でも業務委託の仕事を請ける働き方をしています。<br/>
       <br/>
-      プログラムを書いたりWebアプリケーションを作ったりすることが好きなので、今の仕事をライフワークにしていく予定です。<br/>
+      プログラムを書いたりWebアプリケーションを作ったりすることが好きなので今の仕事が気に入っています。<br/>
       <br/>
       PHP / Laravel / JS / Vue.js / React / MySQL を使うことが多いです。<br/>
       最近は TypeScript / Next.js も学習しています。<br/>
@@ -31,9 +31,9 @@ sections:
       <br/>
       経歴<br/>
       2011年 営業職として製薬メーカーに新卒で入社<br/>
-      2016年 ITエンジニアとしてSESの会社に転職<br/>
-      2017年 Java / VBA を使った保守開発の現場をいくつか経験<br/>
-      2018年 PHP / JS での開発を経験<br/>
+      2017年 ITエンジニアとしてSESの会社に転職<br/>
+      2018年 Java / VBA を使った保守開発の現場をいくつか経験<br/>
+      2019年 PHP / JS での開発を経験<br/>
       2020年 受託開発の会社で打合せ・設計・実装・テストなどの開発工程を幅広く経験<br/>
       2021年 フリーランスとして Laravel / Vue.js を使った開発も経験<br/>
     actions:
@@ -55,6 +55,12 @@ seo:
   title: aono's P&B
   description: 個人開発したWebアプリケーションやプログラミング関連ブログを公開
   extra:
+    - name: 'og:url'
+      value: https://t-aono.net
+      keyName: property
+    - name: 'og:site_name'
+      value: aono's P&B
+      keyName: property
     - name: 'og:type'
       value: website
       keyName: property
@@ -65,17 +71,17 @@ seo:
       value: 個人開発したWebアプリケーションやプログラミング関連ブログを公開
       keyName: property
     - name: 'og:image'
-      value: images/exto_preview.png
       keyName: property
-      relativeUrl: true
+      value: https://t-aono.net/images/ogp_image.png
+      relativeUrl: false
     - name: 'twitter:card'
-      value: summary_large_image
+      value: summary
     - name: 'twitter:title'
       value: aono's P&B
     - name: 'twitter:description'
       value: 個人開発したWebアプリケーションやプログラミング関連ブログを公開
     - name: 'twitter:image'
-      value: images/exto_preview.png
-      relativeUrl: true
+      value: https://t-aono.net/images/ogp_image.png
+      relativeUrl: false
 layout: advanced
 ---
