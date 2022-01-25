@@ -73,7 +73,7 @@ seo:
     - name: 'og:image'
       value: images/ogp-image.png
       keyName: property
-    #   relativeUrl: true
+      relativeUrl: false
     - name: 'twitter:card'
       value: summary_large_image
     - name: 'twitter:title'
@@ -82,6 +82,6 @@ seo:
       value: 個人開発したWebアプリケーションやプログラミング関連ブログを公開
     - name: 'twitter:image'
       value: images/opg-image.png
-    #   relativeUrl: true
+      relativeUrl: false
 layout: advanced
 ---
