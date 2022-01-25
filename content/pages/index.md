@@ -69,7 +69,7 @@ seo:
       keyName: property
       relativeUrl: true
     - name: 'twitter:card'
-      value: summary_large_image
+      value: summary
     - name: 'twitter:title'
       value: aono's P&B
     - name: 'twitter:description'
