@@ -3,19 +3,9 @@ import _ from 'lodash';
 import { htmlToReact } from '../utils';
 import ActionLink from './ActionLink';
 import Action from './Action';
+import { ConfigType } from '../types/components';
 
-type PropsType = {
-  config: {
-    footer: {
-      copyright: string;
-      links: string[];
-      hasSocial: boolean;
-      socialLinks: string[]
-    }
-  }
-}
-
-export const Footer: React.VFC<PropsType> = (props) => {
+export const Footer: React.VFC<ConfigType> = (props) => {
   const config = _.get(props, 'config');
   const footer = _.get(config, 'footer');
   const copyright = _.get(footer, 'content');
@@ -29,17 +19,17 @@ export const Footer: React.VFC<PropsType> = (props) => {
         <div className="site-footer-inside">
           <div className="site-info">
             {copyright && <span className="copyright">{htmlToReact(copyright)}</span>}
-            {_.map(links, (action: string, index) => (
+            {_.map(links, (action, index) => (
               <ActionLink key={index} action={action} />
             ))}
           </div>
           {hasSocial && !_.isEmpty(socialLinks) && (
-            <div className="social-links">{_.map(socialLinks, (action, index) => (index === 0 ? <Action key={index} action={action} /> : ''))}</div>
+            <div className="social-links">{_.map(socialLinks, (action, index: number) => (index === 0 ? <Action key={index} action={action} /> : ''))}</div>
           )}
         </div>
       </div>
     </footer>
   );
-}
+};
 
 export default Footer;

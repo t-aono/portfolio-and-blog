@@ -1,8 +1,11 @@
 import _ from 'lodash';
 
 import Action from './Action';
+import { ActionType } from '../types/components';
 
-export default function CtaButtons(props: string[]) {
-  const actions: string[] = _.get(props, 'actions');
+export const CtaButtons = (props: ActionType) => {
+  const actions = _.get(props, 'actions');
   return _.map(actions, (action, index) => <Action key={index} action={action} />);
-}
+};
+
+export default CtaButtons;

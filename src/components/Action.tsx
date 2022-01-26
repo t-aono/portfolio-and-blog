@@ -2,19 +2,10 @@ import _ from 'lodash';
 
 import { Link, withPrefix, classNames } from '../utils';
 import Icon from './Icon';
-import { AttrsType } from '../../types/components';
+import { AttrsType } from '../types/components';
+import { ActionType } from '../types/components';
 
-type PropsType = {
-  action: {
-    url: string;
-    label: string;
-    style: string;
-    icon: string;
-    classes: string[]
-  }
-}
-
-export const Action: React.VFC<PropsType> = (props) =>  {
+export const Action: React.VFC<ActionType> = (props) => {
   const action = _.get(props, 'action');
   const url = _.get(action, 'url');
   const label = _.get(action, 'label');
@@ -50,6 +41,6 @@ export const Action: React.VFC<PropsType> = (props) =>  {
       )}
     </Link>
   );
-}
+};
 
 export default Action;
