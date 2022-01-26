@@ -1,32 +1,21 @@
-import _ from 'lodash';
 import React from 'react';
+import _ from 'lodash';
 
 import { Link, withPrefix, classNames } from '../utils';
 import Icon from './Icon';
 
-type Props = {
-  action: {
-    url: string;
-    label: string;
-    style: string;
-    icon: string;
-  };
-};
-
-type Link = typeof Link;
-
-export default function Action(props): Link {
+export default function Action(props): JSX.Element {
   const action = _.get(props, 'action');
-  const url = _.get(action, 'url');
-  const label = _.get(action, 'label');
-  const style = _.get(action, 'style', 'link');
-  const icon = _.get(action, 'icon', 'dribbble');
-  const classes = classNames({
+  const url: string = _.get(action, 'url');
+  const label: string = _.get(action, 'label');
+  const style: string = _.get(action, 'style', 'link');
+  const icon: string = _.get(action, 'icon', 'dribbble');
+  const classes: string[] = classNames({
     button: style === 'button',
     'button-icon': style === 'icon'
   });
-  const newWindow = _.get(action, 'new_window');
-  const noFollow = _.get(action, 'no_follow');
+  const newWindow: boolean = _.get(action, 'new_window');
+  const noFollow: boolean = _.get(action, 'no_follow');
   const attrs: {
     target?: string;
     rel?: string;
