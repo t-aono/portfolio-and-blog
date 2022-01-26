@@ -1,6 +1,20 @@
 import _ from 'lodash';
 
-export default function FormField(props) {
+type Props = {
+  field: {
+    inputType: string;
+    name: string;
+    defaultValue: string;
+    options: [],
+    required: boolean;
+    label: string;
+    labelId: string;
+  },
+  onSetValue: React.MouseEventHandler<HTMLInputElement>;
+  onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export const FormField: React.VFC<Props> = (props) => {
   const field = _.get(props, 'field');
   const inputType = _.get(field, 'input_type');
   const name = _.get(field, 'name');
@@ -9,7 +23,10 @@ export default function FormField(props) {
   const required = _.get(field, 'is_required');
   const label = _.get(field, 'label');
   const labelId = `${name}-label`;
-  const attr = {};
+  const attr: {
+    arial_labelledby?: string;
+    required?: boolean;
+  } = {};
   if (label) {
     attr['aria-labelledby'] = labelId;
   }
@@ -52,7 +69,7 @@ export default function FormField(props) {
       return (
         <div className="form-group">
           {label && <label htmlFor={name}>{label}</label>}
-          <textarea name={name} id={name} rows="5" {...(defaultValue ? { placeholder: defaultValue } : null)} {...attr} />
+          <textarea name={name} id={name} rows={5} {...(defaultValue ? { placeholder: defaultValue } : null)} {...attr} />
           <span className="animate-border" aria-hidden="true" />
         </div>
       );
@@ -66,3 +83,5 @@ export default function FormField(props) {
       );
   }
 }
+
+export default FormField;

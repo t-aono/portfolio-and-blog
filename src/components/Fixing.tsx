@@ -3,7 +3,12 @@ import Router from 'next/router';
 import { Layout } from './index';
 import { withPrefix } from '../utils';
 
-export default function Fixing(props) {
+type PropsType = {
+  page: {},
+  config: {}
+}
+
+export const Fixing: React.VFC<PropsType> = (props) => {
   const construction = '/images/construction_simple.png';
   return (
     <Layout page={props.page} config={props.config}>
@@ -23,3 +28,5 @@ export default function Fixing(props) {
     </Layout>
   );
 }
+
+export default Fixing;

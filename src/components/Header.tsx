@@ -1,22 +1,30 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Router from 'next/router';
 import _ from 'lodash';
 
 import { Link, withPrefix, classNames, getPageUrl } from '../utils';
 import Action from './Action';
 
-export default function Header(props) {
-  const menuOpenRef = useRef(false);
+type Props = {
+  page: string;
+  config: {
+    header: {
+      logo: string;
+      logoAlt: string;
+      title: string;
+      hasNav: boolean;
+      navLinks: string[]
+    }
+  }
+}
 
-  const componentDidMount = () => {
+export const Header: React.VFC<Props> = (props) => {
+  const menuOpenRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
     window.addEventListener('resize', handleWindowResize, true);
     Router.events.on('routeChangeStart', handleRouteChange);
-  };
-
-  const componentWillUnmount = () => {
-    window.removeEventListener('resize', handleWindowResize, true);
-    Router.events.off('routeChangeStart', handleRouteChange);
-  };
+  }, [Router]);
 
   const handleWindowResize = () => {
     const menuOpenElm = _.get(menuOpenRef, 'current.offsetParent');
@@ -103,3 +111,5 @@ export default function Header(props) {
     </header>
   );
 }
+
+export default Header;

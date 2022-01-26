@@ -1,14 +1,24 @@
 import _ from 'lodash';
 
 import { Link, withPrefix } from '../utils';
+import { AttrsType } from '../../types/components';
 
-export default function ActionLink() {
-  const action = _.get(this.props, 'action');
-  const url = _.get(action, 'url');
+type PropsType = {
+  action: {
+    url: string;
+    label: string;
+    newWindow: string;
+    noFollow: string;
+  }
+}
+
+export const ActionLink: React.VFC<PropsType> = (props: PropsType) => {
+  const action = _.get(props, 'action');
+  const url = false; //_.get(action, 'url');
   const label = _.get(action, 'label');
   const newWindow = _.get(action, 'new_window');
   const noFollow = _.get(action, 'no_follow');
-  const attrs = {};
+  const attrs: AttrsType = {};
   if (newWindow) {
     attrs.target = '_blank';
   }
@@ -22,3 +32,5 @@ export default function ActionLink() {
     </Link>
   );
 }
+
+export default ActionLink;

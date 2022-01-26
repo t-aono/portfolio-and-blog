@@ -1,25 +1,32 @@
-import React from 'react';
 import _ from 'lodash';
 
 import { Link, withPrefix, classNames } from '../utils';
 import Icon from './Icon';
+import { AttrsType } from '../../types/components';
 
-export default function Action(props): JSX.Element {
+type PropsType = {
+  action: {
+    url: string;
+    label: string;
+    style: string;
+    icon: string;
+    classes: string[]
+  }
+}
+
+export const Action: React.VFC<PropsType> = (props) =>  {
   const action = _.get(props, 'action');
-  const url: string = _.get(action, 'url');
-  const label: string = _.get(action, 'label');
-  const style: string = _.get(action, 'style', 'link');
-  const icon: string = _.get(action, 'icon', 'dribbble');
-  const classes: string[] = classNames({
+  const url = _.get(action, 'url');
+  const label = _.get(action, 'label');
+  const style = _.get(action, 'style', 'link');
+  const icon = _.get(action, 'icon', 'dribbble');
+  const classes = classNames({
     button: style === 'button',
     'button-icon': style === 'icon'
   });
-  const newWindow: boolean = _.get(action, 'new_window');
-  const noFollow: boolean = _.get(action, 'no_follow');
-  const attrs: {
-    target?: string;
-    rel?: string;
-  } = {};
+  const newWindow = _.get(action, 'new_window');
+  const noFollow = _.get(action, 'no_follow');
+  const attrs: AttrsType = {};
   if (newWindow) {
     attrs.target = '_blank';
   }
@@ -30,10 +37,10 @@ export default function Action(props): JSX.Element {
   return (
     <Link href={withPrefix(url)} {...attrs} className={classes}>
       {style === 'icon' ? (
-        <React.Fragment>
+        <>
           <Icon icon={icon} />
           <span className="screen-reader-text">{label}</span>
-        </React.Fragment>
+        </>
       ) : action.icon === 'github' ? (
         <>
           <Icon icon="github" />　{label}
@@ -44,3 +51,5 @@ export default function Action(props): JSX.Element {
     </Link>
   );
 }
+
+export default Action;

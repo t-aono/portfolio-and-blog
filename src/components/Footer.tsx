@@ -4,7 +4,18 @@ import { htmlToReact } from '../utils';
 import ActionLink from './ActionLink';
 import Action from './Action';
 
-export default function Footer(props) {
+type PropsType = {
+  config: {
+    footer: {
+      copyright: string;
+      links: string[];
+      hasSocial: boolean;
+      socialLinks: string[]
+    }
+  }
+}
+
+export const Footer: React.VFC<PropsType> = (props) => {
   const config = _.get(props, 'config');
   const footer = _.get(config, 'footer');
   const copyright = _.get(footer, 'content');
@@ -18,7 +29,7 @@ export default function Footer(props) {
         <div className="site-footer-inside">
           <div className="site-info">
             {copyright && <span className="copyright">{htmlToReact(copyright)}</span>}
-            {_.map(links, (action, index) => (
+            {_.map(links, (action: string, index) => (
               <ActionLink key={index} action={action} />
             ))}
           </div>
@@ -30,3 +41,5 @@ export default function Footer(props) {
     </footer>
   );
 }
+
+export default Footer;
