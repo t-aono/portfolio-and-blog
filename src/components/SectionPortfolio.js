@@ -19,7 +19,9 @@ export default function SectionPortfolio(props) {
         <Link href={projectUrl} className="project-link" onClick={() => setIsLoading(true)}>
           {thumbnail &&
             (isLoading ? (
-              <Loader className="project-loader" type="MutatingDots" color="#23d3ff" height={80} width={80} />
+              <div className="project-loader">
+                <Loader type="MutatingDots" color="#23d3ff" height={80} width={80} />
+              </div>
             ) : (
               <div className="project-thumbnail">
                 <img src={withPrefix(thumbnail)} alt={thumbnail.replace(/images\//g, '')} />
