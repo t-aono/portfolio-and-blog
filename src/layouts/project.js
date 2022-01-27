@@ -4,16 +4,16 @@ import Router from 'next/router';
 import { Layout, Fixing } from '../components/index';
 import { withPrefix, Link } from '../utils';
 
-export default function Project() {
-  const project = _.get(this.props, 'project');
+export default function Project(props) {
+  const project = _.get(props, 'project');
   const thumbnail = _.get(project, 'thumbnail');
   const title = _.get(project, 'title');
   const skill = _.get(project, 'skill');
   const term = _.get(project, 'term');
-  const content = _.get(this.props, 'content');
-  const data = _.get(this.props, 'data');
+  const content = _.get(props, 'content');
+  const data = _.get(props, 'data');
   const config = _.get(data, 'config');
-  const page = _.get(this.props, 'page');
+  const page = _.get(props, 'page');
 
   if (!content) {
     return <Fixing page={page} config={config} />;

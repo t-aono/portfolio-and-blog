@@ -4,11 +4,27 @@ import _ from 'lodash';
 
 import { Link, withPrefix, classNames, getPageUrl } from '../utils';
 import Action from './Action';
-import { PageType, ConfigType } from '../types/components';
 
-type Props = PageType & ConfigType;
+type PropsType = {
+  page: {
+    title: string;
+    seo: {
+      title: string;
+      description: string;
+      robots: string[];
+      extra: string[];
+    };
+  };
+  config: {
+    title: string;
+    color_scheme: string;
+    accent_color: string;
+    favicon: string;
+    domain: string;
+  };
+};
 
-export const Header: React.VFC<Props> = (props) => {
+export const Header: React.VFC<PropsType> = (props) => {
   const menuOpenRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {

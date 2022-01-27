@@ -3,9 +3,18 @@ import _ from 'lodash';
 import { htmlToReact } from '../utils';
 import ActionLink from './ActionLink';
 import Action from './Action';
-import { ConfigType } from '../types/components';
 
-export const Footer: React.VFC<ConfigType> = (props) => {
+type PropsType = {
+  config: {
+    title: string;
+    color_scheme: string;
+    accent_color: string;
+    favicon: string;
+    domain: string;
+  };
+};
+
+export const Footer: React.VFC<PropsType> = (props) => {
   const config = _.get(props, 'config');
   const footer = _.get(config, 'footer');
   const copyright = _.get(footer, 'content');

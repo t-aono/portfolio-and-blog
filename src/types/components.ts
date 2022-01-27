@@ -14,7 +14,15 @@ export type ActionType = {
 }
 
 export interface PageType {
-  page: string;
+  page: {
+    title: string;
+    seo: {
+        title: string;
+        description: string;
+        robots: string[];
+        extra: string[];
+    };
+  }
 }
 
 type PickType<T, K extends keyof T> = T[K];

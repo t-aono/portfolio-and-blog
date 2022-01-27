@@ -2,10 +2,25 @@ import Router from 'next/router';
 
 import { Layout } from './index';
 import { withPrefix } from '../utils';
-import { PageType } from '../types/components';
-import { ConfigType } from '../types/components';
 
-type PropsType = PageType & ConfigType;
+type PropsType = {
+  page: {
+    title: string;
+    seo: {
+      title: string;
+      description: string;
+      robots: string[];
+      extra: string[];
+    };
+  };
+  config: {
+    title: string;
+    color_scheme: string;
+    accent_color: string;
+    favicon: string;
+    domain: string;
+  };
+};
 
 export const Fixing: React.VFC<PropsType> = (props) => {
   const construction = '/images/construction_simple.png';

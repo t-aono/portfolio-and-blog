@@ -23,6 +23,7 @@ type PropsType = {
     favicon: string;
     domain: string;
   };
+  children: HTMLElement;
 };
 
 export const Body: React.VFC<PropsType> = (props) => {
