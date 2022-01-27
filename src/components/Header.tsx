@@ -4,19 +4,9 @@ import _ from 'lodash';
 
 import { Link, withPrefix, classNames, getPageUrl } from '../utils';
 import Action from './Action';
+import { PageType, ConfigType } from '../types/components';
 
-type Props = {
-  page: string;
-  config: {
-    header: {
-      logo: string;
-      logoAlt: string;
-      title: string;
-      hasNav: boolean;
-      navLinks: string[]
-    }
-  }
-}
+type Props = PageType & ConfigType;
 
 export const Header: React.VFC<Props> = (props) => {
   const menuOpenRef = useRef<HTMLButtonElement>(null);
@@ -110,6 +100,6 @@ export const Header: React.VFC<Props> = (props) => {
       </div>
     </header>
   );
-}
+};
 
 export default Header;

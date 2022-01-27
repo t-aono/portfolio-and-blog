@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import _ from 'lodash';
 
@@ -7,16 +6,26 @@ import Header from './Header';
 import Footer from './Footer';
 import { GA_TRACKING_ID } from '../lib/gtag';
 
-export default function Body(props) {
-  useEffect(() => {
-    handleVideoEmbeds();
-  }, []);
-
-  const handleVideoEmbeds = () => {
-    const videoEmbeds = ['iframe[src*="youtube.com"]', 'iframe[src*="vimeo.com"]'];
-    noframe(videoEmbeds.join(','), '.inner-sm');
+type PropsType = {
+  page: {
+    title: string;
+    seo: {
+      title: string;
+      description: string;
+      robots: string[];
+      extra: string[];
+    };
   };
+  config: {
+    title: string;
+    color_scheme: string;
+    accent_color: string;
+    favicon: string;
+    domain: string;
+  };
+};
 
+export const Body: React.VFC<PropsType> = (props) => {
   const page = _.get(props, 'page');
   const pageTitle = _.get(page, 'title');
   const config = _.get(props, 'config');
@@ -88,4 +97,6 @@ export default function Body(props) {
       </div>
     </>
   );
-}
+};
+
+export default Body;

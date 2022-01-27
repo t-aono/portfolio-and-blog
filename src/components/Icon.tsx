@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-export default function Icon(props) {
+export const Icon: React.VFC<{ icon: string }> = (props) => {
   const icon = _.get(props, 'icon');
   switch (icon) {
     case 'dribbble':
@@ -60,4 +60,6 @@ export default function Icon(props) {
     default:
       return null;
   }
-}
+};
+
+export default Icon;

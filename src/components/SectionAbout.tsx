@@ -2,8 +2,21 @@ import _ from 'lodash';
 
 import { htmlToReact, withPrefix, markdownify } from '../utils';
 import { CtaButtons } from '.';
+import { ActionType } from '../types/components';
 
-export default function SectionAbount(props) {
+type PropsType = {
+  section: {
+    section_id: string;
+    title: string;
+    subtitle: string;
+    image: string;
+    image_alt: string;
+    actions: ActionType;
+    content: string;
+  };
+};
+
+export const SectionAbout: React.VFC = (props: PropsType) => {
   const section = _.get(props, 'section');
   const sectionId = _.get(section, 'section_id');
   const title = _.get(section, 'title');
@@ -36,4 +49,6 @@ export default function SectionAbount(props) {
       </div>
     </section>
   );
-}
+};
+
+export default SectionAbout;

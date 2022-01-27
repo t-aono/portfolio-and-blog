@@ -1,17 +1,17 @@
-import Action from './Action.tsx';
-import ActionLink from './ActionLink.tsx';
-import CtaButtons from './CtaButtons.tsx';
-import Footer from './Footer.tsx';
-import FormField from './FormField.tsx';
-import Header from './Header.tsx';
-import Layout from './Layout.tsx';
-import Icon from './Icon.tsx';
-import Fixing from './Fixing.tsx';
-import SectionAbout from './SectionAbout.tsx';
-import SectionForm from './SectionForm.tsx';
-import SectionHero from './SectionHero.tsx';
-import SectionPortfolio from './SectionPortfolio.tsx';
-import SectionPosts from './SectionPosts.tsx';
+import Action from './Action';
+import ActionLink from './ActionLink';
+import CtaButtons from './CtaButtons';
+import Footer from './Footer';
+import FormField from './FormField';
+import Header from './Header';
+import Layout from './Layout';
+import Icon from './Icon';
+import Fixing from './Fixing';
+import SectionAbout from './SectionAbout';
+import SectionForm from './SectionForm';
+import SectionHero from './SectionHero';
+import SectionPortfolio from './SectionPortfolio';
+import SectionPosts from './SectionPosts';
 
 export { Action, ActionLink, CtaButtons, Footer, FormField, Header, Layout, Icon, Fixing, SectionAbout, SectionHero, SectionPortfolio, SectionPosts };
 

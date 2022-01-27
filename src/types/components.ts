@@ -13,7 +13,6 @@ export type ActionType = {
   };
 }
 
-
 export interface PageType {
   page: string;
 }
