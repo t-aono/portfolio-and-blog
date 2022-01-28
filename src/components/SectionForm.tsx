@@ -73,7 +73,13 @@ export default function SectionForm(props) {
                 {submitLabel}
               </button>
             </div>
-            <Loader style={{ display: sending ? 'block' : 'none' }} type="MutatingDots" color="#23d3ff" height={80} width={80} />
+            {sending ? (
+              <div className="form-loader">
+                <Loader type="MutatingDots" color="#23d3ff" height={80} width={80} />
+              </div>
+            ) : (
+              ''
+            )}
           </form>
         </div>
       </div>

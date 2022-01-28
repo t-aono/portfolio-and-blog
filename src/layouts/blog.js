@@ -113,7 +113,9 @@ export default function Blog(props) {
         <div className="post-inside">
           <Link href={postUrl} onClick={() => setPageLoading(index)}>
             {isLoading[index] ? (
-              <Loader className="post-loader" type="MutatingDots" color="#23d3ff" height={80} width={80} />
+              <div className="post-loader">
+                <Loader type="MutatingDots" color="#23d3ff" height={80} width={80} />
+              </div>
             ) : (
               <div className="emoji-md">{emoji ? emoji : 'X'}</div>
             )}
@@ -164,7 +166,9 @@ export default function Blog(props) {
         </form>
 
         {isSearching ? (
-          <Loader className="search-loader" type="MutatingDots" color="#23d3ff" height={80} width={80} />
+          <div className="search-loader">
+            <Loader type="MutatingDots" color="#23d3ff" height={80} width={80} />
+          </div>
         ) : (
           <>
             <div
