@@ -235,6 +235,10 @@
 
 .search-loader {
   text-align: center;
+
+  & > div > svg {
+    overflow: visible;
+  }
 }
 
 .categories {

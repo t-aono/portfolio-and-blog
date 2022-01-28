@@ -278,7 +278,11 @@
     border-bottom: none;
 
     & > .post-loader {
-      padding: 0 1em;
+      padding: 0 0.78em;
+
+      & > div > svg {
+        overflow: visible;
+      }
     }
   }
 }
@@ -297,4 +301,8 @@
   .portfolio-more {
     margin-top: 7em;
   }
+}
+
+.form-loader > div > svg {
+  overflow: visible;
 }
