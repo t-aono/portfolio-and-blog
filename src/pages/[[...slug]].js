@@ -36,10 +36,11 @@ export async function getStaticProps({ params }) {
   if (params.slug && params.slug[0] === 'blog') {
     if (params.slug[1] && params.slug[1] === 'paginate') {
       // ページネーション
-      props.page_no = params.slug[2];
+      const current = parseInt(params.slug[2], 10);
+      props.page_no = current;
       const postIds = await getPosts('id');
       props.post_count = postIds.length;
-      props.posts = await getPosts('post', postIds[(params.slug[2] - 1) * 12]);
+      props.posts = await getPosts('post', postIds[(current - 1) * 12]);
       props.page = props.pages.find((p) => p.title === 'Blog');
     } else {
       // １ページ目

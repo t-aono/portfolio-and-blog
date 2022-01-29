@@ -29,15 +29,15 @@ export const Blog = (props: BlogType): JSX.Element => {
   const noHit = '/images/cat_02_simple.png';
   const categories = props.categories;
   const [currentCategory, setCurrentCategory] = useState('');
-  const [posts, setPosts] = useState(props.posts);
   const originalPosts = props.posts;
+  const [posts, setPosts] = useState(originalPosts);
   const [isSearched, setIsSearched] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [isLoading, setIsLoading] = useState([...Array(posts.length)].map(() => false));
 
   useEffect(() => {
-    setPosts(posts);
-  }, []);
+    setPosts(originalPosts);
+  }, [originalPosts]);
 
   const setValue = (e) => {
     const index = categories.findIndex((category) => category === e.target.value);
@@ -72,6 +72,7 @@ export const Blog = (props: BlogType): JSX.Element => {
     for (let elem of document.getElementsByTagName('input')) {
       if (elem.checked) elem.checked = false;
     }
+    setIsSearched(false);
   };
 
   const onSubmit = (e) => {
