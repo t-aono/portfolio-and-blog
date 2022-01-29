@@ -5,8 +5,17 @@ import Router from 'next/router';
 
 import { Layout, Fixing } from '../components/index';
 import { Link, getPageUrl } from '../utils';
+import { PostType, ConfigType, PageType, ContentType } from '../types/layouts';
 
-const Post = (props) => {
+type PropsType = {
+  post: PostType;
+  content: ContentType[];
+  heading?: { content: string; child: { content: string } }[];
+  data: { config: ConfigType };
+  page: PageType;
+};
+
+const Post = (props: PropsType): JSX.Element => {
   const post = _.get(props, 'post');
   const title = _.get(post, 'title');
   const category = _.get(post, 'category');
@@ -18,7 +27,7 @@ const Post = (props) => {
   const page = _.get(props, 'page');
   const date = post.date ? post.date.replace(/\-/g, '/') : '';
 
-  const [relatedPosts, setRelatedPosts] = useState([]);
+  const [relatedPosts, setRelatedPosts] = useState<PostType[]>([]);
 
   useEffect(() => {
     Prism.highlightAll();
@@ -44,7 +53,7 @@ const Post = (props) => {
     }
   }, []);
 
-  const renderRelatedPosts = (post) => {
+  const renderRelatedPosts = (post: PostType): JSX.Element => {
     const title = _.get(post, 'title');
     const date = post.date ? post.date.replace(/\-/g, '/') : '';
     const category = _.get(post, 'category');
@@ -117,13 +126,6 @@ const Post = (props) => {
               {item.type === 'image' ? (
                 <div className="capture-wrap">
                   <img src={item.block.image.file.url} className="capture-image" />
-                </div>
-              ) : (
-                ''
-              )}
-              {item.type === 'video' ? (
-                <div className="video-wrap">
-                  <video src={item.block.video.file.url} controls></video>
                 </div>
               ) : (
                 ''

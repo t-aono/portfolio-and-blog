@@ -6,8 +6,15 @@ import Loader from 'react-loader-spinner';
 import { Layout } from '../components/index';
 import { classNames, getPageUrl, Link, withPrefix } from '../utils';
 import FormField from '../components/FormField';
+import { ConfigType, PageType } from '../types/layouts';
 
-export const Blog = (props) => {
+type BlogType = {
+  data: { config: ConfigType };
+  page: PageType;
+  page_no: number;
+};
+
+export const Blog = (props: BlogType): JSX.Element => {
   const data = _.get(props, 'data');
   const config = _.get(data, 'config');
   const page = _.get(props, 'page');
@@ -17,8 +24,8 @@ export const Blog = (props) => {
   const hideTitle = _.get(page, 'hide_title');
   const colNumber = _.get(page, 'col_number', 'three');
   const postCount = _.get(props, 'post_count');
-  const prev = pageNo ? parseInt(pageNo) - 1 : null;
-  const next = pageNo > 1 ? (pageNo * 12 < postCount ? parseInt(pageNo) + 1 : null) : 2;
+  const prev = pageNo ? pageNo - 1 : null;
+  const next = pageNo > 1 ? (pageNo * 12 < postCount ? pageNo + 1 : null) : 2;
   const noHit = '/images/cat_02_simple.png';
   const categories = props.categories;
   const [currentCategory, setCurrentCategory] = useState('');

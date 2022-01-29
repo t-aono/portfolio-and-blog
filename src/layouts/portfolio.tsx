@@ -5,8 +5,17 @@ import Loader from 'react-loader-spinner';
 import { Layout } from '../components/index';
 import { getPageUrl, Link, withPrefix } from '../utils';
 
-export const Portfolio = (props) => {
-  const renderProject = (project) => {
+import { ProjectType, ContentType, ConfigType, PageType } from '../types/layouts';
+
+type PortfolioType = {
+  projects: ProjectType[];
+  content: ContentType[];
+  data: { config: ConfigType };
+  page: PageType;
+};
+
+export const Portfolio = (props: PortfolioType): JSX.Element => {
+  const renderProject = (project: ProjectType) => {
     const pageId = _.get(project, 'pageId');
     const projectUrl = getPageUrl(project, { withPrefix: true });
     const title = _.get(project, 'title');
@@ -20,7 +29,9 @@ export const Portfolio = (props) => {
         <Link href={projectUrl} className="project-link" onClick={() => setIsLoading(true)}>
           {thumbnail &&
             (isLoading ? (
-              <Loader className="project-loader" type="MutatingDots" color="#23d3ff" height={80} width={80} />
+              <div className="project-loader">
+                <Loader type="MutatingDots" color="#23d3ff" height={80} width={80} />
+              </div>
             ) : (
               <div className="project-thumbnail">
                 <img src={withPrefix(thumbnail)} alt={thumbnail.replace(/images\//g, '')} />

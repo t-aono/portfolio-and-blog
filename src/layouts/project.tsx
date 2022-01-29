@@ -3,8 +3,9 @@ import Router from 'next/router';
 
 import { Layout, Fixing } from '../components/index';
 import { withPrefix, Link } from '../utils';
+import { ProjectType } from '../types/layouts';
 
-export default function Project(props) {
+export const Project = (props: { project: ProjectType }): JSX.Element => {
   const project = _.get(props, 'project');
   const thumbnail = _.get(project, 'thumbnail');
   const title = _.get(project, 'title');
@@ -77,4 +78,6 @@ export default function Project(props) {
       </div>
     </Layout>
   );
-}
+};
+
+export default Project;

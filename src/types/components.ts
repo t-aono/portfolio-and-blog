@@ -1,7 +1,7 @@
 export type AttrsType = {
   target?: string;
   rel?: string;
-} 
+};
 
 export type ActionType = {
   action: {
@@ -11,7 +11,7 @@ export type ActionType = {
     icon: string;
     classes: string[];
   };
-}
+};
 
 type PickType<T, K extends keyof T> = T[K];
 
@@ -22,15 +22,15 @@ export interface ConfigType {
       logoAlt: string;
       title: string;
       hasNav: boolean;
-      navLinks: string[]
-    },
+      navLinks: string[];
+    };
     footer: {
       copyright: string;
       links: PickType<ActionType, 'action'>[];
       hasSocial: boolean;
-      socialLinks: string[]
-    }
-  }
+      socialLinks: string[];
+    };
+  };
 }
 
 export type FieldProps = {
@@ -38,11 +38,11 @@ export type FieldProps = {
     inputType: string;
     name: string;
     defaultValue: string;
-    options: [],
+    options: [];
     required: boolean;
     label: string;
     labelId: string;
     onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onSetValue: React.MouseEventHandler<HTMLInputElement>;
   };
-}
+};
