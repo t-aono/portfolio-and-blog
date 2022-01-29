@@ -5,8 +5,21 @@ import Loader from 'react-loader-spinner';
 
 import { getPageUrl, htmlToReact, classNames, Link } from '../utils';
 import CtaButtons from './CtaButtons';
+import { ActionType } from '../types/components';
 
-export default function SectionPosts(props) {
+type PropsType = {
+  section: {
+    section_id: string;
+    title: string;
+    subtitle: string;
+    actions: ActionType;
+    colNumber: number;
+    posts: [];
+    postsNumber: number;
+  };
+};
+
+export const SectionPosts = (props: PropsType) => {
   const renderPost = (post, index) => {
     const title = _.get(post, 'title');
     const emoji = _.get(post, 'emoji');
@@ -92,4 +105,6 @@ export default function SectionPosts(props) {
       </div>
     </section>
   );
-}
+};
+
+export default SectionPosts;

@@ -13,18 +13,6 @@ export type ActionType = {
   };
 }
 
-export interface PageType {
-  page: {
-    title: string;
-    seo: {
-        title: string;
-        description: string;
-        robots: string[];
-        extra: string[];
-    };
-  }
-}
-
 type PickType<T, K extends keyof T> = T[K];
 
 export interface ConfigType {
@@ -43,4 +31,18 @@ export interface ConfigType {
       socialLinks: string[]
     }
   }
+}
+
+export type FieldProps = {
+  field: {
+    inputType: string;
+    name: string;
+    defaultValue: string;
+    options: [],
+    required: boolean;
+    label: string;
+    labelId: string;
+    onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onSetValue: React.MouseEventHandler<HTMLInputElement>;
+  };
 }

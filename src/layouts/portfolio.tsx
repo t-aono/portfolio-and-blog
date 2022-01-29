@@ -5,7 +5,7 @@ import Loader from 'react-loader-spinner';
 import { Layout } from '../components/index';
 import { getPageUrl, Link, withPrefix } from '../utils';
 
-export default function Portfolio(props) {
+export const Portfolio = (props) => {
   const renderProject = (project) => {
     const pageId = _.get(project, 'pageId');
     const projectUrl = getPageUrl(project, { withPrefix: true });
@@ -60,4 +60,6 @@ export default function Portfolio(props) {
       </div>
     </Layout>
   );
-}
+};
+
+export default Portfolio;

@@ -2,8 +2,18 @@ import _ from 'lodash';
 
 import { markdownify } from '../utils';
 import CtaButtons from './CtaButtons';
+import { ActionType } from '../types/components';
 
-export default function SectionHero(props) {
+type PropsType = {
+  section: {
+    section_id: string;
+    title: string;
+    content: string;
+    actions: ActionType;
+  };
+};
+
+export const SectionHero: React.VFC<PropsType> = (props) => {
   const section = _.get(props, 'section');
   const sectionId = _.get(section, 'section_id');
   const title = _.get(section, 'title');
@@ -27,4 +37,6 @@ export default function SectionHero(props) {
       </div>
     </section>
   );
-}
+};
+
+export default SectionHero;

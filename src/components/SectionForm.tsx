@@ -5,8 +5,21 @@ import Loader from 'react-loader-spinner';
 
 import { htmlToReact, markdownify } from '../utils';
 import FormField from './FormField';
+import { FieldProps } from '../types/components';
 
-export default function SectionForm(props) {
+type PropsType = {
+  section: {
+    sectionId: string;
+    title: string;
+    subtitle: string;
+    content: string;
+    form_id: string;
+    form_fields: FieldProps;
+    submit_label: string;
+  };
+};
+
+export const SectionForm: React.VFC<PropsType> = (props) => {
   const section = _.get(props, 'section');
   const sectionId = _.get(section, 'section_id');
   const title = _.get(section, 'title');
@@ -85,4 +98,6 @@ export default function SectionForm(props) {
       </div>
     </section>
   );
-}
+};
+
+export default SectionForm;

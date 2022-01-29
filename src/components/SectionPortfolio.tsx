@@ -4,15 +4,27 @@ import Loader from 'react-loader-spinner';
 
 import { getPageUrl, htmlToReact, Link, withPrefix } from '../utils';
 import { CtaButtons } from '.';
+import { ActionType } from '../types/components';
 
-export default function SectionPortfolio(props) {
+type PropsType = {
+  section: {
+    section_id: string;
+    title: string;
+    subtitle: string;
+    layoutStyle: string;
+    actions: ActionType;
+    projects: [];
+  };
+};
+
+export const SectionPortfolio = (props: PropsType) => {
   const renderProject = (project, index) => {
     const title = _.get(project, 'title');
     const skill = _.get(project, 'skill');
     const summary = _.get(project, 'summary');
     const thumbnail = _.get(project, 'thumbnail');
     const projectUrl = getPageUrl(project, { withPrefix: true });
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     return (
       <article key={index} className="project">
@@ -56,7 +68,7 @@ export default function SectionPortfolio(props) {
     <section id={sectionId} className="block-portfolio block outer">
       <div className="inner">
         {(title || subtitle) && (
-          <div className="block-header inner-sm porfolio-header">
+          <div className="block-header inner-sm portfolio-header">
             {title && <h2 className="block-title line-top">{title}</h2>}
             {subtitle && <p className="block-subtitle">{htmlToReact(subtitle)}</p>}
           </div>
@@ -72,4 +84,6 @@ export default function SectionPortfolio(props) {
       </div>
     </section>
   );
-}
+};
+
+export default SectionPortfolio;

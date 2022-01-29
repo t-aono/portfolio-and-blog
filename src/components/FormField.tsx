@@ -1,20 +1,8 @@
 import _ from 'lodash';
 
-type Props = {
-  field: {
-    inputType: string;
-    name: string;
-    defaultValue: string;
-    options: [],
-    required: boolean;
-    label: string;
-    labelId: string;
-  },
-  onSetValue: React.MouseEventHandler<HTMLInputElement>;
-  onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
+import { FieldProps } from '../types/components';
 
-export const FormField: React.VFC<Props> = (props) => {
+export const FormField = (props: FieldProps): JSX.Element => {
   const field = _.get(props, 'field');
   const inputType = _.get(field, 'input_type');
   const name = _.get(field, 'name');
@@ -45,7 +33,7 @@ export const FormField: React.VFC<Props> = (props) => {
     case 'radio':
       return (
         <div className="form-group form-radio">
-          <input type="radio" id={label} name={name} value={label} onClick={props.onSetValue} />
+          <input type="radio" id={label} name={name} value={label} onClick={field.onSetValue} />
           {label && <label htmlFor={label}>{label}</label>}
         </div>
       );
@@ -77,11 +65,11 @@ export const FormField: React.VFC<Props> = (props) => {
       return (
         <div className="form-group">
           {label && <label htmlFor={name}>{label}</label>}
-          <input type={inputType} name={name} id={name} {...(defaultValue ? { placeholder: defaultValue } : null)} {...attr} onChange={props.onInputChange} />
+          <input type={inputType} name={name} id={name} {...(defaultValue ? { placeholder: defaultValue } : null)} {...attr} onChange={field.onInputChange} />
           <span className="animate-border" aria-hidden="true" />
         </div>
       );
   }
-}
+};
 
 export default FormField;

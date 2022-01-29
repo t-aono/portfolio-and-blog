@@ -2,8 +2,11 @@ import _ from 'lodash';
 
 import { Layout } from '../components/index';
 import { htmlToReact, withPrefix, markdownify } from '../utils';
+import { PageType, ConfigType } from '../types/layouts';
 
-export default function Page(props) {
+type PropsType = PageType | ConfigType;
+
+export const Page = (props: PropsType): JSX.Element => {
   const data = _.get(props, 'data');
   const config = _.get(data, 'config');
   const page = _.get(props, 'page');
@@ -33,4 +36,6 @@ export default function Page(props) {
       </div>
     </Layout>
   );
-}
+};
+
+export default Page;

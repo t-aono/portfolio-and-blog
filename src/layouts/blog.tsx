@@ -7,7 +7,7 @@ import { Layout } from '../components/index';
 import { classNames, getPageUrl, Link, withPrefix } from '../utils';
 import FormField from '../components/FormField';
 
-export default function Blog(props) {
+export const Blog = (props) => {
   const data = _.get(props, 'data');
   const config = _.get(data, 'config');
   const page = _.get(props, 'page');
@@ -207,4 +207,6 @@ export default function Blog(props) {
       </div>
     </Layout>
   );
-}
+};
+
+export default Blog;
