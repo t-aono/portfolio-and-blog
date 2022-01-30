@@ -1,8 +1,13 @@
 import _ from 'lodash';
 
-import { FieldProps } from '../types/components';
+import { FieldType } from '../types/components';
 
-export const FormField = (props: FieldProps): JSX.Element => {
+type FormType = {
+  field: FieldType;
+  onInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+export const FormField = (props: FormType): JSX.Element => {
   const field = _.get(props, 'field');
   const inputType = _.get(field, 'input_type');
   const name = _.get(field, 'name');
@@ -33,7 +38,7 @@ export const FormField = (props: FieldProps): JSX.Element => {
     case 'radio':
       return (
         <div className="form-group form-radio">
-          <input type="radio" id={label} name={name} value={label} onClick={field.onSetValue} />
+          <input type="radio" id={label} name={name} value={label} />
           {label && <label htmlFor={label}>{label}</label>}
         </div>
       );

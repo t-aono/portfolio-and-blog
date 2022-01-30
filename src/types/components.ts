@@ -33,16 +33,14 @@ export interface ConfigType {
   };
 }
 
-export type FieldProps = {
-  field: {
-    inputType: string;
-    name: string;
-    defaultValue: string;
-    options: [];
-    required: boolean;
-    label: string;
-    labelId: string;
-    onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    onSetValue: React.MouseEventHandler<HTMLInputElement>;
-  };
+export type FieldType = {
+  input_type: string;
+  name: string;
+  label?: string;
+  label_id?: string;
+  default_value?: string;
+  options?: [];
+  required?: boolean;
+  onInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  // onSetValue?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
