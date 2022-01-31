@@ -1,15 +1,43 @@
+import { NextApiRequest, NextApiResponse } from 'next';
+import { PostType } from '../../types/layouts';
+
 const { Client } = require('@notionhq/client');
 
-export default function handler(req, res) {
-  let response = null;
-  let posts = [];
+type queryParamType = {
+  database_id: string;
+  sorts: {
+    property: string;
+    direction: string;
+  }[];
+  filter: {
+    and: [
+      {
+        property: string;
+        checkbox: {
+          equals: boolean;
+        };
+      },
+      {
+        property: string;
+        multi_select: {
+          contains: string;
+        };
+      }
+    ];
+  };
+  page_size?: number;
+};
 
-  const searchPosts = async (req) => {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  let response: PostType[] = null;
+  let posts: PostType[] = [];
+
+  const searchPosts = async (req: NextApiRequest) => {
     const notion = new Client({ auth: process.env.NOTION_TOKEN });
     const databaseId = '75d817d15e21455f8df10c68aa28f7de';
 
     if (req.body.category) {
-      const queryParam = {
+      const queryParam: queryParamType = {
         database_id: databaseId,
         sorts: [
           {
@@ -37,7 +65,7 @@ export default function handler(req, res) {
 
       if (req.body.count) queryParam.page_size = req.body.count + 1;
 
-      const data = await notion.databases.query(queryParam);
+      const data: { results: PostType[] } = await notion.databases.query(queryParam);
       posts = data.results;
     }
 

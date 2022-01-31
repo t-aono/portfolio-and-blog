@@ -6,6 +6,7 @@ import Loader from 'react-loader-spinner';
 import { getPageUrl, htmlToReact, classNames, Link } from '../utils';
 import CtaButtons from './CtaButtons';
 import { ActionType } from '../types/components';
+import { PostType } from '../types/layouts';
 
 type PropsType = {
   section: {
@@ -13,21 +14,30 @@ type PropsType = {
     title: string;
     subtitle: string;
     actions: ActionType;
-    colNumber: number;
-    posts: [];
-    postsNumber: number;
+    col_number: string;
+    posts_number: number;
   };
 };
 
 export const SectionPosts = (props: PropsType) => {
-  const renderPost = (post, index) => {
+  const section = _.get(props, 'section');
+  const sectionId = _.get(section, 'section_id');
+  const title = _.get(section, 'title');
+  const subtitle = _.get(section, 'subtitle');
+  const actions = _.get(section, 'actions');
+  const colNumber = _.get(section, 'col_number', 'three');
+  const posts = _.orderBy<PostType>(_.get(props, 'posts', []), 'date', 'desc');
+  const postsNumber = _.get(section, 'posts_number', 3);
+  const recentPosts = posts.slice(0, postsNumber);
+
+  const renderPost = (post: PostType, index: number): JSX.Element => {
     const title = _.get(post, 'title');
     const emoji = _.get(post, 'emoji');
     const category = _.get(post, 'category');
     const excerpt = _.get(post, 'excerpt');
     const date = _.get(post, 'date');
-    const dateTimeAttr = moment(date).strftime('%Y-%m-%d');
-    const formattedDate = moment(date).strftime('%Y/%m/%d');
+    const dateTimeAttr: moment.Moment = moment(date).strftime('%Y-%m-%d');
+    const formattedDate: moment.Moment = moment(date).strftime('%Y/%m/%d');
     const postUrl = getPageUrl(post, { withPrefix: true });
     const [isLoading, setIsLoading] = useState(false);
 
@@ -67,16 +77,6 @@ export const SectionPosts = (props: PropsType) => {
       </article>
     );
   };
-
-  const section = _.get(props, 'section');
-  const sectionId = _.get(section, 'section_id');
-  const title = _.get(section, 'title');
-  const subtitle = _.get(section, 'subtitle');
-  const actions = _.get(section, 'actions');
-  const colNumber = _.get(section, 'col_number', 'three');
-  const posts = _.orderBy(_.get(props, 'posts', []), 'date', 'desc');
-  const postsNumber = _.get(section, 'posts_number', 3);
-  const recentPosts = posts.slice(0, postsNumber);
 
   return (
     <section id={sectionId} className="block block-posts outer">

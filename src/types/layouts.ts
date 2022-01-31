@@ -54,12 +54,25 @@ export type ProjectType = {
   skill: string[];
   summary: string;
   term: string;
+  layout_style: string;
 };
 
 export type PostType = {
   title: string;
   category: string[];
   emoji: string;
-  date?: string;
   pageId: string;
+  excerpt?: string;
+  date?: string;
+  id?: string;
+  icon?: {
+    emoji: string;
+  };
+  properties?: {
+    title: {
+      title: { plain_text }[];
+    };
+    category: { multi_select: { name: string }[] };
+    date: { date: { start: string } };
+  };
 };

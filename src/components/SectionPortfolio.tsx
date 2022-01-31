@@ -5,6 +5,7 @@ import Loader from 'react-loader-spinner';
 import { getPageUrl, htmlToReact, Link, withPrefix } from '../utils';
 import { CtaButtons } from '.';
 import { ActionType } from '../types/components';
+import { ProjectType } from '../types/layouts';
 
 type PropsType = {
   section: {
@@ -13,12 +14,21 @@ type PropsType = {
     subtitle: string;
     layoutStyle: string;
     actions: ActionType;
-    projects: [];
   };
+  projects: ProjectType[];
 };
 
-export const SectionPortfolio = (props: PropsType) => {
-  const renderProject = (project, index) => {
+export const SectionPortfolio = (props: PropsType): JSX.Element => {
+  const section = _.get(props, 'section');
+  const sectionId = _.get(section, 'section_id');
+  const title = _.get(section, 'title');
+  const subtitle = _.get(section, 'subtitle');
+  const layoutStyle = _.get(section, 'layout_style', 'mosaic');
+  const actions = _.get(section, 'actions');
+  const projects = _.get(props, 'projects');
+  const recentProjects = projects.slice(0, 4);
+
+  const renderProject = (project: ProjectType, index: number): JSX.Element => {
     const title = _.get(project, 'title');
     const skill = _.get(project, 'skill');
     const summary = _.get(project, 'summary');
@@ -54,15 +64,6 @@ export const SectionPortfolio = (props: PropsType) => {
       </article>
     );
   };
-
-  const section = _.get(props, 'section');
-  const sectionId = _.get(section, 'section_id');
-  const title = _.get(section, 'title');
-  const subtitle = _.get(section, 'subtitle');
-  const layoutStyle = _.get(section, 'layout_style', 'mosaic');
-  const actions = _.get(section, 'actions');
-  const projects = _.get(props, 'projects');
-  const recentProjects = projects.slice(0, 4);
 
   return (
     <section id={sectionId} className="block-portfolio block outer">

@@ -1,10 +1,18 @@
-export default function handler(req, res) {
+import { NextApiRequest, NextApiResponse } from 'next';
+
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
   let response = null;
 
   if (req.method === 'POST') {
     const sgMail = require('@sendgrid/mail');
     sgMail.setApiKey(process.env.SENDGRID_APIKEY);
-    const msg = {
+    const msg: {
+      to: string;
+      cc: string;
+      from: string;
+      subject: string;
+      text: string;
+    } = {
       to: req.body.email,
       cc: 'info@t-aono.net',
       from: 'noreply@t-aono.net',
