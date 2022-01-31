@@ -41,6 +41,8 @@ export type FieldType = {
   default_value?: string;
   options?: [];
   required?: boolean;
-  onInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  // onSetValue?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
+
+export type ClickType = React.MouseEventHandler<HTMLInputElement>;
+
+export type InputType = (e: React.ChangeEvent<HTMLInputElement>) => void;

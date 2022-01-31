@@ -1,14 +1,17 @@
 import _ from 'lodash';
 
-import { FieldType } from '../types/components';
+import { FieldType, ClickType, InputType } from '../types/components';
 
 type FormType = {
   field: FieldType;
-  onInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  set_value?: ClickType;
+  input_change?: InputType;
 };
 
 export const FormField = (props: FormType): JSX.Element => {
   const field = _.get(props, 'field');
+  const setValue = _.get(props, 'set_value');
+  const inputChange = _.get(props, 'input_change');
   const inputType = _.get(field, 'input_type');
   const name = _.get(field, 'name');
   const defaultValue = _.get(field, 'default_value');
@@ -38,7 +41,7 @@ export const FormField = (props: FormType): JSX.Element => {
     case 'radio':
       return (
         <div className="form-group form-radio">
-          <input type="radio" id={label} name={name} value={label} />
+          <input type="radio" id={label} name={name} value={label} onClick={setValue} />
           {label && <label htmlFor={label}>{label}</label>}
         </div>
       );
@@ -70,7 +73,7 @@ export const FormField = (props: FormType): JSX.Element => {
       return (
         <div className="form-group">
           {label && <label htmlFor={name}>{label}</label>}
-          <input type={inputType} name={name} id={name} {...(defaultValue ? { placeholder: defaultValue } : null)} {...attr} onChange={field.onInputChange} />
+          <input type={inputType} name={name} id={name} {...(defaultValue ? { placeholder: defaultValue } : null)} {...attr} onChange={inputChange} />
           <span className="animate-border" aria-hidden="true" />
         </div>
       );

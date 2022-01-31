@@ -7,6 +7,7 @@ import { Layout } from '../components/index';
 import { classNames, getPageUrl, Link, withPrefix } from '../utils';
 import FormField from '../components/FormField';
 import { ConfigType, PageType, PostType } from '../types/layouts';
+import { ClickType } from '../types/components';
 
 type BlogType = {
   data: { config: ConfigType };
@@ -31,21 +32,20 @@ export const Blog = (props: BlogType): JSX.Element => {
   const next = pageNo > 1 ? (pageNo * 12 < postCount ? pageNo + 1 : null) : 2;
   const noHit = '/images/cat_02_simple.png';
   const categories = props.categories;
-  const [currentCategory, setCurrentCategory] = useState('');
   const originalPosts = props.posts;
-  const [posts, setPosts] = useState(originalPosts);
-  const [isSearched, setIsSearched] = useState(false);
-  const [isSearching, setIsSearching] = useState(false);
-  const [isLoading, setIsLoading] = useState([...Array(posts.length)].map(() => false));
+
+  const [currentCategory, setCurrentCategory] = useState<string>('');
+  const [posts, setPosts] = useState<PostType[]>(originalPosts);
+  const [isSearched, setIsSearched] = useState<boolean>(false);
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean[]>([...Array(posts.length)].map(() => false));
 
   useEffect(() => {
     setPosts(originalPosts);
   }, [originalPosts]);
 
-  const setValue = (e) => {
-    console.log(e);
-
-    const index = categories.findIndex((category) => category === e.target.value);
+  const setValue: ClickType = (e) => {
+    const index = categories.findIndex((category) => category === (e.target as HTMLInputElement).value);
     if (categories[index]) {
       if (currentCategory === categories[index]) {
         setPosts(originalPosts);
@@ -62,7 +62,7 @@ export const Blog = (props: BlogType): JSX.Element => {
     query.value = '';
   };
 
-  const onInputChange = _.debounce((e: React.ChangeEvent<HTMLInputElement>): void => {
+  const inputChange = _.debounce((e: React.ChangeEvent<HTMLInputElement>): void => {
     e.preventDefault();
     if (e.target.value) {
       searchPosts({ title: e.target.value });
@@ -82,16 +82,16 @@ export const Blog = (props: BlogType): JSX.Element => {
     setIsSearched(false);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     return false;
   };
 
-  const setPageLoading = (index) => {
+  const setPageLoading = (index: number) => {
     setIsLoading(isLoading.map((_, i) => (i === index ? true : false)));
   };
 
-  const searchPosts = (query) => {
+  const searchPosts = (query: { title: string } | { category: string }) => {
     setIsSearching(true);
     fetch('/api/search/', {
       body: JSON.stringify(query),
@@ -174,10 +174,10 @@ export const Blog = (props: BlogType): JSX.Element => {
         <form onSubmit={onSubmit} className="search-form">
           <div className="categories">
             {categories.map((category) => (
-              <FormField key={category} field={{ input_type: 'radio', name: 'category', label: category }} />
+              <FormField key={category} field={{ input_type: 'radio', name: 'category', label: category }} set_value={setValue} />
             ))}
           </div>
-          <FormField field={{ input_type: 'text', name: 'query', default_value: 'Search ...' }} onInputChange={onInputChange} />
+          <FormField field={{ input_type: 'text', name: 'query', default_value: 'Search ...' }} input_change={inputChange} />
         </form>
 
         {isSearching ? (
