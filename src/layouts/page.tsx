@@ -4,7 +4,12 @@ import { Layout } from '../components/index';
 import { htmlToReact, withPrefix, markdownify } from '../utils';
 import { PageType, ConfigType } from '../types/layouts';
 
-type PropsType = PageType | ConfigType;
+type PropsType = {
+  data: {
+    config: ConfigType;
+  };
+  page: PageType;
+};
 
 export const Page = (props: PropsType): JSX.Element => {
   const data = _.get(props, 'data');

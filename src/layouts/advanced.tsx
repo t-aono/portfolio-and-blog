@@ -2,9 +2,16 @@ import _ from 'lodash';
 
 import components, { Layout } from '../components/index';
 import { getPageUrl } from '../utils';
-import { PageType, ConfigType } from '../types/layouts';
+import { PageType, ConfigType, PostType, ProjectType } from '../types/layouts';
 
-type PropsType = PageType | ConfigType;
+type PropsType = {
+  data: {
+    config: ConfigType;
+  };
+  posts: PostType[];
+  projects: ProjectType[];
+  page: PageType;
+};
 
 export const Advanced = (props: PropsType): JSX.Element => {
   const data = _.get(props, 'data');

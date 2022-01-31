@@ -2,6 +2,10 @@ export type PageType = {
   hide_title: string;
   title: string;
   subtitle: string;
+  image: string;
+  image_alt: string;
+  image_type: string;
+  markdown_content: string;
   layout_style: string;
   col_number: string;
   sections: [];
@@ -48,6 +52,7 @@ export type ProjectType = {
   thumbnail: string;
   title: string;
   skill: string[];
+  summary: string;
   term: string;
 };
 

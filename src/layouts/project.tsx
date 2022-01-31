@@ -3,9 +3,16 @@ import Router from 'next/router';
 
 import { Layout, Fixing } from '../components/index';
 import { withPrefix, Link } from '../utils';
-import { ProjectType } from '../types/layouts';
+import { ConfigType, ContentType, PageType, ProjectType } from '../types/layouts';
 
-export const Project = (props: { project: ProjectType }): JSX.Element => {
+type PropsType = {
+  project: ProjectType;
+  content: ContentType[];
+  data: { config: ConfigType };
+  page: PageType;
+};
+
+export const Project = (props: PropsType): JSX.Element => {
   const project = _.get(props, 'project');
   const thumbnail = _.get(project, 'thumbnail');
   const title = _.get(project, 'title');
