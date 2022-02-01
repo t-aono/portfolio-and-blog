@@ -4,7 +4,7 @@ import path from 'path';
 import { GetServerSideProps } from 'next';
 
 import pageLayouts from '../../../layouts';
-import { getPageContent, getPosts, getPageHeading } from '../../../utils';
+import { getPageContent, getPosts, getPageHeading, makePostCollection } from '../../../utils';
 import { ContentType, PostType, ProjectType } from '../../../types/layouts';
 
 type PagePropsType = {
@@ -24,34 +24,47 @@ const Post = (props: PagePropsType): JSX.Element => {
   return <PageLayout {...props} />;
 };
 
-const getConfig = async () => {
+type ConfigType = {
+  data: { config: {} };
+  page?: {
+    __metadata: { modelName: string; urlPath: string };
+    seo: { title: string; description: string };
+  };
+  post?: PostType[];
+  content?: ContentType[];
+  heading?: string;
+};
+
+const getConfig = async (): Promise<ConfigType> => {
   const filePath = path.join(process.cwd(), 'content/data/config.json');
   const config = JSON.parse(fs.readFileSync(filePath, 'utf8'));
   return { data: { config } };
 };
 
+type PostsType = {
+  icon: { emoji: string };
+  id: string;
+  properties: {
+    title: { title: { plain_text: string }[] };
+    category: { multi_select: { name: string }[] };
+    date: { date: { start: string } };
+  };
+}[];
+
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   console.log('Page [id].js getServerSideProps, params: ', params);
-  const props: {
-    data: { config: {} };
-    page?: {
-      __metadata: { modelName: string; urlPath: string };
-      seo: { title: string; description: string };
-    };
-    post?: PostType | {};
-    content?: ContentType[];
-    heading?: string;
-  } = await getConfig();
-  const posts = await getPosts('post', params.id);
+  const props = await getConfig();
+  const posts = await getPosts('post', params.id as string);
+  const postCollection = makePostCollection(posts);
 
   if (posts) {
-    const post = posts.find((po) => po.pageId === params.id);
+    const post = postCollection.find((post) => post.pageId === params.id);
     const pageContent: { content: ContentType[] } = await getPageContent(params.id);
     const pageHeading = await getPageHeading(pageContent.content);
 
     props.page = {
       __metadata: { modelName: 'post', urlPath: '/blog' },
-      seo: { title: posts[0].title, description: `${posts[0].category.map((cat) => cat + ',')} ${posts[0].title}` }
+      seo: { title: postCollection[0].title, description: `${postCollection[0].category.map((cat) => cat + ',')} ${postCollection[0].title}` }
     };
     props.post = post;
     props.content = pageContent.content;

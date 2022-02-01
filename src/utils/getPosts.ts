@@ -1,11 +1,12 @@
 import { Client as ClientType } from '@notionhq/client';
-import { QueryDatabaseParameters } from '@notionhq/client/build/src/api-endpoints';
+import { QueryDatabaseParameters, QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 
 const { Client } = require('@notionhq/client');
 
 type KindType = 'post' | 'path' | 'id';
+type ResponseType = Promise<(string | { object: 'page'; id: string })[]>;
 
-export default async function getPosts(kind: KindType, startCursor: string = null) {
+export const getPosts = async (kind: KindType, startCursor: string = null): ResponseType => {
   const notion: ClientType = new Client({ auth: process.env.NOTION_TOKEN });
   const databaseId = '75d817d15e21455f8df10c68aa28f7de';
   const queryParam: QueryDatabaseParameters = {
@@ -25,7 +26,8 @@ export default async function getPosts(kind: KindType, startCursor: string = nul
   };
   if (kind === 'post') queryParam.page_size = 12;
   if (startCursor) queryParam.start_cursor = startCursor;
-  let response = null;
+
+  let response: QueryDatabaseResponse = null;
   try {
     response = await notion.databases.query(queryParam);
   } catch (error) {
@@ -38,19 +40,11 @@ export default async function getPosts(kind: KindType, startCursor: string = nul
     } else if (kind === 'id') {
       return row.id;
     } else if (kind === 'post') {
-      const emoji = row.icon ? row.icon.emoji : '';
-      return {
-        pageId: row.id,
-        title: row.properties.title.title[0].plain_text,
-        category: row.properties.category.multi_select.map((cat) => cat.name),
-        date: row.properties.date.date.start,
-        emoji: emoji,
-        __metadata: {
-          urlPath: `/blog/post/${row.id}`
-        }
-      };
+      return row;
     } else {
       return null;
     }
   });
-}
+};
+
+export default getPosts;

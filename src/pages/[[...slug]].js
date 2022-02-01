@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { sourcebitDataClient } from 'sourcebit-target-next';
 import { withRemoteDataUpdates } from 'sourcebit-target-next/with-remote-data-updates';
-import { getProjects, getPosts, getCategories } from '../utils';
+import { getProjects, getPosts, getCategories, makePostCollection } from '../utils';
 
 import pageLayouts from '../layouts';
 
@@ -45,7 +45,8 @@ export async function getStaticProps({ params }) {
     } else {
       // １ページ目
       props.page_no = 1;
-      props.posts = await getPosts('post');
+      const posts = await getPosts('post');
+      props.posts = makePostCollection(posts);
     }
     props.categories = await getCategories();
     return { props };
