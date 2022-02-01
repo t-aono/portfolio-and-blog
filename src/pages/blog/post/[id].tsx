@@ -1,13 +1,26 @@
 import _ from 'lodash';
 import fs from 'fs';
 import path from 'path';
+import { GetServerSideProps } from 'next';
 
 import pageLayouts from '../../../layouts';
 import { getPageContent, getPosts, getPageHeading } from '../../../utils';
+import { ConfigType, PostType, ProjectType } from '../../../types/layouts';
 
-const Post = (props) => {
+type PagePropsType = {
+  data: {
+    config: ConfigType;
+  };
+  posts: PostType[];
+  projects: ProjectType[];
+  'page.__metadata.modelName': string;
+};
+
+type PageLayoutType = (props: PagePropsType) => JSX.Element;
+
+const Post = (props: PagePropsType): JSX.Element => {
   const modelName = _.get(props, 'page.__metadata.modelName');
-  const PageLayout = pageLayouts[modelName];
+  const PageLayout: PageLayoutType = pageLayouts[modelName];
   if (!PageLayout) {
     throw new Error(`no page layout matching the page model: ${modelName}`);
   }
@@ -16,11 +29,11 @@ const Post = (props) => {
 
 const getConfig = async () => {
   const filePath = path.join(process.cwd(), 'content/data/config.json');
-  const config = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  const config: ConfigType = JSON.parse(fs.readFileSync(filePath, 'utf8'));
   return { data: { config } };
 };
 
-export async function getServerSideProps({ params }) {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   console.log('Page [id].js getServerSideProps, params: ', params);
   const props = await getConfig();
   const posts = await getPosts('post', params.id);

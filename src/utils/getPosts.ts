@@ -1,9 +1,14 @@
+import { Client as ClientType } from '@notionhq/client';
+import { QueryDatabaseParameters } from '@notionhq/client/build/src/api-endpoints';
+
 const { Client } = require('@notionhq/client');
 
-export default async function getPosts(type, startCursor = null) {
-  const notion = new Client({ auth: process.env.NOTION_TOKEN });
+type KindType = 'post' | 'path' | 'id';
+
+export default async function getPosts(kind: KindType, startCursor: string = null) {
+  const notion: ClientType = new Client({ auth: process.env.NOTION_TOKEN });
   const databaseId = '75d817d15e21455f8df10c68aa28f7de';
-  const queryParam = {
+  const queryParam: QueryDatabaseParameters = {
     database_id: databaseId,
     sorts: [
       {
@@ -18,7 +23,7 @@ export default async function getPosts(type, startCursor = null) {
       }
     }
   };
-  if (type === 'post') queryParam.page_size = 12;
+  if (kind === 'post') queryParam.page_size = 12;
   if (startCursor) queryParam.start_cursor = startCursor;
   let response = null;
   try {
@@ -28,11 +33,11 @@ export default async function getPosts(type, startCursor = null) {
   }
 
   return response.results.map((row) => {
-    if (type === 'path') {
+    if (kind === 'path') {
       return `/blog/${row.id}`;
-    } else if (type === 'id') {
+    } else if (kind === 'id') {
       return row.id;
-    } else if (type === 'post') {
+    } else if (kind === 'post') {
       const emoji = row.icon ? row.icon.emoji : '';
       return {
         pageId: row.id,

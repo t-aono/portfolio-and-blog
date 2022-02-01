@@ -1,32 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { PostType } from '../../types/layouts';
+import { QueryParamType } from '../../types/pages';
 
 const { Client } = require('@notionhq/client');
-
-type queryParamType = {
-  database_id: string;
-  sorts: {
-    property: string;
-    direction: string;
-  }[];
-  filter: {
-    and: [
-      {
-        property: string;
-        checkbox: {
-          equals: boolean;
-        };
-      },
-      {
-        property: string;
-        multi_select: {
-          contains: string;
-        };
-      }
-    ];
-  };
-  page_size?: number;
-};
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   let response: PostType[] = null;
@@ -37,7 +13,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const databaseId = '75d817d15e21455f8df10c68aa28f7de';
 
     if (req.body.category) {
-      const queryParam: queryParamType = {
+      const queryParam: QueryParamType = {
         database_id: databaseId,
         sorts: [
           {
