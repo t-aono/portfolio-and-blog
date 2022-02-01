@@ -5,12 +5,9 @@ import { GetServerSideProps } from 'next';
 
 import pageLayouts from '../../../layouts';
 import { getPageContent, getPosts, getPageHeading } from '../../../utils';
-import { ConfigType, PostType, ProjectType } from '../../../types/layouts';
+import { ContentType, PostType, ProjectType } from '../../../types/layouts';
 
 type PagePropsType = {
-  data: {
-    config: ConfigType;
-  };
   posts: PostType[];
   projects: ProjectType[];
   'page.__metadata.modelName': string;
@@ -29,18 +26,27 @@ const Post = (props: PagePropsType): JSX.Element => {
 
 const getConfig = async () => {
   const filePath = path.join(process.cwd(), 'content/data/config.json');
-  const config: ConfigType = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  const config = JSON.parse(fs.readFileSync(filePath, 'utf8'));
   return { data: { config } };
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   console.log('Page [id].js getServerSideProps, params: ', params);
-  const props = await getConfig();
+  const props: {
+    data: { config: {} };
+    page?: {
+      __metadata: { modelName: string; urlPath: string };
+      seo: { title: string; description: string };
+    };
+    post?: PostType | {};
+    content?: ContentType[];
+    heading?: string;
+  } = await getConfig();
   const posts = await getPosts('post', params.id);
 
   if (posts) {
     const post = posts.find((po) => po.pageId === params.id);
-    const pageContent = await getPageContent(params.id);
+    const pageContent: { content: ContentType[] } = await getPageContent(params.id);
     const pageHeading = await getPageHeading(pageContent.content);
 
     props.page = {
@@ -60,6 +66,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   }
 
   return { props };
-}
+};
 
 export default Post;
