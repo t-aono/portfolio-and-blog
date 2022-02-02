@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
 import ScriptTag from 'react-script-tag';
 import Link from './link';
@@ -6,7 +5,7 @@ import _ from 'lodash';
 
 const convertChildren = (children, index) => _.map(children, (childNode) => convertNodeToElement(childNode, index, _.noop()));
 
-export default function htmlToReact(html) {
+export const htmlToReact = (html: string): JSX.Element => {
   if (!html) {
     return null;
   }
@@ -36,4 +35,6 @@ export default function htmlToReact(html) {
       }
     }
   });
-}
+};
+
+export default htmlToReact;

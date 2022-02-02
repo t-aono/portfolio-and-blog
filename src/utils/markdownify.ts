@@ -1,7 +1,7 @@
 import marked from 'marked';
 import htmlToReact from './htmlToReact';
 
-export default function markdownify(markdown) {
+export default function markdownify(markdown: string) {
   if (!markdown) {
     return null;
   }

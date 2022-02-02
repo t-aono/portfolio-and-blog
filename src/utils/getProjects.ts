@@ -23,30 +23,30 @@ export const getProjects = async () => {
     }
   };
   return await notion.databases.query(queryParam);
-}
+};
 
 type responseProjects = {
   results: {
     id: string;
     properties?: {
       title?: {
-        title: { plain_text }[]
+        title: { plain_text }[];
       };
       skill?: {
-        rich_text: { plain_text: string }
+        rich_text: { plain_text: string };
       };
       summary?: {
-        rich_text: { plain_text: string }
+        rich_text: { plain_text: string };
       };
       term?: {
-        rich_text: { plain_text: string }
+        rich_text: { plain_text: string };
       };
       thumbnail?: {
-        rich_text: { plain_text: string }
-      }
-    }
+        rich_text: { plain_text: string };
+      };
+    };
   }[];
-}
+};
 
 export const makeProjectCollection = (responseProjects: responseProjects): ProjectType[] => {
   return responseProjects.results.map((row) => {
@@ -62,6 +62,4 @@ export const makeProjectCollection = (responseProjects: responseProjects): Proje
       }
     };
   });
-}
-
-export default getProjects;
+};

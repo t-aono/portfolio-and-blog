@@ -50,22 +50,22 @@ export const getPosts = async (kind: KindType, startCursor: string = null): Resp
 type ResponsePosts = {
   results: {
     id: string;
+    icon?: {
+      emoji: string;
+    };
     properties?: {
-      icon?: {
-        emoji: string
-      };
       title?: {
-        title: { plain_text: string; }
+        title: { plain_text: string };
       };
       category?: {
-        multi_select: { name: string; }[];
+        multi_select: { name: string }[];
       };
       date?: {
-        date: { start: string; }
-      }
-    }
+        date: { start: string };
+      };
+    };
   }[];
-}
+};
 
 export const makePostCollection = (responsePosts: ResponsePosts): PostType[] => {
   return responsePosts.results.map((row) => {
@@ -82,5 +82,3 @@ export const makePostCollection = (responsePosts: ResponsePosts): PostType[] => 
     };
   });
 };
-
-export default getPosts;
