@@ -6,6 +6,7 @@
 - フロントエンドは Next.js (SSG / SSR) で構築
 - Notion API を利用してコンテンツを取得
 - 問い合わせ時のメール送信は SendGrid API を利用
+- [Jamstack Themes](https://jamstackthemes.dev) のテンプレート（Nextjs Exto）を利用
 
 ## 使い方
 
