@@ -1,4 +1,4 @@
-import { ContentType, PostType, ProjectType } from "./layouts";
+import { ContentType, PostType, ProjectType } from './layouts';
 
 export type QueryParamType = {
   database_id: string;
@@ -22,7 +22,7 @@ export type QueryParamType = {
       }
     ];
     property?: string;
-    checkbox?: { equals: boolean }
+    checkbox?: { equals: boolean };
   };
   page_size?: number;
   start_cursor?: number;
@@ -37,7 +37,14 @@ export type ConfigType = {
   post?: PostType | {};
   project?: ProjectType | {};
   content?: ContentType[];
-  heading?: string;
+  heading?: PageHeading[];
+};
+
+export type PageHeading = {
+  content?: string;
+  child?: {
+    content: string;
+  };
 };
 
 export type PagePropsType = {

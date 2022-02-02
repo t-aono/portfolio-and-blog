@@ -24,7 +24,7 @@ type PropsType = {
   };
 };
 
-export const Header: React.VFC<PropsType> = (props) => {
+export const Header = (props: PropsType): JSX.Element => {
   const menuOpenRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {

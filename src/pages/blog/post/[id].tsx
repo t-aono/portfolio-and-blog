@@ -29,11 +29,11 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   console.log('Page [id].js getServerSideProps, params: ', params);
   const posts = await getPosts('post', params.id as string);
   const props = await getConfig();
-  
+
   if (posts) {
     const postCollection = makePostCollection(posts);
     const post = postCollection.find((post) => post.pageId === params.id);
-    const pageContent: { content: ContentType[] } = await getPageContent(params.id);
+    const pageContent: { content: ContentType[] } = await getPageContent(params.id as string);
     const pageHeading = await getPageHeading(pageContent.content);
 
     props.page = {

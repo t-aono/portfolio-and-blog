@@ -2,7 +2,6 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import _ from 'lodash';
 import { sourcebitDataClient } from 'sourcebit-target-next';
 import { withRemoteDataUpdates } from 'sourcebit-target-next/with-remote-data-updates';
-import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 import { ParsedUrlQuery } from 'querystring';
 
 import { getProjects, getPosts, getCategories, makePostCollection, makeProjectCollection, makeCategoryList } from '../utils';
@@ -44,13 +43,13 @@ export const getStaticProps: GetStaticProps<{ params: ParsedUrlQuery }> = async 
       props.page_no = current;
       const postIds = (await getPosts('id')) as string[];
       props.post_count = postIds.length;
-      const tmpPosts = (await getPosts('post', postIds[(current - 1) * 12])) as QueryDatabaseResponse;
+      const tmpPosts = await getPosts('post', postIds[(current - 1) * 12]);
       props.posts = makePostCollection(tmpPosts);
       props.page = props.pages.find((p) => p.title === 'Blog');
     } else {
       // １ページ目
       props.page_no = 1;
-      const posts = (await getPosts('post')) as QueryDatabaseResponse;
+      const posts = await getPosts('post');
       props.posts = makePostCollection(posts);
     }
     const responseCategories = await getCategories();
@@ -60,7 +59,7 @@ export const getStaticProps: GetStaticProps<{ params: ParsedUrlQuery }> = async 
 
   // トップページ
   const topProjects = await getProjects();
-  const topPosts = (await getPosts('post')) as QueryDatabaseResponse;
+  const topPosts = await getPosts('post');
   props.projects = makeProjectCollection(topProjects);
   props.posts = makePostCollection(topPosts);
   return { props };
