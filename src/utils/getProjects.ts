@@ -1,9 +1,13 @@
+import { Client as ClientType } from '@notionhq/client';
+import { QueryDatabaseParameters, QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
+import { ProjectType } from '../types/layouts';
+
 const { Client } = require('@notionhq/client');
 
-export default async function getProjects() {
-  const notion = new Client({ auth: process.env.NOTION_TOKEN });
+export const getProjects = async () => {
+  const notion: ClientType = new Client({ auth: process.env.NOTION_TOKEN });
   const databaseId = 'a4928a93d9c0447fa889c7d60c5124a7';
-  const queryParam = {
+  const queryParam: QueryDatabaseParameters = {
     database_id: databaseId,
     sorts: [
       {
@@ -18,8 +22,13 @@ export default async function getProjects() {
       }
     }
   };
-  const response = await notion.databases.query(queryParam);
-  return response.results.map((row) => {
+  const response: QueryDatabaseResponse = await notion.databases.query(queryParam);
+
+  return response.results;
+}
+
+export const makeProjectCollection = (projects): ProjectType[] => {
+  return projects.map((row) => {
     return {
       pageId: row.id,
       title: row.properties.title.title[0].plain_text,
@@ -33,3 +42,5 @@ export default async function getProjects() {
     };
   });
 }
+
+export default getProjects;

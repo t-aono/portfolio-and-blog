@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { sourcebitDataClient } from 'sourcebit-target-next';
 import { withRemoteDataUpdates } from 'sourcebit-target-next/with-remote-data-updates';
-import { getProjects, getPosts, getCategories, makePostCollection } from '../utils';
+import { getProjects, getPosts, getCategories, makePostCollection, makeProjectCollection } from '../utils';
 
 import pageLayouts from '../layouts';
 
@@ -29,7 +29,8 @@ export async function getStaticProps({ params }) {
   const props = await sourcebitDataClient.getStaticPropsForPageAtPath(pagePath);
 
   if (params.slug && params.slug[0] === 'portfolio') {
-    props.projects = await getProjects();
+    const projects = await getProjects();
+    props.projects = makeProjectCollection(projects);
     return { props };
   }
 
@@ -40,7 +41,8 @@ export async function getStaticProps({ params }) {
       props.page_no = current;
       const postIds = await getPosts('id');
       props.post_count = postIds.length;
-      props.posts = await getPosts('post', postIds[(current - 1) * 12]);
+      const tmpPosts = await getPosts('post', postIds[(current - 1) * 12]);
+      props.posts = makePostCollection(tmpPosts);
       props.page = props.pages.find((p) => p.title === 'Blog');
     } else {
       // １ページ目
@@ -53,8 +55,10 @@ export async function getStaticProps({ params }) {
   }
 
   // トップページ
-  props.projects = await getProjects();
-  props.posts = await getPosts('post');
+  const topProjects = await getProjects();
+  const topPosts = await getPosts('post');
+  props.projects = makeProjectCollection(topProjects);
+  props.posts = makePostCollection(topPosts);
   return { props };
 }
 

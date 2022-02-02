@@ -3,9 +3,12 @@ import fs from 'fs';
 import path from 'path';
 
 import pageLayouts from '../../../layouts';
-import { getPageContent, getProjects } from '../../../utils';
+import { getPageContent, getProjects, makeProjectCollection } from '../../../utils';
+import { ConfigType, PagePropsType } from '../../../types/pages';
+import { GetServerSideProps } from 'next';
+import { ContentType } from '../../../types/layouts';
 
-const Project = (props) => {
+const Project = (props: PagePropsType): JSX.Element => {
   const modelName = _.get(props, 'page.__metadata.modelName');
   const PageLayout = pageLayouts[modelName];
   if (!PageLayout) {
@@ -14,20 +17,21 @@ const Project = (props) => {
   return <PageLayout {...props} />;
 };
 
-const getConfig = async () => {
+const getConfig = async (): Promise<ConfigType> => {
   const filePath = path.join(process.cwd(), 'content/data/config.json');
   const config = JSON.parse(fs.readFileSync(filePath, 'utf8'));
   return { data: { config } };
 };
 
-export async function getServerSideProps({ params }) {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   console.log('Page [id].js getServerSideProps, params: ', params);
   const projects = await getProjects();
-  const project = projects.find((pj) => pj.pageId === params.id);
-  const pageContent = await getPageContent(params.id);
+  const projectCollection = makeProjectCollection(projects);
+  const project = projectCollection.find((project) => project.pageId === params.id);
   const props = await getConfig();
-
-  if (project !== undefined) {
+  
+  if (projectCollection) {
+    const pageContent: { content: ContentType[] } = await getPageContent(params.id);
     props.page = {
       __metadata: { modelName: 'project', urlPath: '/portfolio' },
       seo: { title: project.title, description: `${project.skill} を使って${project.title}を制作` }
@@ -40,7 +44,7 @@ export async function getServerSideProps({ params }) {
       seo: { title: 'メンテナンス中', description: '' }
     };
     props.project = {};
-    props.pageContent = null;
+    props.content = null;
   }
 
   return { props };

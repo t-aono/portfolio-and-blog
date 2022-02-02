@@ -1,3 +1,5 @@
+import { ContentType, PostType, ProjectType } from "./layouts";
+
 export type QueryParamType = {
   database_id: string;
   sorts: {
@@ -24,4 +26,23 @@ export type QueryParamType = {
   };
   page_size?: number;
   start_cursor?: number;
+};
+
+export type ConfigType = {
+  data: { config: {} };
+  page?: {
+    __metadata: { modelName: string; urlPath: string };
+    seo: { title: string; description: string };
+  };
+  post?: PostType | {};
+  project?: ProjectType | {};
+  content?: ContentType[];
+  heading?: string;
+};
+
+
+export type PagePropsType = {
+  posts: PostType[];
+  projects: ProjectType[];
+  'page.__metadata.modelName': string;
 };

@@ -1,5 +1,6 @@
 import { Client as ClientType } from '@notionhq/client';
 import { QueryDatabaseParameters, QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
+import { PostType } from '../types/layouts';
 
 const { Client } = require('@notionhq/client');
 
@@ -44,6 +45,22 @@ export const getPosts = async (kind: KindType, startCursor: string = null): Resp
     } else {
       return null;
     }
+  });
+};
+
+export const makePostCollection = (posts): PostType[] => {
+  return posts.map((row) => {
+    const emoji = row.icon ? row.icon.emoji : '';
+    return {
+      pageId: row.id,
+      title: row.properties.title.title[0].plain_text,
+      category: row.properties.category.multi_select.map((cat) => cat.name),
+      date: row.properties.date.date.start,
+      emoji: emoji,
+      __metadata: {
+        urlPath: `/blog/post/${row.id}`
+      }
+    };
   });
 };
 
