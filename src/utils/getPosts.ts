@@ -5,7 +5,7 @@ import { PostType } from '../types/layouts';
 const { Client } = require('@notionhq/client');
 
 type KindType = 'post' | 'path' | 'id';
-type ResponseType = Promise<(string | { object: 'page'; id: string })[]>;
+type ResponseType = Promise<string[] | QueryDatabaseResponse | null>;
 
 export const getPosts = async (kind: KindType, startCursor: string = null): ResponseType => {
   const notion: ClientType = new Client({ auth: process.env.NOTION_TOKEN });
@@ -35,21 +35,40 @@ export const getPosts = async (kind: KindType, startCursor: string = null): Resp
     return null;
   }
 
-  return response.results.map((row) => {
-    if (kind === 'path') {
-      return `/blog/${row.id}`;
-    } else if (kind === 'id') {
-      return row.id;
-    } else if (kind === 'post') {
-      return row;
-    } else {
-      return null;
-    }
-  });
+  if (kind === 'path') {
+    return response.results.map((row) => `/blog/${row.id}`);
+  }
+  if (kind === 'id') {
+    return response.results.map((row) => row.id);
+  }
+  if (kind === 'post') {
+    return response;
+  }
+  return null;
 };
 
-export const makePostCollection = (posts): PostType[] => {
-  return posts.map((row) => {
+type ResponsePosts = {
+  results: {
+    id: string;
+    properties?: {
+      icon?: {
+        emoji: string
+      };
+      title?: {
+        title: { plain_text: string; }
+      };
+      category?: {
+        multi_select: { name: string; }[];
+      };
+      date?: {
+        date: { start: string; }
+      }
+    }
+  }[];
+}
+
+export const makePostCollection = (responsePosts: ResponsePosts): PostType[] => {
+  return responsePosts.results.map((row) => {
     const emoji = row.icon ? row.icon.emoji : '';
     return {
       pageId: row.id,

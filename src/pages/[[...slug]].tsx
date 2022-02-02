@@ -1,8 +1,11 @@
+import { GetStaticPaths, GetStaticProps } from 'next';
 import _ from 'lodash';
 import { sourcebitDataClient } from 'sourcebit-target-next';
 import { withRemoteDataUpdates } from 'sourcebit-target-next/with-remote-data-updates';
-import { getProjects, getPosts, getCategories, makePostCollection, makeProjectCollection } from '../utils';
+import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
+import { ParsedUrlQuery } from 'querystring';
 
+import { getProjects, getPosts, getCategories, makePostCollection, makeProjectCollection } from '../utils';
 import pageLayouts from '../layouts';
 
 const Page = (props) => {
@@ -14,23 +17,23 @@ const Page = (props) => {
   return <PageLayout {...props} />;
 };
 
-export async function getStaticPaths() {
+export const getStaticPaths:GetStaticPaths = async () => {
   console.log('Page [...slug].js getStaticPaths');
   const paths = await sourcebitDataClient.getStaticPaths();
-  const postPaths = await getPosts('path');
-  const blogPagingPaths = postPaths.map((p, i) => (i % 12 === 0 ? `/blog/paginate/${i / 12 + 2}` : null)).filter((v) => v);
+  const postPaths = await getPosts('path') as string[];
+  const blogPagingPaths = postPaths.map((_, i) => (i % 12 === 0 ? `/blog/paginate/${i / 12 + 2}` : null)).filter((v) => v);
   paths.push(...blogPagingPaths);
   return { paths, fallback: false };
 }
 
-export async function getStaticProps({ params }) {
+export const getStaticProps: GetStaticProps<{params: ParsedUrlQuery}> = async ({ params }) => {
   console.log('Page [...slug].js getStaticProps, params: ', params);
-  const pagePath = '/' + (params.slug ? params.slug.join('/') : '');
+  const pagePath = '/' + (params.slug ? (params.slug as string[]).join('/') : '');
   const props = await sourcebitDataClient.getStaticPropsForPageAtPath(pagePath);
 
   if (params.slug && params.slug[0] === 'portfolio') {
-    const projects = await getProjects();
-    props.projects = makeProjectCollection(projects);
+    const responseProjects = await getProjects();
+    props.projects = makeProjectCollection(responseProjects);
     return { props };
   }
 
@@ -39,15 +42,15 @@ export async function getStaticProps({ params }) {
       // ページネーション
       const current = parseInt(params.slug[2], 10);
       props.page_no = current;
-      const postIds = await getPosts('id');
+      const postIds = await getPosts('id') as string[];
       props.post_count = postIds.length;
-      const tmpPosts = await getPosts('post', postIds[(current - 1) * 12]);
+      const tmpPosts = await getPosts('post', postIds[(current - 1) * 12]) as QueryDatabaseResponse;
       props.posts = makePostCollection(tmpPosts);
       props.page = props.pages.find((p) => p.title === 'Blog');
     } else {
       // １ページ目
       props.page_no = 1;
-      const posts = await getPosts('post');
+      const posts = await getPosts('post') as QueryDatabaseResponse;
       props.posts = makePostCollection(posts);
     }
     props.categories = await getCategories();
@@ -56,7 +59,7 @@ export async function getStaticProps({ params }) {
 
   // トップページ
   const topProjects = await getProjects();
-  const topPosts = await getPosts('post');
+  const topPosts = await getPosts('post') as QueryDatabaseResponse;
   props.projects = makeProjectCollection(topProjects);
   props.posts = makePostCollection(topPosts);
   return { props };

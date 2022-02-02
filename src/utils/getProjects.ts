@@ -1,5 +1,5 @@
 import { Client as ClientType } from '@notionhq/client';
-import { QueryDatabaseParameters, QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
+import { QueryDatabaseParameters } from '@notionhq/client/build/src/api-endpoints';
 import { ProjectType } from '../types/layouts';
 
 const { Client } = require('@notionhq/client');
@@ -22,13 +22,34 @@ export const getProjects = async () => {
       }
     }
   };
-  const response: QueryDatabaseResponse = await notion.databases.query(queryParam);
-
-  return response.results;
+  return await notion.databases.query(queryParam);
 }
 
-export const makeProjectCollection = (projects): ProjectType[] => {
-  return projects.map((row) => {
+type responseProjects = {
+  results: {
+    id: string;
+    properties?: {
+      title?: {
+        title: { plain_text }[]
+      };
+      skill?: {
+        rich_text: { plain_text: string }
+      };
+      summary?: {
+        rich_text: { plain_text: string }
+      };
+      term?: {
+        rich_text: { plain_text: string }
+      };
+      thumbnail?: {
+        rich_text: { plain_text: string }
+      }
+    }
+  }[];
+}
+
+export const makeProjectCollection = (responseProjects: responseProjects): ProjectType[] => {
+  return responseProjects.results.map((row) => {
     return {
       pageId: row.id,
       title: row.properties.title.title[0].plain_text,

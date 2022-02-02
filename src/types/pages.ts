@@ -40,7 +40,6 @@ export type ConfigType = {
   heading?: string;
 };
 
-
 export type PagePropsType = {
   posts: PostType[];
   projects: ProjectType[];

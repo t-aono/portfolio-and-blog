@@ -54,7 +54,7 @@ export type ProjectType = {
   skill: string[];
   summary: string;
   term: string;
-  layout_style: string;
+  layout_style?: string;
 };
 
 export type PostType = {
