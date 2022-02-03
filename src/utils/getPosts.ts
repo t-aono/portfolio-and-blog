@@ -1,11 +1,10 @@
 import { Client as ClientType } from '@notionhq/client';
-import { QueryDatabaseParameters, QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
+import { QueryDatabaseParameters } from '@notionhq/client/build/src/api-endpoints';
 import { PostType } from '../types/layouts';
 
 const { Client } = require('@notionhq/client');
 
 type KindType = 'post' | 'path' | 'id';
-type ResponseType = Promise<string[] | QueryDatabaseResponse | null>;
 
 export const getPosts = async (kind: KindType, startCursor: string = null) => {
   const notion: ClientType = new Client({ auth: process.env.NOTION_TOKEN });
