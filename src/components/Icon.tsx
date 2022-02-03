@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-export const Icon: React.VFC<{ icon: string }> = (props) => {
+export const Icon = (props: { icon: string }): JSX.Element => {
   const icon = _.get(props, 'icon');
   switch (icon) {
     case 'dribbble':

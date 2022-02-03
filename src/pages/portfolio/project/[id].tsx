@@ -29,9 +29,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const projectCollection = makeProjectCollection(projects);
   const project = projectCollection.find((project) => project.pageId === params.id);
   const props = await getConfig();
-  
+
   if (projectCollection) {
-    const pageContent: { content: ContentType[] } = await getPageContent(params.id);
+    const pageContent: { content: ContentType[] } = await getPageContent(params.id as string);
     props.page = {
       __metadata: { modelName: 'project', urlPath: '/portfolio' },
       seo: { title: project.title, description: `${project.skill} を使って${project.title}を制作` }
@@ -48,6 +48,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   }
 
   return { props };
-}
+};
 
 export default Project;

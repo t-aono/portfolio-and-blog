@@ -1,3 +1,5 @@
+import { PageHeading } from '../types/pages';
+
 type ItemsType = {
   type: string;
   block: {
@@ -18,18 +20,11 @@ type ItemsType = {
   };
 }[];
 
-type TmpType = {
-  content?: string;
-  child?: {
-    content: string;
-  };
-};
-
 export const getPageHeading = (items: ItemsType) => {
   return items
     .filter((item) => item.type.match(/heading_\d/))
     .map((item) => {
-      let tmp: TmpType = {};
+      let tmp: PageHeading = {};
       if (item.type === 'heading_2') {
         tmp = { content: item.block.heading_2.text[0].text.content };
       }

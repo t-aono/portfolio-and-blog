@@ -2,7 +2,14 @@ import _ from 'lodash';
 import withPrefix from './withPrefix';
 
 type PostType = {
-  post: '__metadata.urlPath';
+  title: string;
+  seo?: {
+    title: string;
+    description: string;
+    robots: string[];
+    extra: string[];
+  };
+  post?: '__metadata.urlPath';
 };
 
 export default function getPageUrl(post: PostType, { withPrefix: addPrefix = false } = {}): string {
