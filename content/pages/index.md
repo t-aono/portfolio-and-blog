@@ -27,7 +27,7 @@ sections:
       <br/>
       PHP / Laravel / JS / Vue.js / React / MySQL を使うことが多いです。<br/>
       最近は TypeScript / Next.js も学習しています。<br/>
-      このサイトは Next.js (SSG/SSR) と Notion API で構築しました。<br/>
+      このサイトは TypeScript / Next.js (SSG/SSR/CSR) と Notion API で構築しました。<br/>
       <br/>
       経歴<br/>
       2011年 営業職として製薬メーカーに新卒で入社<br/>
