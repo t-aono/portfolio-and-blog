@@ -1,11 +1,29 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import _ from 'lodash';
-import { sourcebitDataClient } from 'sourcebit-target-next';
-import { withRemoteDataUpdates } from 'sourcebit-target-next/with-remote-data-updates';
 import { ParsedUrlQuery } from 'querystring';
+import * as fs from 'fs';
+import * as path from 'path';
+import matter from 'gray-matter';
 
 import { getProjects, getPosts, getCategories, makePostCollection, makeProjectCollection, makeCategoryList } from '../utils';
 import pageLayouts from '../layouts';
+
+const getPage = (page) => {
+  const pageMdPath = path.join(process.cwd(), 'content', 'pages', `${page}.md`);
+  // console.log(pageMdPath);
+  const pageMd = fs.readFileSync(pageMdPath, 'utf-8');
+  console.log(matter(pageMd));
+  // return matter(pageMd);
+  // return {
+  //   page: matter(pageMd)
+  // };
+};
+
+const getConfig = () => {
+  const configJsonPath = path.join(process.cwd(), 'content', 'data', 'config.json');
+  const configJson = fs.readFileSync(configJsonPath, 'utf-8');
+  return JSON.parse(configJson);
+};
 
 const Page = (props) => {
   const modelName = _.get(props, 'page.__metadata.modelName');
@@ -18,17 +36,24 @@ const Page = (props) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   console.log('Page [...slug].js getStaticPaths');
-  const paths = await sourcebitDataClient.getStaticPaths();
-  const postPaths = (await getPosts('path')) as string[];
-  const blogPagingPaths = postPaths.map((_, i) => (i % 12 === 0 ? `/blog/paginate/${i / 12 + 2}` : null)).filter((v) => v);
-  paths.push(...blogPagingPaths);
+  const paths = ['/']; //await sourcebitDataClient.getStaticPaths();
+  // const postPaths = (await getPosts('path')) as string[];
+  // const blogPagingPaths = postPaths.map((_, i) => (i % 12 === 0 ? `/blog/paginate/${i / 12 + 2}` : null)).filter((v) => v);
+  // paths.push(...blogPagingPaths);
   return { paths, fallback: false };
 };
 
 export const getStaticProps: GetStaticProps<{ params: ParsedUrlQuery }> = async ({ params }) => {
   console.log('Page [...slug].js getStaticProps, params: ', params);
   const pagePath = '/' + (params.slug ? (params.slug as string[]).join('/') : '');
-  const props = await sourcebitDataClient.getStaticPropsForPageAtPath(pagePath);
+  const page = getPage('index');
+  const props = {
+    page: { __metadata: { modelName: 'advanced' }, ...page },
+    data: {
+      config: getConfig()
+    }
+  };
+  //await sourcebitDataClient.getStaticPropsForPageAtPath(pagePath);
 
   if (params.slug && params.slug[0] === 'portfolio') {
     const responseProjects = await getProjects();
@@ -65,4 +90,5 @@ export const getStaticProps: GetStaticProps<{ params: ParsedUrlQuery }> = async 
   return { props };
 };
 
-export default withRemoteDataUpdates(Page);
+// export default withRemoteDataUpdates(Page);
+export default Page;
