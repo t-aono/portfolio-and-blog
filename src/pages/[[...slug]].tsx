@@ -8,25 +8,22 @@ import matter from 'gray-matter';
 import { getProjects, getPosts, getCategories, makePostCollection, makeProjectCollection, makeCategoryList } from '../utils';
 import pageLayouts from '../layouts';
 
+const getModelName = (pagePath) => {
+  if (pagePath === '/portfolio') return 'portfolio';
+  else if (pagePath.match(/\/blog.*/)) return 'blog';
+  else return 'advanced';
+};
+
 const getMarkdownData = (pageUrl) => {
   let markdownFile = '';
-  switch (pageUrl) {
-    case '/':
-      markdownFile = 'index.md';
-      break;
-    case '/portfolio':
-      markdownFile = 'portfolio.md';
-      break;
-    case '/blog':
-      markdownFile = 'blog.md';
-      break;
-    case '/contact':
-      markdownFile = 'contact.md';
-      break;
-  }
+  if (pageUrl === '/') markdownFile = 'index.md';
+  else if (pageUrl === '/portfolio') markdownFile = 'portfolio/index.md';
+  else if (pageUrl === '/contact') markdownFile = 'contact.md';
+  else if (pageUrl.match(/\/blog.*/)) markdownFile = 'blog/index.md';
+
   const filePath = path.join(process.cwd(), 'content', 'pages', markdownFile);
-  const pageMd = fs.readFileSync(filePath, 'utf-8');
-  const { data } = matter(pageMd);
+  const markdownText = fs.readFileSync(filePath, 'utf-8');
+  const { data } = matter(markdownText);
   return data;
 };
 
@@ -34,19 +31,6 @@ const getConfig = () => {
   const configJsonPath = path.join(process.cwd(), 'content', 'data', 'config.json');
   const configJson = fs.readFileSync(configJsonPath, 'utf-8');
   return JSON.parse(configJson);
-};
-
-const getModelName = (pagePath) => {
-  switch (pagePath) {
-    case '/':
-      return 'advanced';
-    case '/portfolio':
-      return 'portfolio';
-    case '/blog':
-      return 'blog';
-    default:
-      return 'page';
-  }
 };
 
 const Page = (props) => {
@@ -61,14 +45,13 @@ const Page = (props) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   console.log('Page [...slug].js getStaticPaths');
   const paths = ['/', '/portfolio', '/blog', '/contact'];
-  //await sourcebitDataClient.getStaticPaths();
-  // const postPaths = (await getPosts('path')) as string[];
-  // const blogPagingPaths = postPaths.map((_, i) => (i % 12 === 0 ? `/blog/paginate/${i / 12 + 2}` : null)).filter((v) => v);
-  // paths.push(...blogPagingPaths);
+  const postPaths = (await getPosts('path')) as string[];
+  const blogPagingPaths = postPaths.map((_, i) => (i % 12 === 0 ? `/blog/paginate/${i / 12 + 2}` : null)).filter((v) => v);
+  paths.push(...blogPagingPaths);
   return { paths, fallback: false };
 };
 
-export const getStaticProps: GetStaticProps<{ params: ParsedUrlQuery }> = async ({ params }) => {
+export const getStaticProps = async ({ params }) => {
   console.log('Page [...slug].js getStaticProps, params: ', params);
   const pagePath = '/' + (params.slug ? (params.slug as string[]).join('/') : '');
   const props = {
@@ -96,7 +79,6 @@ export const getStaticProps: GetStaticProps<{ params: ParsedUrlQuery }> = async 
       props.post_count = postIds.length;
       const tmpPosts = await getPosts('post', postIds[(current - 1) * 12]);
       props.posts = makePostCollection(tmpPosts);
-      props.page = props.pages.find((p) => p.title === 'Blog');
     } else {
       // １ページ目
       props.page_no = 1;

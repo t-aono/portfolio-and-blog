@@ -1,21 +1,12 @@
-// const sourcebit = require('sourcebit');
-
-// const sourcebitConfig = require('./sourcebit.js');
-
-// sourcebit.fetch(sourcebitConfig);
-
-module.exports = {
-  trailingSlash: true,
-  devIndicators: {
-    autoPrerender: false
+const nextConfig = {
+  future: {
+    webpack5: true
   },
-  webpack: (config, { webpack }) => {
-    // Tell webpack to ignore watching content files in the content folder.
-    // Otherwise webpack receompiles the app and refreshes the whole page.
-    // Instead, the src/pages/[...slug].js uses the "withRemoteDataUpdates"
-    // function to update the content on the page without refreshing the
-    // whole page
-    config.plugins.push(new webpack.WatchIgnorePlugin([[/\/content\//]]));
+  webpack: (config) => {
+    config.resolve.fallback = { fs: false, path: false };
+
     return config;
   }
 };
+
+module.exports = nextConfig;
