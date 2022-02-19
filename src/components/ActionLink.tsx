@@ -4,7 +4,7 @@ import { Link, withPrefix } from '../utils';
 import { AttrsType } from '../types/components';
 import { ActionType } from '../types/components';
 
-export const ActionLink = (props: ActionType): JSX.Element => {
+export const ActionLink = (props: ActionType) => {
   const action = _.get(props, 'action');
   const url = _.get(action, 'url');
   const label = _.get(action, 'label');

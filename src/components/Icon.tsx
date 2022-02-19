@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-export const Icon = (props: { icon: string }): JSX.Element => {
+export const Icon = (props: { icon: string }) => {
   const icon = _.get(props, 'icon');
   switch (icon) {
     case 'dribbble':

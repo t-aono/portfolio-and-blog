@@ -5,7 +5,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import matter from 'gray-matter';
 
-import { getProjects, getPosts, getCategories, makePostCollection, makeProjectCollection, makeCategoryList } from '../utils';
+import { getProjects, getPosts, getCategories, makePostCollection, makeProjectCollection, makeCategoryList, getWorkList } from '../utils';
 import pageLayouts from '../layouts';
 
 const getModelName = (pagePath) => {
@@ -17,6 +17,7 @@ const getModelName = (pagePath) => {
 const getMarkdownData = (pageUrl) => {
   let markdownFile = '';
   if (pageUrl === '/') markdownFile = 'index.md';
+  else if (pageUrl === '/work') markdownFile = 'work/index.md';
   else if (pageUrl === '/portfolio') markdownFile = 'portfolio/index.md';
   else if (pageUrl === '/contact') markdownFile = 'contact.md';
   else if (pageUrl.match(/\/blog.*/)) markdownFile = 'blog/index.md';
@@ -24,6 +25,13 @@ const getMarkdownData = (pageUrl) => {
   const filePath = path.join(process.cwd(), 'content', 'pages', markdownFile);
   const markdownText = fs.readFileSync(filePath, 'utf-8');
   const { data } = matter(markdownText);
+
+  // if (pageUrl === '/work') {
+  //   const works = await getWorkList();
+  //   data.work = works;
+  // }
+  // console.log(data);
+
   return data;
 };
 
@@ -36,6 +44,7 @@ const getConfig = () => {
 const Page = (props) => {
   const modelName = _.get(props, 'page.__metadata.modelName');
   const PageLayout = pageLayouts[modelName];
+  // console.log(PageLayout);
   if (!PageLayout) {
     throw new Error(`no page layout matching the page model: ${modelName}`);
   }
@@ -44,7 +53,7 @@ const Page = (props) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   console.log('Page [...slug].js getStaticPaths');
-  const paths = ['/', '/portfolio', '/blog', '/contact'];
+  const paths = ['/', '/work', '/portfolio', '/blog', '/contact'];
   const postPaths = (await getPosts('path')) as string[];
   const blogPagingPaths = postPaths.map((_, i) => (i % 12 === 0 ? `/blog/paginate/${i / 12 + 2}` : null)).filter((v) => v);
   paths.push(...blogPagingPaths);

@@ -30,7 +30,7 @@ export const SectionPosts = (props: PropsType) => {
   const postsNumber = _.get(section, 'posts_number', 3);
   const recentPosts = posts.slice(0, postsNumber);
 
-  const renderPost = (post: PostType, index: number): JSX.Element => {
+  const renderPost = (post: PostType, index: number) => {
     const title = _.get(post, 'title');
     const emoji = _.get(post, 'emoji');
     const category = _.get(post, 'category');

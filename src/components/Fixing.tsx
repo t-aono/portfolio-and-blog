@@ -22,7 +22,7 @@ type PropsType = {
   };
 };
 
-export const Fixing = (props: PropsType): JSX.Element => {
+export const Fixing = (props: PropsType) => {
   const construction = '/images/construction_simple.png';
   return (
     <Layout page={props.page} config={props.config}>

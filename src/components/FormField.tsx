@@ -8,7 +8,7 @@ type FormType = {
   input_change?: InputType;
 };
 
-export const FormField = (props: FormType): JSX.Element => {
+export const FormField = (props: FormType) => {
   const field = _.get(props, 'field');
   const setValue = _.get(props, 'set_value');
   const inputChange = _.get(props, 'input_change');

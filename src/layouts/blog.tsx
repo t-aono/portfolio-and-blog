@@ -18,7 +18,7 @@ type BlogType = {
   post_count: number;
 };
 
-export const Blog = (props: BlogType): JSX.Element => {
+export const Blog = (props: BlogType) => {
   const data = _.get(props, 'data');
   const config = _.get(data, 'config');
   const page = _.get(props, 'page');

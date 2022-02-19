@@ -14,7 +14,7 @@ type PortfolioType = {
   page: PageType;
 };
 
-export const Portfolio = (props: PortfolioType): JSX.Element => {
+export const Portfolio = (props: PortfolioType) => {
   const renderProject = (project: ProjectType) => {
     const pageId = _.get(project, 'pageId');
     const projectUrl = getPageUrl(project, { withPrefix: true });

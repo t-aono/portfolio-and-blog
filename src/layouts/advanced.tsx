@@ -13,7 +13,7 @@ type PropsType = {
   page: PageType;
 };
 
-export const Advanced = (props: PropsType): JSX.Element => {
+export const Advanced = (props: PropsType) => {
   const data = _.get(props, 'data');
   const config = _.get(data, 'config');
   const posts = _.get(props, 'posts');

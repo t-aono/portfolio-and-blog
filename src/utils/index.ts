@@ -14,3 +14,4 @@ export { default as getPageHeading } from './getPageHeading';
 export { getProjects, makeProjectCollection } from './getProjects';
 export { getPosts, makePostCollection } from './getPosts';
 export { getCategories, makeCategoryList } from './getCategories';
+export { getWorkList } from './getWorkList';

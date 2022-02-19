@@ -12,24 +12,15 @@
 
 ### ローカル
 
+- node : v14.15.3
+
 - .env を作成して api key を追記
+
 - ライブラリインストール　`yarn install`
+
 - ビルド　`yarn dev`
+
 - ホームぺ―ジ　 http://localhost:300/
-
-- ビルド時に以下のエラーが出た場合
-
-  ```
-  Unhandled Runtime Error
-  TypeError: io is not a function
-  ```
-
-  node_modules/sourcebit-target-next/with-remote-data-updates.js
-  を編集して再度ビルドすると解消
-
-  ```
-  io(*******) → io.connect(*******)
-  ```
 
 - md 編集後に 404 エラーがでた場合  
   マークダウンのインデントがずれているのが原因

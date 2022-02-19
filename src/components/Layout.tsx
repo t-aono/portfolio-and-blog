@@ -23,10 +23,10 @@ type PropsType = {
     favicon: string;
     domain: string;
   };
-  children: JSX.Element;
+  children;
 };
 
-export const Body = (props: PropsType): JSX.Element => {
+export const Body = (props: PropsType) => {
   const page = _.get(props, 'page');
   const pageTitle = _.get(page, 'title');
   const config = _.get(props, 'config');

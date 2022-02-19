@@ -24,7 +24,7 @@ type PropsType = {
   };
 };
 
-export const Header = (props: PropsType): JSX.Element => {
+export const Header = (props: PropsType) => {
   const menuOpenRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {

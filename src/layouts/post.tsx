@@ -15,7 +15,7 @@ type PropsType = {
   page: PageType;
 };
 
-const Post = (props: PropsType): JSX.Element => {
+const Post = (props: PropsType) => {
   const post = _.get(props, 'post');
   const title = _.get(post, 'title');
   const category = _.get(post, 'category');
@@ -53,7 +53,7 @@ const Post = (props: PropsType): JSX.Element => {
     }
   }, []);
 
-  const renderRelatedPosts = (post: PostType): JSX.Element => {
+  const renderRelatedPosts = (post: PostType) => {
     const title = _.get(post, 'title');
     const date = post.date ? post.date.replace(/\-/g, '/') : '';
     const category = _.get(post, 'category');
