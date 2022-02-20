@@ -30,7 +30,6 @@
     "react-helmet": "^6.1.0",
     "react-html-parser": "^2.0.2",
     "react-loader-spinner": "^4.0.0",
-    "react-markdown": "^8.0.0",
     "react-script-tag": "^1.1.2",
     "webpack": "^5.24.1"
   },
