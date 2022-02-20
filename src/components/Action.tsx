@@ -5,7 +5,7 @@ import Icon from './Icon';
 import { AttrsType } from '../types/components';
 import { ActionType } from '../types/components';
 
-export const Action = (props: ActionType) => {
+export const Action = (props: ActionType): JSX.Element => {
   const action = _.get(props, 'action');
   const url = _.get(action, 'url');
   const label = _.get(action, 'label');

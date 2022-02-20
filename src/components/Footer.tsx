@@ -14,7 +14,7 @@ type PropsType = {
   };
 };
 
-export const Footer = (props: PropsType) => {
+export const Footer = (props: PropsType): JSX.Element => {
   const config = _.get(props, 'config');
   const footer = _.get(config, 'footer');
   const copyright = _.get(footer, 'content');

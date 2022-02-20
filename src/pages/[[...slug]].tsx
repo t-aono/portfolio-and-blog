@@ -9,7 +9,8 @@ import { getProjects, getPosts, getCategories, makePostCollection, makeProjectCo
 import pageLayouts from '../layouts';
 
 const getModelName = (pagePath) => {
-  if (pagePath === '/portfolio') return 'portfolio';
+  if (pagePath === '/work') return 'work';
+  else if (pagePath === '/portfolio') return 'portfolio';
   else if (pagePath.match(/\/blog.*/)) return 'blog';
   else return 'advanced';
 };
@@ -26,12 +27,6 @@ const getMarkdownData = (pageUrl) => {
   const markdownText = fs.readFileSync(filePath, 'utf-8');
   const { data } = matter(markdownText);
 
-  // if (pageUrl === '/work') {
-  //   const works = await getWorkList();
-  //   data.work = works;
-  // }
-  // console.log(data);
-
   return data;
 };
 
@@ -44,7 +39,7 @@ const getConfig = () => {
 const Page = (props) => {
   const modelName = _.get(props, 'page.__metadata.modelName');
   const PageLayout = pageLayouts[modelName];
-  // console.log(PageLayout);
+  // console.log({ modelName }, { PageLayout });
   if (!PageLayout) {
     throw new Error(`no page layout matching the page model: ${modelName}`);
   }
@@ -72,6 +67,11 @@ export const getStaticProps = async ({ params }) => {
       config: getConfig()
     }
   };
+
+  if (params.slug && params.slug[0] === 'work') {
+    props.works = await getWorkList();
+    return { props };
+  }
 
   if (params.slug && params.slug[0] === 'portfolio') {
     const responseProjects = await getProjects();

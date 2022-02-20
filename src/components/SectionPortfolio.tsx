@@ -18,7 +18,7 @@ type PropsType = {
   projects: ProjectType[];
 };
 
-export const SectionPortfolio = (props: PropsType) => {
+export const SectionPortfolio = (props: PropsType): JSX.Element => {
   const section = _.get(props, 'section');
   const sectionId = _.get(section, 'section_id');
   const title = _.get(section, 'title');
@@ -28,7 +28,7 @@ export const SectionPortfolio = (props: PropsType) => {
   const projects = _.get(props, 'projects');
   const recentProjects = projects.slice(0, 4);
 
-  const renderProject = (project: ProjectType, index: number) => {
+  const renderProject = (project: ProjectType, index: number): JSX.Element => {
     const title = _.get(project, 'title');
     const skill = _.get(project, 'skill');
     const summary = _.get(project, 'summary');

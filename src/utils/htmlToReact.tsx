@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 const convertChildren = (children, index) => _.map(children, (childNode) => convertNodeToElement(childNode, index, _.noop()));
 
-export const htmlToReact = (html: string) => {
+export const htmlToReact = (html: string): JSX.Element => {
   if (!html) {
     return null;
   }

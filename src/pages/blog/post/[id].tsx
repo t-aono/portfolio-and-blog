@@ -10,7 +10,7 @@ import { ConfigType, PagePropsType } from '../../../types/pages';
 
 type PageLayoutType = (props: PagePropsType) => JSX.Element;
 
-const Post = (props: PagePropsType) => {
+const Post = (props: PagePropsType): JSX.Element => {
   const modelName = _.get(props, 'page.__metadata.modelName');
   const PageLayout: PageLayoutType = pageLayouts[modelName];
   if (!PageLayout) {

@@ -13,7 +13,7 @@ type PropsType = {
   };
 };
 
-export const SectionHero = (props: PropsType) => {
+export const SectionHero = (props: PropsType): JSX.Element => {
   const section = _.get(props, 'section');
   const sectionId = _.get(section, 'section_id');
   const title = _.get(section, 'title');

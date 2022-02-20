@@ -12,7 +12,7 @@ type PropsType = {
   page: PageType;
 };
 
-export const Project = (props: PropsType) => {
+export const Project = (props: PropsType): JSX.Element => {
   const project = _.get(props, 'project');
   const thumbnail = _.get(project, 'thumbnail');
   const title = _.get(project, 'title');

@@ -8,7 +8,7 @@ import { ConfigType, PagePropsType } from '../../../types/pages';
 import { GetServerSideProps } from 'next';
 import { ContentType } from '../../../types/layouts';
 
-const Project = (props: PagePropsType) => {
+const Project = (props: PagePropsType): JSX.Element => {
   const modelName = _.get(props, 'page.__metadata.modelName');
   const PageLayout = pageLayouts[modelName];
   if (!PageLayout) {

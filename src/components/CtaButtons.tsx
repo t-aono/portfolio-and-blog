@@ -7,7 +7,7 @@ type PropsType = {
   actions: ActionType;
 };
 
-export const CtaButtons = (props: PropsType) => {
+export const CtaButtons = (props: PropsType): JSX.Element => {
   const actions = _.get(props, 'actions');
   return (
     <>

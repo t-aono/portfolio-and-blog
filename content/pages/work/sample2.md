@@ -1,5 +1,6 @@
 ---
-title: サンプル１
+title: サンプル2
+description: 業務効率化
 ---
 
 # サンプル 2
