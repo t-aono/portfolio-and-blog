@@ -16,8 +16,7 @@ const Page = (props) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   console.log('Page [...slug].js getStaticPaths');
-  // const paths = await sourcebitDataClient.getStaticPaths();
-  const paths = ['/', '/portfolio', '/blog', '/contact'];
+  const paths = ['/', '/portfolio', '/blog'];
   const postPaths = (await getPosts('path')) as string[];
   const blogPagingPaths = postPaths.map((_, i) => (i % 12 === 0 ? `/blog/paginate/${i / 12 + 2}` : null)).filter((v) => v);
   paths.push(...blogPagingPaths);

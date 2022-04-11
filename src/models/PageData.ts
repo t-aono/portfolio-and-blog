@@ -1,9 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
 import matter from 'gray-matter';
-// import Work from './Work';
-// import Post from './Post';
-// import Link from './Link';
 
 export default class PageData {
   private _config: string;
@@ -15,8 +12,7 @@ export default class PageData {
   }
 
   getModelName = () => {
-    if (this.pagePath === '/works') return 'works';
-    else if (this.pagePath === '/about') return 'about';
+    if (this.pagePath === '/portfolio') return 'portfolio';
     else if (this.pagePath.match(/\/blog.*/)) return 'blog';
     else return 'advanced';
   };
@@ -24,62 +20,14 @@ export default class PageData {
   getMarkDownData = () => {
     let markdownFile = '';
     if (this.pagePath === '/') markdownFile = 'index.md';
-    else if (this.pagePath === '/works') markdownFile = 'works/index.md';
-    else if (this.pagePath === '/about') markdownFile = 'about.md';
-    else if (this.pagePath === '/contact') markdownFile = 'contact.md';
+    else if (this.pagePath === '/portfolio') markdownFile = 'portfolio/index.md';
     else if (this.pagePath.match(/\/blog.*/)) markdownFile = 'blog/index.md';
 
     const filePath = path.join(process.cwd(), 'content', 'pages', markdownFile);
     const markdownText = fs.readFileSync(filePath, 'utf-8');
     const { data } = matter(markdownText);
 
-    if (this.pagePath === '/about') {
-      const content = this.getIndexContent();
-      data.sections[0] = {
-        ...data.sections[0],
-        image: content.image,
-        content_top: content.content_top,
-        github_id: content.github_id
-      };
-    }
-
     return data;
-  };
-
-  setWorks = async () => {
-    if (['/', '/works'].includes(this.pagePath)) {
-      // return new Work().getAllWorks();
-    }
-    return [];
-  };
-
-  setPosts = async () => {
-    if (['/blog'].includes(this.pagePath)) {
-      // return new Post().getAllPostTitles();
-    }
-    return [];
-  };
-
-  setLinks = async () => {
-    if (['/', '/about'].includes(this.pagePath)) {
-      // return new Link().getTopPageLinks();
-    } else if (this.pagePath === '/blog') {
-      // return new Link().getBLogLinks();
-    }
-    return [];
-  };
-
-  getIndexContent = () => {
-    const filePath = path.join(process.cwd(), 'content', 'pages', 'index.md');
-    const markdownText = fs.readFileSync(filePath, 'utf-8');
-    const { data } = matter(markdownText);
-    if (this.pagePath === '/about') {
-      const sections = data.sections.filter((section) => section.section_id === 'about');
-      if (sections.length > 0) {
-        return sections[0];
-      }
-    }
-    return null;
   };
 
   getPageProps = async () => {
