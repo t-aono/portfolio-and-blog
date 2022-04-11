@@ -13,6 +13,7 @@
 ### ローカル
 
 - .env を作成して api key を追記
+- node v14.15.3
 - ライブラリインストール　`yarn install`
 - ビルド　`yarn dev`
 - ホームぺ―ジ　 http://localhost:300/
