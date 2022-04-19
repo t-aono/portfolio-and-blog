@@ -65,6 +65,7 @@ export const Header = (props: PropsType): JSX.Element => {
               {_.map(navLinks, (action, index) => {
                 const actionUrl = _.trim(_.get(action, 'url'), '/');
                 const actionStyle = _.get(action, 'style', 'link');
+                pageUrl = pageUrl.replace(/\/paginate\/\d+/, '');
                 return (
                   <li
                     key={index}

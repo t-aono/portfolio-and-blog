@@ -43,7 +43,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       props.post_count = postIds.length;
       const tmpPosts = await getPosts('post', postIds[(current - 1) * 12]);
       props.posts = makePostCollection(tmpPosts);
-      props.page = props.pages.find((p) => p.title === 'Blog');
     } else {
       // １ページ目
       props.page_no = 1;
