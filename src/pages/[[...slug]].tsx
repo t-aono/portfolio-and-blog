@@ -1,11 +1,9 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import _ from 'lodash';
-import { sourcebitDataClient } from 'sourcebit-target-next';
-import { withRemoteDataUpdates } from 'sourcebit-target-next/with-remote-data-updates';
-import { ParsedUrlQuery } from 'querystring';
 
 import { getProjects, getPosts, getCategories, makePostCollection, makeProjectCollection, makeCategoryList } from '../utils';
 import pageLayouts from '../layouts';
+import PageData from '../models/PageData';
 
 const Page = (props) => {
   const modelName = _.get(props, 'page.__metadata.modelName');
@@ -18,17 +16,17 @@ const Page = (props) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   console.log('Page [...slug].js getStaticPaths');
-  const paths = await sourcebitDataClient.getStaticPaths();
+  const paths = ['/', '/portfolio', '/blog', '/contact'];
   const postPaths = (await getPosts('path')) as string[];
   const blogPagingPaths = postPaths.map((_, i) => (i % 12 === 0 ? `/blog/paginate/${i / 12 + 2}` : null)).filter((v) => v);
   paths.push(...blogPagingPaths);
   return { paths, fallback: false };
 };
 
-export const getStaticProps: GetStaticProps<{ params: ParsedUrlQuery }> = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   console.log('Page [...slug].js getStaticProps, params: ', params);
   const pagePath = '/' + (params.slug ? (params.slug as string[]).join('/') : '');
-  const props = await sourcebitDataClient.getStaticPropsForPageAtPath(pagePath);
+  let props = await new PageData(pagePath).getPageProps();
 
   if (params.slug && params.slug[0] === 'portfolio') {
     const responseProjects = await getProjects();
@@ -65,4 +63,4 @@ export const getStaticProps: GetStaticProps<{ params: ParsedUrlQuery }> = async 
   return { props };
 };
 
-export default withRemoteDataUpdates(Page);
+export default Page;
