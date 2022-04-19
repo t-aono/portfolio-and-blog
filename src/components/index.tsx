@@ -8,7 +8,6 @@ import Layout from './Layout';
 import Icon from './Icon';
 import Fixing from './Fixing';
 import SectionAbout from './SectionAbout';
-import SectionForm from './SectionForm';
 import SectionHero from './SectionHero';
 import SectionPortfolio from './SectionPortfolio';
 import SectionPosts from './SectionPosts';
@@ -26,7 +25,6 @@ export default {
   Icon,
   Fixing,
   SectionAbout,
-  SectionForm,
   SectionHero,
   SectionPortfolio,
   SectionPosts

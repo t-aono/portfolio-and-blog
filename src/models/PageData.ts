@@ -23,7 +23,6 @@ export default class PageData {
     if (this.pagePath === '/') markdownFile = 'index.md';
     else if (this.pagePath === '/portfolio') markdownFile = 'portfolio/index.md';
     else if (this.pagePath === '/about') markdownFile = 'about.md';
-    else if (this.pagePath === '/contact') markdownFile = 'contact.md';
     else if (this.pagePath.match(/\/blog.*/)) markdownFile = 'blog/index.md';
 
     const filePath = path.join(process.cwd(), 'content', 'pages', markdownFile);

@@ -21,7 +21,6 @@ export const Page = (props: PropsType): JSX.Element => {
   const imageAlt = _.get(page, 'image_alt', '');
   const imageType = _.get(page, 'image_type', '');
   const markdownContent = _.get(page, 'markdown_content');
-  const path = _.get(props, 'path');
 
   return (
     <Layout page={page} config={config}>
@@ -36,7 +35,7 @@ export const Page = (props: PropsType): JSX.Element => {
               <img src={withPrefix(image)} alt={imageAlt} />
             </div>
           )}
-          {markdownContent && <div className={(path === '/thank-you' ? 'message-center ' : 'post-content ') + 'inner-sm'}>{markdownify(markdownContent)}</div>}
+          {markdownContent && <div className="post-content inner-sm">{markdownify(markdownContent)}</div>}
         </article>
       </div>
     </Layout>
