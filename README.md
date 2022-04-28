@@ -1,42 +1,79 @@
 # Portfolio & Blog
 
-## 概要
+## Overview
 
-- ポートフォリオサイトやブログサイトで利用可能
-- フロントエンドは Next.js (SSG / SSR) で構築
-- Notion API を利用してコンテンツを取得
-- 問い合わせ時のメール送信は SendGrid API を利用
-- [Jamstack Themes](https://jamstackthemes.dev) のテンプレート（Nextjs Exto）を利用
+Site for publishing portfolios and blogs.
 
-## 使い方
+## Description
 
-### ローカル
+- The front end is built with Next.js (SSG / SSR)
+- Get content using Notion API
+- Use SendGrid API to send emails when making inquiries
 
-- .env を作成して api key を追記
+## Demo
+
+<!-- ## VS. -->
+
+## Requirement
+
 - node v14.15.3
-- ライブラリインストール　`yarn install`
-- ビルド　`yarn dev`
-- トップページ URL 　 http://localhost:300/
+- Notion Api Key
+- Notion Database (portfolio and blog)
 
-- md 編集後に 404 エラーがでた場合  
-  マークダウンのインデントがずれているのが原因かも
+## Usage
 
-### コンテンツの編集
+### Launch locally
 
-- トップページ：SSG  
-  `content/pages/index.md` を編集してビルド
+1. create `.env` file
 
-- 制作物・ブログ一覧：SSG  
-  `content/pages` 配下の該当ファイルを編集してビルド
+   ```
+   cp .env.example .env
+   ```
 
-- 制作物・ブログ詳細：SSR  
-  notion 側で編集
+2. added Notion Api Key and Database ID
 
-### Vercel へのデプロイ
+3. package installation and build
 
-1. branch 作成
+   ```
+   yarn install
+   yarn dev
+   ```
+
+4. access the top page
+
+   ```
+   http://localhost:300/
+   ```
+
+### Editing content
+
+- Top page：SSG  
+  edit and build `content / pages / index.md`
+
+- List page：SSG  
+  edit and build the corresponding file under `content / pages`
+
+- Detail page：SSR  
+  edit on the notion side
+
+### Deploy to Vercel
+
+1. Create a branch
 2. commit & push
-3. GitHub で PR 作成 & merge
+3. Create PR on GitHub & merge
 
-- `vercel-ignore-build-step.sh` : main ブランチ以外はプレビューデプロイを無視
-- `vercel.json` : Vercel Bot からのプルリクへのコメントをオフに
+- `vercel-ignore-build-step.sh`: Ignore preview deployment except for main branch
+- `vercel.json`: Turn off comments to pull requests from Vercel Bot
+
+<!-- ## Install -->
+
+<!-- ## Contribution -->
+
+<!-- ## Licence -->
+
+## Author
+
+[t-aono](https://github.com/t-aono)
+
+<!-- README.md Sample -->
+<!-- https://deeeet.com/writing/2014/07/31/readme/ -->
