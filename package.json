@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "next dev",
     "develop": "next dev",
-    "fetch": "sourcebit fetch",
     "build": "next build",
     "start": "next start"
   },

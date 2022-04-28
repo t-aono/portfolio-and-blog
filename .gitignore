@@ -93,7 +93,6 @@ out
 .yarn/install-state.gz
 .pnp.*
 
-.sourcebit-nextjs-cache.json
 .DS_Store
 .idea
 
