@@ -10,7 +10,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const searchPosts = async (req: NextApiRequest) => {
     const notion = new Client({ auth: process.env.NOTION_TOKEN });
-    const databaseId = '75d817d15e21455f8df10c68aa28f7de';
+    const databaseId = process.env.NOTION_POSTS_DB_ID;
 
     if (req.body.category) {
       const queryParam: QueryParamType = {

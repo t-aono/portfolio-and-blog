@@ -8,7 +8,7 @@ type KindType = 'post' | 'path' | 'id';
 
 export const getPosts = async (kind: KindType, startCursor: string = null) => {
   const notion: ClientType = new Client({ auth: process.env.NOTION_TOKEN });
-  const databaseId = '75d817d15e21455f8df10c68aa28f7de';
+  const databaseId = process.env.NOTION_POSTS_DB_ID;
   const queryParam: QueryDatabaseParameters = {
     database_id: databaseId,
     sorts: [

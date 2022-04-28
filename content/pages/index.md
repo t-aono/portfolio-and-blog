@@ -4,8 +4,8 @@ hide_title: true
 sections:
   - section_id: hero
     type: section_hero
-    title: Portfolio & Blog
-    content: ソフトウェアエンジニアのアオノです。<br/>
+    title:
+    content: 興味を持って頂きありがとうございます。<br/>
       個人開発したWebアプリケーションやプログラミング関連ブログを公開しています。<br/>
   - section_id: latest-projects
     type: section_portfolio
@@ -29,16 +29,9 @@ sections:
       最近は TypeScript / Next.js も学習しています。<br/>
       このサイトは TypeScript / Next.js (SSG/SSR/CSR) と Notion API で構築しました。<br/>
       <br/>
-      経歴<br/>
-      2011年 営業職として製薬メーカーに新卒で入社<br/>
-      2017年 ITエンジニアとしてSESの会社に転職<br/>
-      2018年 Java / VBA を使った保守開発の現場をいくつか経験<br/>
-      2019年 PHP / JS での開発を経験<br/>
-      2020年 受託開発の会社で打合せ・設計・実装・テストなどの開発工程を幅広く経験<br/>
-      2021年 フリーランスとして Laravel / Vue.js を使った開発も経験<br/>
     actions:
       - label: GitHub
-        url: https://github.com/t-aono
+        url: https://github.com/xxx
         style: button
         icon: github
         new_window: true
@@ -52,36 +45,36 @@ sections:
         url: blog
         style: button
 seo:
-  title: aono's P&B
+  title: P&B
   description: 個人開発したWebアプリケーションやプログラミング関連ブログを公開
   extra:
     - name: 'og:url'
-      value: https://t-aono.net
+      value:
       keyName: property
     - name: 'og:site_name'
-      value: aono's P&B
+      value: P&B
       keyName: property
     - name: 'og:type'
       value: website
       keyName: property
     - name: 'og:title'
-      value: aono's P&B
+      value: P&B
       keyName: property
     - name: 'og:description'
       value: 個人開発したWebアプリケーションやプログラミング関連ブログを公開
       keyName: property
     - name: 'og:image'
       keyName: property
-      value: https://t-aono.net/images/ogp_image.png
+      value:
       relativeUrl: false
     - name: 'twitter:card'
       value: summary
     - name: 'twitter:title'
-      value: aono's P&B
+      value: P&B
     - name: 'twitter:description'
       value: 個人開発したWebアプリケーションやプログラミング関連ブログを公開
     - name: 'twitter:image'
-      value: https://t-aono.net/images/ogp_image.png
+      value:
       relativeUrl: false
 layout: advanced
 ---
