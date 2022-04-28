@@ -1,11 +1,11 @@
 {
-  "title": "aono's P&B",
+  "title": "P&B",
   "path_prefix": "/",
   "color_scheme": "dark",
   "accent_color": "blue",
   "favicon": "/images/favicon.ico",
   "header": {
-    "title": "aono's P&B",
+    "title": "Portfolio & Blog",
     "has_nav": true,
     "nav_links": [
       {
@@ -26,7 +26,7 @@
     ]
   },
   "footer": {
-    "content": "© t-aono",
+    "content": "P&B",
     "has_social": false,
     "social_links": [
       {

@@ -6,7 +6,7 @@ const { Client } = require('@notionhq/client');
 
 export const getProjects = async () => {
   const notion: ClientType = new Client({ auth: process.env.NOTION_TOKEN });
-  const databaseId = 'a4928a93d9c0447fa889c7d60c5124a7';
+  const databaseId = process.env.NOTION_PROJECTS_DB_ID;
   const queryParam: QueryDatabaseParameters = {
     database_id: databaseId,
     sorts: [

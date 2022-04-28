@@ -5,7 +5,7 @@ const { Client } = require('@notionhq/client');
 
 export const getCategories = async () => {
   const notion: ClientType = new Client({ auth: process.env.NOTION_TOKEN });
-  const databaseId = '75d817d15e21455f8df10c68aa28f7de';
+  const databaseId = process.env.NOTION_POSTS_DB_ID;
   const queryParam: QueryDatabaseParameters = {
     database_id: databaseId,
     sorts: [
