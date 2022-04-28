@@ -12,6 +12,8 @@ Site for publishing portfolios and blogs.
 
 ## Demo
 
+![it6OsIBQvpDSiuA8JPK11651188608-1651188635](https://user-images.githubusercontent.com/46856574/165863919-49407d1d-1881-4d83-8e91-9708b8ce684b.gif)
+
 <!-- ## VS. -->
 
 ## Requirement
