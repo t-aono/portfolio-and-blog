@@ -1,81 +1,67 @@
 # Portfolio & Blog
 
-## Overview
+## 概要
 
-Site for publishing portfolios and blogs.
+Notionに書いた記事をAPIから取得して表示できるポートフォリオサイト
 
-## Description
+## 機能
 
-- The front end is built with Next.js (SSG / SSR)
-- Get content using Notion API
-- Use SendGrid API to send emails when making inquiries
+- Next.js を使った SSG(Static Site Generation) / SSR(Server-side Rendering)
+-  Notion に書いた記事を取得して表示
+-  記事のタイトルの検索、カテゴリでの絞り込み
+-  お問い合わせフォームからメール送信
 
-## Demo
+## 使用技術
+TypeScript / Next.js / SCSS / Notion Database / Notion API / Send Grid API
+
+## デモ
 
 ![it6OsIBQvpDSiuA8JPK11651188608-1651188635](https://user-images.githubusercontent.com/46856574/165863919-49407d1d-1881-4d83-8e91-9708b8ce684b.gif)
 
-<!-- ## VS. -->
+## 利用方法
 
-## Requirement
+事前に Notion の [My Integrations](https://www.notion.so/login) から Notion Api Key を取得してください。  
+表示するための記事を Notion Database で作成する必要があります。  
 
-- node v14.15.3
-- Notion Api Key
-- Notion Database (portfolio and blog)
+### ローカルでの起動　
 
-## Usage
-
-### Launch locally
-
-1. create `.env` file
+1. .env ファイルの作成
 
    ```
    cp .env.example .env
    ```
 
-2. added Notion Api Key and Database ID
+2. Notion Api Key と Database ID を .env に入力
 
-3. package installation and build
+3. パッケージのインストールとビルド
 
    ```
    yarn install
    yarn dev
    ```
 
-4. access the top page
+4. トップページへアクセス
 
    ```
-   http://localhost:300/
+   http://localhost:3000
    ```
 
-### Editing content
+### コンテンツの編集
 
-- Top page：SSG  
-  edit and build `content / pages / index.md`
+- トップページ：SSG  
+  `content/pages/index.md` を編集してビルド（ローカルではリロード）
 
-- List page：SSG  
-  edit and build the corresponding file under `content / pages`
+- 記事の一覧ページ：SSG  
+  `content/pages` 配下のファイルを編集してビルド（ローカルではリロード）
 
-- Detail page：SSR  
-  edit on the notion side
+- 記事の詳細ページ：SSR  
+  Notion側で内容の変更
 
-### Deploy to Vercel
+### Vercelへのデプロイ
 
-1. Create a branch
-2. commit & push
-3. Create PR on GitHub & merge
+1. ブランチの作成
+2. commit と push
+3. GitHubでPR作成してマージ
 
-- `vercel-ignore-build-step.sh`: Ignore preview deployment except for main branch
-- `vercel.json`: Turn off comments to pull requests from Vercel Bot
-
-<!-- ## Install -->
-
-<!-- ## Contribution -->
-
-<!-- ## Licence -->
-
-## Author
-
-[t-aono](https://github.com/t-aono)
-
-<!-- README.md Sample -->
-<!-- https://deeeet.com/writing/2014/07/31/readme/ -->
+- `vercel-ignore-build-step.sh`: main ブランチ以外の preview deployment を無視
+- `vercel.json`: Vercel Bot からのプルリクコメントをオフ
